@@ -1,0 +1,98 @@
+import type { DemoAccount } from '@/modules/auth/types/auth'
+
+export const DEMO_PASSWORD = 'DemoPass123!'
+export const DEMO_RECOVERY_CODE = '123456'
+export const DEMO_INVITATION_TOKEN = 'vendor-demo-invite'
+export const demoAccounts: readonly DemoAccount[] = [
+  {
+    id: 'vendor-owner',
+    email: 'owner@vendor.example',
+    name: 'مالك المعرض',
+    scope: 'vendor',
+    role: 'Owner',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'vendor-manager',
+    email: 'manager@vendor.example',
+    name: 'مدير المعرض',
+    scope: 'vendor',
+    role: 'Manager',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'vendor-editor',
+    email: 'editor@vendor.example',
+    name: 'محرر محتوى المعرض',
+    scope: 'vendor',
+    role: 'Content Editor',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'admin-super',
+    email: 'super@admin.example',
+    name: 'مدير النظام',
+    scope: 'admin',
+    role: 'Super Admin',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'admin-moderator',
+    email: 'moderator@admin.example',
+    name: 'مشرف المراجعة',
+    scope: 'admin',
+    role: 'Moderator',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'admin-content',
+    email: 'content@admin.example',
+    name: 'مسؤول المحتوى',
+    scope: 'admin',
+    role: 'Content / CMS Admin',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'admin-commercial',
+    email: 'commercial@admin.example',
+    name: 'مسؤول الشؤون التجارية',
+    scope: 'admin',
+    role: 'Commercial Admin',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'admin-support',
+    email: 'support@admin.example',
+    name: 'مسؤول العمليات',
+    scope: 'admin',
+    role: 'Support / Operations',
+    active: true,
+    organizationActive: true,
+  },
+  {
+    id: 'vendor-suspended',
+    email: 'suspended@vendor.example',
+    name: 'معرض غير مفعّل',
+    scope: 'vendor',
+    role: 'Owner',
+    active: true,
+    organizationActive: false,
+  },
+  {
+    id: 'vendor-disabled',
+    email: 'disabled@vendor.example',
+    name: 'عضو غير مفعّل',
+    scope: 'vendor',
+    role: 'Manager',
+    active: false,
+    organizationActive: true,
+  },
+]
+export const authQueryKeys = { session: ['auth', 'session'] as const }

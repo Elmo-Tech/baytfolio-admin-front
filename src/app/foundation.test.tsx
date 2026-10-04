@@ -1,27 +1,43 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, waitFor } from '@testing-library/react'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { expect, it } from 'vitest'
-import { AppProviders } from '@/app/providers/app-providers'
-import { FoundationPage } from '@/app/pages/foundation-page'
-import { NotFoundPage } from '@/app/pages/not-found-page'
+import { createQueryClient } from '@/shared/config/query-client'
+import { AuthProvider, RequireSession } from '@/modules/auth'
+import { LoginPage } from '@/modules/auth/pages/login-page'
+import { SessionPage } from '@/modules/auth/pages/session-page'
+import { createDemoAuthService } from '@/modules/auth/api/demo-auth-service'
+import { DEMO_PASSWORD } from '@/modules/auth/constants/demo-accounts'
 
-it('renders the foundation through providers and recovers from an unknown route', async () => {
-  const user = userEvent.setup()
+it('protects private routes, preserves return context and clears private cache on expiration', async () => {
+  const service = createDemoAuthService(0)
+  const client = createQueryClient()
   const router = createMemoryRouter(
     [
-      { path: '/', element: <FoundationPage /> },
-      { path: '*', element: <NotFoundPage /> },
+      { path: '/login', element: <LoginPage /> },
+      {
+        element: <RequireSession scope="vendor" />,
+        children: [{ path: '/vendor', element: <SessionPage /> }],
+      },
     ],
-    { initialEntries: ['/unknown'] },
+    { initialEntries: ['/vendor?tab=demo'] },
   )
   render(
-    <AppProviders>
-      <RouterProvider router={router} />
-    </AppProviders>,
+    <QueryClientProvider client={client}>
+      <AuthProvider service={service}>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>,
   )
-  expect(screen.getByRole('heading', { name: '404 — Page not found' })).toBeInTheDocument()
-  await user.click(screen.getByRole('link', { name: 'Return to start' }))
-  expect(screen.getByRole('heading', { name: 'BaytFolio Dashboard' })).toBeInTheDocument()
-  expect(screen.getByText('Frontend foundation ready.')).toBeInTheDocument()
+  await screen.findByRole('button', { name: 'تسجيل الدخول' })
+  expect(router.state.location.pathname).toBe('/login')
+  expect(new URLSearchParams(router.state.location.search).get('returnTo')).toBe('/vendor?tab=demo')
+  await service.login({ email: 'owner@vendor.example', password: DEMO_PASSWORD })
+  await router.navigate('/vendor')
+  await screen.findByRole('heading', { name: 'جلسة Vendor التجريبية' })
+  client.setQueryData(['private', 'example'], { sensitive: true })
+  service.expireSession()
+  await waitFor(() => expect(client.getQueryData(['private', 'example'])).toBeUndefined())
+  await screen.findByRole('button', { name: 'تسجيل الدخول' })
+  expect(router.state.location.pathname).toBe('/login')
 })

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState, type PropsWithChildren } from 'react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
+import { AuthProvider } from '@/modules/auth'
 import { createQueryClient } from '@/shared/config/query-client'
 
 const QueryDevtools = import.meta.env.DEV
@@ -16,7 +17,7 @@ export function AppProviders({ children }: PropsWithChildren) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <AuthProvider>{children}</AuthProvider>
       <Toaster richColors closeButton />
       {QueryDevtools && (
         <Suspense fallback={null}>
