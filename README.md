@@ -13,7 +13,7 @@ Product features and backend integration are outside the scope of this foundatio
 ## Tech Stack
 
 - **React 19** — UI development.
-- **TypeScript** — Static typing with strict type checking.
+- **TypeScript** — Static typing and type checking.
 - **Vite** — Development server and production build.
 - **React Router** — Client-side routing.
 - **Tailwind CSS v4** — Utility-first styling.
@@ -52,7 +52,7 @@ Replace `<repository-url>` with the repository URL provided by the team.
 ### 2. Install dependencies
 
 ```bash
-npm install
+npm ci
 ```
 
 ### 3. Start the development server
@@ -79,23 +79,21 @@ npm run preview
 
 ## Available Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Starts the Vite development server. |
-| `npm run build` | Runs TypeScript project checks and builds the application. |
-| `npm run preview` | Previews the production build locally. |
-| `npm run lint` | Runs ESLint. |
-| `npm run lint:fix` | Automatically fixes supported ESLint issues. |
-| `npm run typecheck` | Runs TypeScript project checks independently. |
-| `npm run test` | Runs Vitest tests once. |
-| `npm run test:watch` | Runs Vitest in watch mode. |
-| `npm run test:e2e` | Runs Playwright end-to-end tests. |
-| `npm run test:e2e:ui` | Opens the Playwright UI test runner. |
-| `npm run format` | Formats project files with Prettier. |
-| `npm run format:check` | Checks formatting without modifying files. |
-| `npm run check` | Runs the configured formatting, linting, type checking, tests, and build checks. |
+| Command                | Description                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------- |
+| `npm run dev`          | Starts the Vite development server.                                                             |
+| `npm run build`        | Runs TypeScript project checks and builds the application.                                      |
+| `npm run preview`      | Previews the production build locally.                                                          |
+| `npm run lint`         | Runs ESLint.                                                                                    |
+| `npm run lint:fix`     | Automatically fixes supported ESLint issues, if configured.                                     |
+| `npm run typecheck`    | Runs TypeScript project checks independently.                                                   |
+| `npm run test`         | Runs Vitest tests once.                                                                         |
+| `npm run test:watch`   | Runs Vitest in watch mode.                                                                      |
+| `npm run format`       | Formats project files with Prettier.                                                            |
+| `npm run format:check` | Checks formatting without modifying files.                                                      |
+| `npm run check`        | Runs the configured formatting, linting, type checking, tests, and build checks, if configured. |
 
-**Note:** The `typecheck`, `lint:fix`, `test:e2e`, `test:e2e:ui`, and `check` commands must exist in `package.json` for these commands to work.
+Only use commands that are defined in `package.json`.
 
 ## Project Structure
 
@@ -108,6 +106,7 @@ src/
 │   ├── providers/
 │   │   ├── app-providers.tsx
 │   │   └── app-providers.test.tsx
+│   ├── app.tsx
 │   ├── router.tsx
 │   └── router.test.tsx
 ├── assets/
@@ -124,14 +123,13 @@ src/
 │       └── cn.ts
 ├── test/
 │   └── setup.ts
-├── App.tsx
 ├── index.css
 └── main.tsx
 ```
 
 The structure above describes the intended organization of the frontend foundation. Some directories may remain empty until their corresponding features are implemented.
 
-### Architecture
+## Architecture
 
 - **`app/`** — Application-level routing, pages, and providers.
 - **`modules/`** — Feature-specific modules as the application grows.
@@ -139,9 +137,43 @@ The structure above describes the intended organization of the frontend foundati
 - **`assets/`** — Static assets used by the application.
 - **`test/`** — Shared test setup and utilities.
 
-## Code Quality
+## Module Architecture
 
-Before submitting changes, run the relevant checks:
+Feature-specific code belongs in `src/modules/`. Each module should own its related components, hooks, API functions, schemas, types, and utilities when needed.
+
+Shared functionality that is genuinely reusable across multiple modules belongs in `src/shared/`.
+
+### Public API
+
+A module should expose only the functionality that other modules are expected to consume through its `index.ts` entry point.
+
+Example:
+
+```text
+modules/
+└── example/
+    ├── components/
+    ├── hooks/
+    ├── api/
+    ├── schemas/
+    ├── types/
+    ├── utils/
+    └── index.ts
+```
+
+The `index.ts` file acts as the module's public API. Consumers should import from that entry point instead of reaching into another module's internal files.
+
+### Import Boundaries
+
+- Keep module implementation details private to their owning module.
+- Import cross-module functionality through the exporting module's `index.ts`.
+- Put reusable application-wide functionality in `src/shared/`.
+- Avoid circular dependencies between modules.
+- Keep application routing and provider configuration in `src/app/`.
+
+## Quality Checks
+
+Run the following commands before submitting changes:
 
 ```bash
 npm run format:check
@@ -152,6 +184,8 @@ npm run build
 ```
 
 Run `npm run format` to apply Prettier formatting when necessary.
+
+All checks should pass before a pull request is considered ready for review.
 
 ## Testing
 
@@ -169,7 +203,7 @@ Use watch mode during development:
 npm run test:watch
 ```
 
-End-to-end tests use Playwright when corresponding test files and configuration are available.
+End-to-end testing can be added with Playwright when the corresponding test files and configuration are available.
 
 ## Git Workflow
 
