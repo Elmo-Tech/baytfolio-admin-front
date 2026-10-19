@@ -33,10 +33,15 @@ Product features and backend integration are outside the scope of this foundatio
 
 ## Requirements
 
-- Node.js version compatible with the project's declared engine requirements.
-- npm version compatible with the project's declared engine requirements.
+- **Node.js:** Version 24, matching the project's CI configuration.
+- **npm:** Use a version compatible with your Node.js installation. CI uses `npm ci` to install dependencies from the lockfile.
 
-Check the `engines` field in `package.json` for the exact supported versions.
+Verify your installed versions with:
+
+```bash
+node --version
+npm --version
+```
 
 ## Getting Started
 
@@ -79,21 +84,17 @@ npm run preview
 
 ## Available Scripts
 
-| Command                | Description                                                                                     |
-| ---------------------- | ----------------------------------------------------------------------------------------------- |
-| `npm run dev`          | Starts the Vite development server.                                                             |
-| `npm run build`        | Runs TypeScript project checks and builds the application.                                      |
-| `npm run preview`      | Previews the production build locally.                                                          |
-| `npm run lint`         | Runs ESLint.                                                                                    |
-| `npm run lint:fix`     | Automatically fixes supported ESLint issues, if configured.                                     |
-| `npm run typecheck`    | Runs TypeScript project checks independently.                                                   |
-| `npm run test`         | Runs Vitest tests once.                                                                         |
-| `npm run test:watch`   | Runs Vitest in watch mode.                                                                      |
-| `npm run format`       | Formats project files with Prettier.                                                            |
-| `npm run format:check` | Checks formatting without modifying files.                                                      |
-| `npm run check`        | Runs the configured formatting, linting, type checking, tests, and build checks, if configured. |
-
-Only use commands that are defined in `package.json`.
+| Command                | Description                                                |
+| ---------------------- | ---------------------------------------------------------- |
+| `npm run dev`          | Starts the Vite development server.                        |
+| `npm run build`        | Runs TypeScript project checks and builds the application. |
+| `npm run typecheck`    | Runs TypeScript project checks independently.              |
+| `npm run lint`         | Runs ESLint.                                               |
+| `npm run test`         | Runs Vitest tests once.                                    |
+| `npm run test:watch`   | Runs Vitest in watch mode.                                 |
+| `npm run format`       | Formats project files with Prettier.                       |
+| `npm run format:check` | Checks formatting without modifying files.                 |
+| `npm run preview`      | Previews the production build locally.                     |
 
 ## Project Structure
 
@@ -119,6 +120,9 @@ src/
 │   │       └── button.tsx
 │   ├── config/
 │   │   └── query-client.ts
+│   ├── constants/
+│   ├── hooks/
+│   ├── types/
 │   └── utils/
 │       └── cn.ts
 ├── test/
@@ -127,7 +131,7 @@ src/
 └── main.tsx
 ```
 
-The structure above describes the intended organization of the frontend foundation. Some directories may remain empty until their corresponding features are implemented.
+This structure describes the current frontend foundation. Some directories are prepared for future implementation and may remain empty until their corresponding functionality is needed.
 
 ## Architecture
 
@@ -209,15 +213,15 @@ End-to-end testing can be added with Playwright when the corresponding test file
 
 Use descriptive commit messages that reflect the purpose of the changes.
 
-Examples:
+Example:
 
 ```bash
-git add .
-git commit -m "chore: update frontend foundation"
+git add README.md
+git commit -m "docs: align README with project configuration"
 git push origin starter
 ```
 
-The project includes Husky and lint-staged for pre-commit tooling. The exact checks performed before each commit depend on the current hook configuration.
+The project may use Husky and lint-staged for pre-commit tooling, depending on the current hook configuration.
 
 ## Scope
 
