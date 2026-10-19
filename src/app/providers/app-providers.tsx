@@ -1,28 +1,20 @@
-import { lazy, Suspense, useState, type PropsWithChildren } from 'react'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { Toaster } from 'sonner'
-import { createQueryClient } from '@/shared/config/query-client'
+import type { ReactNode } from "react";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "sonner";
+import { queryClient } from "@/shared/config/query-client";
 
-const QueryDevtools = import.meta.env.DEV
-  ? lazy(() =>
-      import('@tanstack/react-query-devtools').then(({ ReactQueryDevtools }) => ({
-        default: ReactQueryDevtools,
-      })),
-    )
-  : null
+type AppProvidersProps = {
+  children: ReactNode;
+};
 
-export function AppProviders({ children }: PropsWithChildren) {
-  const [queryClient] = useState(createQueryClient)
-
+export function AppProviders({ children }: AppProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <Toaster richColors closeButton />
-      {QueryDevtools && (
-        <Suspense fallback={null}>
-          <QueryDevtools initialIsOpen={false} />
-        </Suspense>
-      )}
+      <Toaster richColors position="top-right" />
+
+      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
-  )
+  );
 }
