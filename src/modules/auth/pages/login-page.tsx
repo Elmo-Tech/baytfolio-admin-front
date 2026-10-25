@@ -6,8 +6,9 @@ import { authShieldUser, baytfolioIcon } from "@/assets";
 export default function LoginPage() {
   return (
     <AuthLayout>
-      <div className="w-full max-w-lg">
-        <AuthCard>
+      <div className="w-full max-w-2xl">
+        <AuthCard className="!max-w-none">
+          {" "}
           <div
             dir="rtl"
             className="mb-7 flex items-start justify-between gap-3"
@@ -36,12 +37,11 @@ export default function LoginPage() {
                 className="h-4 w-4 shrink-0 object-contain"
               />
 
-              <span className="whitespace-nowrap text-xs text-[#8B7964]">
+              <span className="whitespace-nowrap text-xs text-[#37434B]">
                 بوابة الإدارة المركزية
               </span>
             </div>
           </div>
-
           <div className="mb-7 text-right">
             <h1 className="mb-2 text-2xl font-bold">تسجيل الدخول</h1>
 
@@ -50,7 +50,6 @@ export default function LoginPage() {
               والعمليات.{" "}
             </p>
           </div>
-
           <LoginForm />
         </AuthCard>
       </div>
