@@ -178,7 +178,7 @@ export default function OtpVerificationForm() {
         >
           طلب رمز جديد
         </button>
-        <span className="flex items-center gap-1.5 text-[#5A6872]">
+        <span className="flex items-center gap-1.5 text-[#37434B]">
           <Clock3 aria-hidden="true" className="size-3.5 text-[#A99780]" />
           {secondsRemaining > 0 ? (
             <>
@@ -221,7 +221,7 @@ export default function OtpVerificationForm() {
         <ArrowIcon className="size-4" />
       </Button>
 
-      <div className="rounded-md bg-[#F6F1EA] px-3 py-2 text-center text-sm leading-5 text-[#806F5C]">
+      <div className="rounded-md bg-[#F6F1EA] px-3 py-2 text-center text-sm leading-5 text-[#37434B]">
         <span className="inline-flex items-center gap-1">
           <AlertCircle aria-hidden="true" className="size-3.5 text-[#C58C43]" />
           تنتهي صلاحية الرمز خلال 10 دقائق لحماية حسابك.

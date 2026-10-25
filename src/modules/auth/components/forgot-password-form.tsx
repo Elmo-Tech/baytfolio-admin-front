@@ -29,7 +29,6 @@ export default function ForgotPasswordForm() {
   async function onSubmit() {
     setRequestState("loading");
 
-    // No password-reset service is configured in this application yet.
     await Promise.resolve();
     setRequestState("error");
   }
@@ -64,9 +63,9 @@ export default function ForgotPasswordForm() {
           />
         </div>
 
-        <p className="flex items-center gap-1.5 text-xs leading-5 text-[#9A8B79]">
-          <Info aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" /> يجب
-          أن يكون البريد مسجلاً ضمن صلاحيات الإدارة المعتمدة.
+        <p className="flex items-center gap-1.5 text-sm leading-5 text-[#37434B]">
+          <Info aria-hidden="true" className="size-4 shrink-0 text-[#A99780]" />
+          <span>يجب أن يكون البريد مسجلاً ضمن صلاحيات الإدارة المعتمدة.</span>
         </p>
         <FieldError errors={[errors.email]} />
       </Field>
@@ -74,7 +73,7 @@ export default function ForgotPasswordForm() {
       {requestState === "error" && (
         <p
           role="alert"
-          className="rounded-md border border-[#E8C8C3] bg-[#FFF5F3] px-3 py-2 text-xs leading-5 text-[#9E3D31]"
+          className="rounded-md border border-[#E8C8C3] bg-[#FFF5F3] px-3 py-2 text-sm leading-5 text-[#9E3D31]"
         >
           خدمة استعادة كلمة المرور غير متاحة حاليًا. لم يتم إرسال أي بريد
           إلكتروني.
@@ -85,7 +84,7 @@ export default function ForgotPasswordForm() {
         type="submit"
         size="lg"
         disabled={requestState === "loading"}
-        className="h-10 w-full rounded-md bg-[#172A3A] text-sm text-white shadow-sm hover:bg-[#243B4D] focus-visible:border-[#B8914E] focus-visible:ring-[#B8914E]/40"
+        className="h-10 w-full rounded-md bg-[#172A3A] text-base text-white shadow-sm hover:bg-[#243B4D] focus-visible:border-[#B8914E] focus-visible:ring-[#B8914E]/40"
       >
         <span>
           {requestState === "loading"

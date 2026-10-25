@@ -35,14 +35,14 @@ export default function VerifyOtpPage() {
             <h1 className="text-[26px] font-bold text-[#172A3A]">
               التحقق بخطوتين
             </h1>
-            <p className="mt-1 text-sm text-[#5D6D78]">
+            <p className="mt-1 text-sm text-[#37434B]">
               أدخل رمز التحقق المكون من 6 أرقام للمتابعة.
             </p>
-            <p className="mt-1 text-sm text-[#9A8B79]">
+            <p className="mt-1 text-sm text-[#37434B]">
               تم إرسال الرمز إلى البريد المسجل
               <span
                 dir="ltr"
-                className="mr-1 inline-block text-sm text-[#586A76]"
+                className="mr-1 inline-block text-sm text-[#37434B]"
               >
                 a•••••@baytfolio.com
               </span>
@@ -53,11 +53,17 @@ export default function VerifyOtpPage() {
 
         <p
           dir="rtl"
-          className="mt-5 flex items-center justify-center gap-1.5 text-center text-sm text-[#9A8B79]"
+          className="mt-5 flex items-center justify-center gap-2 text-center text-sm text-[#A99780]"
         >
-          <ShieldCheck aria-hidden="true" className="size-3.5 text-[#3D8D79]" />
-          بروتوكول مصادقة مصرفي مشفر
-          <span dir="ltr" className="text-[#AA9A86]">
+          <ShieldCheck
+            aria-hidden="true"
+            className="size-4 shrink-0 text-[#3D8D79]"
+          />
+          <span>بروتوكول مصادقة مصرفي مشفر</span>
+          <span aria-hidden="true" className="text-[#D8CBB9]">
+            •
+          </span>
+          <span dir="ltr" className="text-[#A99780]">
             Session: #ADM-8831
           </span>
         </p>

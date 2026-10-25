@@ -18,7 +18,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
         <div
           dir="rtl"
-          className="flex shrink-0 items-center gap-2 rounded-full border border-[#DDE7DF] bg-[#F2F7F2] px-3 py-1.5 text-xs font-medium text-[#52735B]"
+          className="flex shrink-0 items-center gap-2 rounded-full border border-[#DDE7DF] bg-[#F2F7F2] px-3 py-1.5 text-base font-medium text-[#52735B]"
         >
           <span
             aria-hidden="true"
@@ -33,7 +33,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       </main>
 
       <footer className="border-t border-[#E7DED2] px-6 py-5 sm:px-10">
-        <div className="flex items-center justify-start gap-2 text-right text-xs">
+        <div className="flex items-center justify-start gap-2 text-right text-sm">
           <span dir="ltr">© {currentYear} BaytFolio Inc.</span>
           <span className="text-[#B5A28C]">—</span>
           <span>نظام إدارة العمليات والمنصة</span>
