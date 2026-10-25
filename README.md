@@ -4,11 +4,11 @@ The frontend foundation for the BaytFolio admin dashboard, built with React, Typ
 
 ## Overview
 
-This project establishes the initial frontend architecture and development environment for the BaytFolio admin dashboard.
+This project contains the current frontend implementation for the BaytFolio admin dashboard.
 
-It provides the foundational setup for application routing, shared providers, UI components, testing, and code quality tooling.
+It includes application routing, shared providers and UI primitives, an Arabic authentication UI, local form validation, component tests, and code quality tooling.
 
-Product features and backend integration are outside the scope of this foundation stage.
+The authentication screens are not connected to backend services yet. API calls, session management, email delivery, OTP verification, and password updates remain future integration work.
 
 ## Tech Stack
 
@@ -33,8 +33,8 @@ Product features and backend integration are outside the scope of this foundatio
 
 ## Requirements
 
-- **Node.js:** Version 24, matching the project's CI configuration.
-- **npm:** Use a version compatible with your Node.js installation. CI uses `npm ci` to install dependencies from the lockfile.
+- **Node.js:** Version 24 or a version supported by the installed dependencies.
+- **npm:** Use a version compatible with your Node.js installation. Use `npm ci` to install dependencies from the lockfile.
 
 Verify your installed versions with:
 
@@ -95,6 +95,7 @@ npm run preview
 | `npm run format`       | Formats project files with Prettier.                       |
 | `npm run format:check` | Checks formatting without modifying files.                 |
 | `npm run preview`      | Previews the production build locally.                     |
+| `npm run prepare`      | Initializes Husky after dependencies are installed.        |
 
 ## Project Structure
 
@@ -111,13 +112,43 @@ src/
 │   ├── router.tsx
 │   └── router.test.tsx
 ├── assets/
+│   ├── icons/
+│   │   └── auth-shield-user.svg
+│   └── index.ts
 ├── modules/
+│   └── auth/
+│       ├── components/
+│       │   ├── auth-brand.tsx
+│       │   ├── auth-card.tsx
+│       │   ├── auth-layout.tsx
+│       │   ├── forgot-password-form.tsx
+│       │   ├── login-form.tsx
+│       │   ├── otp-verification-form.tsx
+│       │   ├── otp-verification-form.test.tsx
+│       │   ├── reset-password-form.tsx
+│       │   └── reset-password-form.test.tsx
+│       ├── pages/
+│       │   ├── forgot-password-page.tsx
+│       │   ├── login-page.tsx
+│       │   ├── reset-password-page.tsx
+│       │   └── verify-otp-page.tsx
+│       └── schemas/
+│           ├── forgot-password.schema.ts
+│           ├── login.schema.ts
+│           ├── otp-verification.schema.ts
+│           └── reset-password.schema.ts
 ├── shared/
 │   ├── api/
 │   ├── components/
 │   │   ├── common/
 │   │   └── ui/
-│   │       └── button.tsx
+│   │       ├── arrow-icon.tsx
+│   │       ├── button.tsx
+│   │       ├── field.tsx
+│   │       ├── index.ts
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       └── separator.tsx
 │   ├── config/
 │   │   └── query-client.ts
 │   ├── constants/
@@ -131,12 +162,25 @@ src/
 └── main.tsx
 ```
 
-This structure describes the current frontend foundation. Some directories are prepared for future implementation and may remain empty until their corresponding functionality is needed.
+Some shared directories are prepared for future implementation and may remain empty until their corresponding functionality is needed.
+
+## Authentication UI
+
+The router currently exposes these authentication pages:
+
+| Route              | Page             | Current behavior                                                                    |
+| ------------------ | ---------------- | ----------------------------------------------------------------------------------- |
+| `/login`           | Login            | Local form validation; submit values are logged only.                               |
+| `/forgot-password` | Forgot Password  | Local email validation; no email is sent.                                           |
+| `/verify-otp`      | OTP Verification | Six-digit input, paste/focus handling, and countdown; no OTP is verified or resent. |
+| `/reset-password`  | Reset Password   | Local password validation; no password or reset token is sent to a service.         |
+
+The forms use React Hook Form with Zod schemas. The recovery, OTP, and reset flows display an explicit unavailable-service message after submission. No authentication API client, endpoint, session storage, or backend integration is configured in the current codebase.
 
 ## Architecture
 
 - **`app/`** — Application-level routing, pages, and providers.
-- **`modules/`** — Feature-specific modules as the application grows.
+- **`modules/`** — Feature-specific modules. The current `auth` module owns the authentication pages, forms, schemas, and related tests.
 - **`shared/`** — Reusable components, configuration, API utilities, and helpers.
 - **`assets/`** — Static assets used by the application.
 - **`test/`** — Shared test setup and utilities.
@@ -221,13 +265,13 @@ git commit -m "docs: align README with project configuration"
 git push origin starter
 ```
 
-The project may use Husky and lint-staged for pre-commit tooling, depending on the current hook configuration.
+The pre-commit hook runs Husky, lint-staged, and the TypeScript typecheck described in [Git Hooks](#git-hooks). Do not bypass the hook when committing changes.
 
 ## Scope
 
 This stage focuses on the frontend foundation:
 
-- Application routing and the not-found page.
+- Application routing, the home and not-found pages, and the authentication routes.
 - Shared application providers.
 - TanStack Query configuration.
 - UI component setup.
@@ -235,7 +279,25 @@ This stage focuses on the frontend foundation:
 - Testing infrastructure.
 - Code formatting and linting tools.
 
-Feature-specific UI, business logic, and backend integration will be implemented in subsequent development stages.
+The current scope includes the implemented authentication UI and local validation. Backend authentication, account sessions, email/OTP delivery, password-reset token handling, and other business logic are not implemented yet.
+
+## Git Hooks
+
+Husky runs the following commands from `.husky/pre-commit`:
+
+```text
+npx lint-staged
+npm run typecheck
+```
+
+lint-staged runs ESLint with `--fix` followed by Prettier on staged JavaScript and TypeScript files. It runs Prettier on staged JSON, CSS, Markdown, and HTML files. The commands use the Node entrypoints below instead of the Windows `.cmd` shims:
+
+```text
+node ./node_modules/eslint/bin/eslint.js --fix
+node ./node_modules/prettier/bin/prettier.cjs --write
+```
+
+This keeps the pre-commit hook enabled and avoids the Windows child-process hang caused by invoking the bare executable shims.
 
 ## License
 
