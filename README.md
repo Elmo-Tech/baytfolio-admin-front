@@ -114,6 +114,9 @@ src/
 ├── assets/
 │   ├── icons/
 │   │   └── auth-shield-user.svg
+│   ├── baytfolio-icon.png
+│   ├── baytfolio-logo-full.png
+│   ├── baytfolio-logo-horizontal.png
 │   └── index.ts
 ├── modules/
 │   └── auth/
