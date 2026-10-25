@@ -1,8 +1,3 @@
-import { z } from "zod";
-
-export const loginSchema = z.object({
-  email: z.email("أدخل بريدًا إلكترونيًا صحيحًا"),
-  password: z.string().min(1, "كلمة المرور مطلوبة"),
-});
-
-export type LoginFormValues = z.infer<typeof loginSchema>;
+// Compatibility entry point for legacy imports. Keep the schema implementation
+// in login.schema.ts so there is a single validation source of truth.
+export { loginSchema, type LoginFormValues } from "./login.schema";
