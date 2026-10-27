@@ -30,8 +30,7 @@ export default function ResetPasswordPage() {
               إنشاء كلمة مرور جديدة
             </h1>
             <p className="mt-2 text-sm leading-6 text-[#37434B]">
-              أدخل كلمة المرور الجديدة لحساب الإدارة الخاص بك للمتابعة بصلاحيات
-              آمنة.
+              أدخل كلمة المرور الجديدة بعد فتح رابط استعادة صالح.
             </p>
           </div>
 
@@ -39,24 +38,10 @@ export default function ResetPasswordPage() {
             dir="rtl"
             className="mt-5 flex items-center justify-start gap-3 rounded-md border border-[#EEE7DE] bg-[#F8F4EF] px-3 py-2.5"
           >
-            <img
-              src={authShieldUser}
-              alt=""
-              aria-hidden="true"
-              className="size-5 shrink-0 object-contain"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(67%) sepia(10%) saturate(600%) hue-rotate(350deg) brightness(90%)",
-              }}
-            />
-
             <div className="min-w-0 text-right">
-              <p className="text-xs text-[#A99780]">الحساب المرتبط</p>
-              <p
-                dir="ltr"
-                className="truncate text-sm font-medium text-[#172A3A]"
-              >
-                admin-security@baytfolio.sa
+              <p className="text-xs text-[#A99780]">حالة الخدمة</p>
+              <p className="text-sm font-medium text-[#172A3A]">
+                لا يوجد رابط استعادة متصل حاليًا
               </p>
             </div>
           </div>
@@ -69,7 +54,7 @@ export default function ResetPasswordPage() {
           >
             <span className="inline-flex items-center gap-1.5">
               <KeyRound aria-hidden="true" className="size-4 shrink-0" />
-              تشفير فيدرالي FIPS
+              كلمة المرور لا تُرسل حاليًا
             </span>
 
             <span aria-hidden="true" className="text-[#E5DCCF]">
@@ -78,7 +63,7 @@ export default function ResetPasswordPage() {
 
             <span className="inline-flex items-center gap-1.5">
               <Clock3 aria-hidden="true" className="size-4 shrink-0" />
-              صلاحية الرابط 15 دقيقة
+              يلزم رابط صالح من الخدمة
             </span>
           </div>
         </AuthCard>

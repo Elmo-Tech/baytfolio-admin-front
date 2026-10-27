@@ -39,13 +39,7 @@ export default function VerifyOtpPage() {
               أدخل رمز التحقق المكون من 6 أرقام للمتابعة.
             </p>
             <p className="mt-1 text-sm text-[#37434B]">
-              تم إرسال الرمز إلى البريد المسجل
-              <span
-                dir="ltr"
-                className="mr-1 inline-block text-sm text-[#37434B]"
-              >
-                a•••••@baytfolio.com
-              </span>
+              أدخل الرمز المرسل إلى بريدك المسجل عند تفعيل الخدمة.
             </p>
           </div>
           <OtpVerificationForm />
@@ -55,17 +49,8 @@ export default function VerifyOtpPage() {
           dir="rtl"
           className="mt-5 flex items-center justify-center gap-2 text-center text-sm text-[#A99780]"
         >
-          <ShieldCheck
-            aria-hidden="true"
-            className="size-4 shrink-0 text-[#3D8D79]"
-          />
-          <span>بروتوكول مصادقة مصرفي مشفر</span>
-          <span aria-hidden="true" className="text-[#D8CBB9]">
-            •
-          </span>
-          <span dir="ltr" className="text-[#A99780]">
-            Session: #ADM-8831
-          </span>
+          <ShieldCheck aria-hidden="true" className="size-4 shrink-0" />
+          <span>التحقق بخطوتين قيد الإعداد</span>
         </p>
       </div>
     </AuthLayout>

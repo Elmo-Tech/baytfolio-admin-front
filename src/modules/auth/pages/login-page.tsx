@@ -2,7 +2,6 @@ import LoginForm from "@/modules/auth/components/login-form";
 import AuthCard from "@/modules/auth/components/auth-card";
 import AuthLayout from "@/modules/auth/components/auth-layout";
 import { authShieldUser, baytfolioIcon } from "@/assets";
-import { demoAuthService } from "@/modules/auth/api/demo-auth-service";
 
 export function LoginPage() {
   return (
@@ -52,9 +51,11 @@ export function LoginPage() {
             </p>
           </div>
           <LoginForm
-            onSubmit={({ email, password }) =>
-              demoAuthService.login({ email, password }).then(() => undefined)
-            }
+            onSubmit={async () => {
+              throw new Error(
+                "خدمة تسجيل الدخول غير متاحة حاليًا. لم يتم إرسال أي طلب.",
+              );
+            }}
           />{" "}
         </AuthCard>
       </div>

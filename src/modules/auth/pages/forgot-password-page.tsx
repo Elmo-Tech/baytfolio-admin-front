@@ -43,12 +43,10 @@ export default function ForgotPasswordPage() {
           >
             <span className="flex items-center gap-1.5">
               <ShieldCheck aria-hidden="true" className="size-3.5 shrink-0" />
-              استرداد معتمد عبر تشفير عالي الكفاءة
+              استرداد كلمة المرور قيد الإعداد
             </span>
 
-            <span dir="ltr" className="whitespace-nowrap tracking-wide">
-              FIPS 140-3 COMPLIANT
-            </span>
+            <span className="whitespace-nowrap">لا يتم إرسال بريد حاليًا</span>
           </div>
         </AuthCard>
         <p

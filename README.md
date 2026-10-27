@@ -8,7 +8,7 @@ This project contains the current frontend implementation for the BaytFolio admi
 
 It includes application routing, shared providers and UI primitives, an Arabic authentication UI, local form validation, component tests, and code quality tooling.
 
-The authentication screens are not connected to backend services yet. API calls, session management, email delivery, OTP verification, and password updates remain future integration work.
+Task 2 currently delivers four frontend-only authentication pages. They use local form validation and explicit unavailable-service states; no authentication backend, email delivery, OTP verification, reset token, or session integration is connected.
 
 ## Tech Stack
 
@@ -173,12 +173,12 @@ The router currently exposes these authentication pages:
 
 | Route              | Page             | Current behavior                                                                    |
 | ------------------ | ---------------- | ----------------------------------------------------------------------------------- |
-| `/login`           | Login            | Local form validation; submit values are logged only.                               |
-| `/forgot-password` | Forgot Password  | Local email validation; no email is sent.                                           |
+| `/login`           | Login            | Email/password validation; submission reports that the service is unavailable.      |
+| `/forgot-password` | Forgot Password  | Email validation; no email or recovery request is sent.                             |
 | `/verify-otp`      | OTP Verification | Six-digit input, paste/focus handling, and countdown; no OTP is verified or resent. |
-| `/reset-password`  | Reset Password   | Local password validation; no password or reset token is sent to a service.         |
+| `/reset-password`  | Reset Password   | Local password/confirmation validation; no password or reset token is sent.         |
 
-The forms use React Hook Form with Zod schemas. The recovery, OTP, and reset flows display an explicit unavailable-service message after submission. No authentication API client, endpoint, session storage, or backend integration is configured in the current codebase.
+The four forms use React Hook Form with Zod schemas and expose accessible labels, validation errors, pending states, and service-unavailable messages. The shared Axios client is scaffolding only; no authentication endpoint or backend integration is configured.
 
 ## Architecture
 
@@ -254,7 +254,7 @@ Use watch mode during development:
 npm run test:watch
 ```
 
-End-to-end testing can be added with Playwright when the corresponding test files and configuration are available.
+Playwright configuration and an E2E smoke spec are present, but there is no npm E2E script and browser execution requires the configured Chromium binary.
 
 ## Git Workflow
 
@@ -264,11 +264,24 @@ Example:
 
 ```bash
 git add README.md
-git commit -m "docs: align README with project configuration"
-git push origin starter
+git commit -m "feat(auth): prepare Task 2 authentication pages"
+git push origin feat/auth-module
 ```
 
-The pre-commit hook runs Husky, lint-staged, and the TypeScript typecheck described in [Git Hooks](#git-hooks). Do not bypass the hook when committing changes.
+Task 2 was developed on `starter` and integrated into `feat/auth-module`. Open the pull request from `feat/auth-module` into `main` when the changes are ready for review.
+
+## Git Hooks
+
+The pre-commit hook runs the following commands from `.husky/pre-commit`:
+
+```bash
+npx lint-staged
+npm run typecheck
+```
+
+`lint-staged` runs ESLint with `--fix` followed by Prettier on staged JavaScript and TypeScript files. It runs Prettier on staged JSON, CSS, Markdown, and HTML files.
+
+The pre-commit hook runs TypeScript project checks after `lint-staged`. Both steps must pass for the commit to complete successfully.
 
 ## Scope
 
@@ -282,7 +295,7 @@ This stage focuses on the frontend foundation:
 - Testing infrastructure.
 - Code formatting and linting tools.
 
-The current scope includes the implemented authentication UI and local validation. Backend authentication, account sessions, email/OTP delivery, password-reset token handling, and other business logic are not implemented yet.
+The current scope is Task 2: the four authentication pages, their forms, local validation, shared UI, routes, and tests. Backend authentication, account sessions, email/OTP delivery, password-reset token handling, and other business logic are not implemented.
 
 ## Git Hooks
 
