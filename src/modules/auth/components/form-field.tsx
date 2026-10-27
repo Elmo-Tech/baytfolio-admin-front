@@ -1,12 +1,15 @@
-import { useId, type ComponentProps } from 'react'
-import type { FieldError } from 'react-hook-form'
-import { Input } from '@/shared/components/ui/input'
+import { useId, type ComponentProps } from "react";
+import type { FieldError } from "react-hook-form";
+import { Input } from "@/shared/components/ui/input";
 export function FormField({
   label,
   error,
   ...props
-}: ComponentProps<typeof Input> & { label: string; error?: FieldError | undefined }) {
-  const id = useId()
+}: ComponentProps<typeof Input> & {
+  label: string;
+  error?: FieldError | undefined;
+}) {
+  const id = useId();
   return (
     <div className="space-y-2">
       <label htmlFor={id} className="block text-sm font-medium">
@@ -24,16 +27,22 @@ export function FormField({
         </p>
       )}
     </div>
-  )
+  );
 }
-export function SubmitButton({ busy, children }: { busy: boolean; children: React.ReactNode }) {
+export function SubmitButton({
+  busy,
+  children,
+}: {
+  busy: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="submit"
       disabled={busy}
       className="min-h-11 w-full rounded-md bg-primary px-4 text-primary-foreground disabled:opacity-50"
     >
-      {busy ? 'جارٍ الإرسال…' : children}
+      {busy ? "جارٍ الإرسال…" : children}
     </button>
-  )
+  );
 }
