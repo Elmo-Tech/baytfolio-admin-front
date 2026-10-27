@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router";
 
-export function NotFoundPage() {
+export default function NotFoundPage() {
   return (
-    <main className="mx-auto max-w-xl px-6 py-16">
-      <h1 className="text-2xl font-semibold">404 — Page not found</h1>
-      <Link className="mt-4 inline-block underline focus-visible:outline-ring" to="/">
-        Return to start
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-8">
+      <h1 className="text-4xl font-bold">404</h1>
+      <p>Page not found.</p>
+      <Link to="/" className="underline">
+        Return to dashboard
       </Link>
     </main>
-  )
+  );
 }

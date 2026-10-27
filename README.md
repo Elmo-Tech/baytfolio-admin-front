@@ -1,117 +1,307 @@
-# BaytFolio Dashboard
+# BaytFolio Admin Frontend
 
-Vite + React + strict TypeScript + React Router foundation with an explicitly approved **frontend-only Auth demo for Vendor and Admin**. The customer website remains a separate Next.js application. Synced files under the parent `sources/` remain read-only and unchanged.
+The frontend foundation for the BaytFolio admin dashboard, built with React, TypeScript, Vite, and Tailwind CSS v4.
 
-## Run locally
+## Overview
 
-Use Node 24 LTS (`.nvmrc`) and npm 11.
+This project contains the current frontend implementation for the BaytFolio admin dashboard.
 
-```sh
+It includes application routing, shared providers and UI primitives, an Arabic authentication UI, local form validation, component tests, and code quality tooling.
+
+The authentication screens are not connected to backend services yet. API calls, session management, email delivery, OTP verification, and password updates remain future integration work.
+
+## Tech Stack
+
+- **React 19** — UI development.
+- **TypeScript** — Static typing and type checking.
+- **Vite** — Development server and production build.
+- **React Router** — Client-side routing.
+- **Tailwind CSS v4** — Utility-first styling.
+- **shadcn/ui with Base UI** — UI component foundation.
+- **TanStack Query** — Server-state management.
+- **Axios** — HTTP client.
+- **Zustand** — Client-state management.
+- **React Hook Form** — Form management.
+- **Zod** — Schema validation.
+- **Sonner** — Toast notifications.
+- **Lucide React** — Icons.
+- **Vitest** — Unit and component testing.
+- **React Testing Library** — Component testing utilities.
+- **ESLint** — Code linting.
+- **Prettier** — Code formatting.
+- **Husky and lint-staged** — Git pre-commit tooling.
+
+## Requirements
+
+- **Node.js:** Version 24 or a version supported by the installed dependencies.
+- **npm:** Use a version compatible with your Node.js installation. Use `npm ci` to install dependencies from the lockfile.
+
+Verify your installed versions with:
+
+```bash
+node --version
+npm --version
+```
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd baytfolio-admin-front
+```
+
+Replace `<repository-url>` with the repository URL provided by the team.
+
+### 2. Install dependencies
+
+```bash
 npm ci
+```
+
+### 3. Start the development server
+
+```bash
 npm run dev
 ```
 
-A local ignored `.env.local` was prepared for this demonstration with `VITE_API_URL=http://127.0.0.1:8000/api/v1`. That address is an unused fixture; the auth demo makes no backend requests and requires no Laravel server. After cloning elsewhere, copy `.env.example` to `.env.local` and supply that demo fixture (or the approved actual API URL for later integration).
+Vite will display the local development URL in the terminal.
 
-Vite validates `VITE_API_URL` with Zod at startup/build. It must be an HTTP(S) origin ending in `/api/v1`, without credentials, query, or hash. Public `VITE_*` variables must never contain secrets. Actual API integration requires approved Laravel contracts and its real deployment URL.
+### 4. Build for production
 
-Open `/login`. Example Vendor: `owner@vendor.example`; example Admin: `super@admin.example`; password: `DemoPass123!`. Expand **حسابات التجربة** to see all roles. Full details, examples, and proposed settings: [Auth module README](src/modules/auth/README.md).
+```bash
+npm run build
+```
 
-## Structure
+This command runs TypeScript project checks and generates the production build.
+
+### 5. Preview the production build
+
+```bash
+npm run preview
+```
+
+## Available Scripts
+
+| Command                | Description                                                |
+| ---------------------- | ---------------------------------------------------------- |
+| `npm run dev`          | Starts the Vite development server.                        |
+| `npm run build`        | Runs TypeScript project checks and builds the application. |
+| `npm run typecheck`    | Runs TypeScript project checks independently.              |
+| `npm run lint`         | Runs ESLint.                                               |
+| `npm run test`         | Runs Vitest tests once.                                    |
+| `npm run test:watch`   | Runs Vitest in watch mode.                                 |
+| `npm run format`       | Formats project files with Prettier.                       |
+| `npm run format:check` | Checks formatting without modifying files.                 |
+| `npm run preview`      | Previews the production build locally.                     |
+| `npm run prepare`      | Initializes Husky after dependencies are installed.        |
+
+## Project Structure
 
 ```text
 src/
 ├── app/
-│   ├── pages/not-found-page.tsx
-│   ├── providers/app-providers.tsx
-│   ├── router.tsx
-│   ├── styles.css
-│   └── foundation.test.tsx
-├── modules/auth/
-│   ├── api/
-│   ├── components/
-│   ├── constants/
-│   ├── hooks/
 │   ├── pages/
+│   │   ├── home-page.tsx
+│   │   └── not-found-page.tsx
 │   ├── providers/
-│   ├── schemas/
-│   ├── types/
-│   ├── utils/
-│   ├── index.ts
-│   └── README.md
+│   │   ├── app-providers.tsx
+│   │   └── app-providers.test.tsx
+│   ├── app.tsx
+│   ├── router.tsx
+│   └── router.test.tsx
+├── assets/
+│   ├── icons/
+│   │   └── auth-shield-user.svg
+│   ├── baytfolio-icon.png
+│   ├── baytfolio-logo-full.png
+│   ├── baytfolio-logo-horizontal.png
+│   └── index.ts
+├── modules/
+│   └── auth/
+│       ├── components/
+│       │   ├── auth-brand.tsx
+│       │   ├── auth-card.tsx
+│       │   ├── auth-layout.tsx
+│       │   ├── forgot-password-form.tsx
+│       │   ├── login-form.tsx
+│       │   ├── otp-verification-form.tsx
+│       │   ├── otp-verification-form.test.tsx
+│       │   ├── reset-password-form.tsx
+│       │   └── reset-password-form.test.tsx
+│       ├── pages/
+│       │   ├── forgot-password-page.tsx
+│       │   ├── login-page.tsx
+│       │   ├── reset-password-page.tsx
+│       │   └── verify-otp-page.tsx
+│       └── schemas/
+│           ├── forgot-password.schema.ts
+│           ├── login.schema.ts
+│           ├── otp-verification.schema.ts
+│           └── reset-password.schema.ts
 ├── shared/
 │   ├── api/
-│   ├── components/ui/
+│   ├── components/
+│   │   ├── common/
+│   │   └── ui/
+│   │       ├── arrow-icon.tsx
+│   │       ├── button.tsx
+│   │       ├── field.tsx
+│   │       ├── index.ts
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       └── separator.tsx
 │   ├── config/
+│   │   └── query-client.ts
 │   ├── constants/
 │   ├── hooks/
 │   ├── types/
 │   └── utils/
-├── assets/
-├── test/setup.ts
-├── vite-env.d.ts
+│       └── cn.ts
+├── test/
+│   └── setup.ts
+├── index.css
 └── main.tsx
-e2e/smoke.spec.ts
 ```
 
-Feature logic stays in its module. `shared` contains only cross-feature infrastructure. Auth pages load by route. `/` is a minimal session demonstration, `/vendor` and `/admin` are scope-protected session examples; none is a product dashboard layout.
+Some shared directories are prepared for future implementation and may remain empty until their corresponding functionality is needed.
 
-## Installed stack
+## Authentication UI
 
-- React, React DOM, TypeScript, Vite, React Vite plugin, React Router DOM.
-- Tailwind CSS v4 + Vite plugin, shadcn/Radix prerequisites, Lucide React, CVA, clsx, tailwind-merge, tw-animate-css.
-- Axios, TanStack React Query + development-only Devtools, Zustand.
-- React Hook Form, Zod, `@hookform/resolvers`, Motion, Sonner.
-- ESLint + TypeScript/React plugins, Prettier, Husky, lint-staged.
-- Vitest, React Testing Library, jest-dom, user-event, jsdom, Playwright.
+The router currently exposes these authentication pages:
 
-Exact versions are in `package-lock.json`. `components.json` maps future shadcn components into `shared/components/ui`; no generator dependency is needed for runtime/builds. Tailwind uses its Vite plugin and CSS token configuration. Zustand/Motion are available for actual client state/interactions when needed, without demonstration stores or gratuitous animations.
+| Route              | Page             | Current behavior                                                                    |
+| ------------------ | ---------------- | ----------------------------------------------------------------------------------- |
+| `/login`           | Login            | Local form validation; submit values are logged only.                               |
+| `/forgot-password` | Forgot Password  | Local email validation; no email is sent.                                           |
+| `/verify-otp`      | OTP Verification | Six-digit input, paste/focus handling, and countdown; no OTP is verified or resent. |
+| `/reset-password`  | Reset Password   | Local password validation; no password or reset token is sent to a service.         |
 
-## Configuration
+The forms use React Hook Form with Zod schemas. The recovery, OTP, and reset flows display an explicit unavailable-service message after submission. No authentication API client, endpoint, session storage, or backend integration is configured in the current codebase.
 
-| Area                 | Files                                                                                              |
-| -------------------- | -------------------------------------------------------------------------------------------------- |
-| Dependencies/runtime | `package.json`, `package-lock.json`, `.nvmrc`                                                      |
-| TypeScript/aliases   | `tsconfig.base.json`, `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`                   |
-| Build/unit tests     | `vite.config.ts`, `src/test/setup.ts`                                                              |
-| Browser tests        | `playwright.config.ts`, `e2e/smoke.spec.ts`                                                        |
-| UI/styles            | `components.json`, `src/app/styles.css`                                                            |
-| Environment          | `.env.example`, `src/vite-env.d.ts`, `src/shared/config/env-schema.ts`, `src/shared/config/env.ts` |
-| Quality              | `eslint.config.js`, `.prettierrc.json`, `.prettierignore`                                          |
-| Git hooks            | `.husky/pre-commit`, `lint-staged.config.js`, `.gitignore`                                         |
+## Architecture
 
-Strict mode, exact optional properties, and unchecked indexed access checks apply to application/test/tooling code. `@/*` maps to `src/*` consistently in TypeScript/Vite/Vitest.
+- **`app/`** — Application-level routing, pages, and providers.
+- **`modules/`** — Feature-specific modules. The current `auth` module owns the authentication pages, forms, schemas, and related tests.
+- **`shared/`** — Reusable components, configuration, API utilities, and helpers.
+- **`assets/`** — Static assets used by the application.
+- **`test/`** — Shared test setup and utilities.
 
-The centralized Axios client remains configured with API base URL, JSON Accept header, 15-second timeout, normalized transport errors, and preserved cancellation. Auth does not use it yet; no real API endpoints or token/session integration were assumed. Laravel remains authoritative for business rules, authorization, tenancy, canonical values, and validation.
+## Module Architecture
 
-## Scripts
+Feature-specific code belongs in `src/modules/`. Each module should own its related components, hooks, API functions, schemas, types, and utilities when needed.
 
-| Script                     | Purpose                                          |
-| -------------------------- | ------------------------------------------------ |
-| `dev` / `preview`          | Development / production preview server          |
-| `build`                    | Typecheck + production build                     |
-| `format` / `format:check`  | Write/check Prettier formatting                  |
-| `lint` / `lint:fix`        | ESLint with zero warnings / fix                  |
-| `typecheck`                | Application, test, and tooling type checks       |
-| `test` / `test:watch`      | Run/watch Vitest                                 |
-| `test:e2e` / `test:e2e:ui` | Playwright / interactive browser runner          |
-| `check`                    | Format check, lint, typecheck, unit tests, build |
-| `prepare`                  | Install Husky hooks                              |
+Shared functionality that is genuinely reusable across multiple modules belongs in `src/shared/`.
 
-```sh
-npm run check
-npx playwright install chromium --no-shell
-npm run test:e2e
+### Public API
+
+A module should expose only the functionality that other modules are expected to consume through its `index.ts` entry point.
+
+Example:
+
+```text
+modules/
+└── example/
+    ├── components/
+    ├── hooks/
+    ├── api/
+    ├── schemas/
+    ├── types/
+    ├── utils/
+    └── index.ts
 ```
 
-Playwright builds fresh production assets, runs Chromium headlessly, and starts a preview on strict port 4173. Its environment uses an isolated loopback fixture; no running unrelated server is reused. Husky runs lint-staged and full typecheck before commits. In CI, hooks can be skipped using `HUSKY=0 npm ci`.
+The `index.ts` file acts as the module's public API. Consumers should import from that entry point instead of reaching into another module's internal files.
 
-## Deployment and next integration
+### Import Boundaries
 
-This application currently demonstrates auth with fictitious in-memory data; it does not provide production authentication. A full refresh resets the demonstration, including its session. Do not use real credentials.
+- Keep module implementation details private to their owning module.
+- Import cross-module functionality through the exporting module's `index.ts`.
+- Put reusable application-wide functionality in `src/shared/`.
+- Avoid circular dependencies between modules.
+- Keep application routing and provider configuration in `src/app/`.
 
-For approved static hosting, deploy `dist/` with SPA fallback to `index.html`; missing static assets must still return 404. Production authentication requires approved API/session/CORS/CSRF/revocation contracts. Browser session strategy and privileged Admin MFA remain open technical decisions. No CI provider or deployment is configured.
+## Quality Checks
 
-The older Technical Specification still names Next.js for dashboards; the explicit approved Vite decision takes precedence. PRD rules were not changed. Development is on `feat/auth-module`; no commit, PR, or deployment was created for this change.
+Run the following commands before submitting changes:
 
-Tooling references: [Tailwind Vite](https://tailwindcss.com/docs/installation/using-vite), [shadcn setup](https://ui.shadcn.com/docs/installation/manual), [Vitest](https://vitest.dev/config/), [React Hook Form resolvers](https://github.com/react-hook-form/resolvers).
+```bash
+npm run format:check
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+```
+
+Run `npm run format` to apply Prettier formatting when necessary.
+
+All checks should pass before a pull request is considered ready for review.
+
+## Testing
+
+Unit and component tests are implemented with Vitest and React Testing Library.
+
+Run the test suite with:
+
+```bash
+npm run test
+```
+
+Use watch mode during development:
+
+```bash
+npm run test:watch
+```
+
+End-to-end testing can be added with Playwright when the corresponding test files and configuration are available.
+
+## Git Workflow
+
+Use descriptive commit messages that reflect the purpose of the changes.
+
+Example:
+
+```bash
+git add README.md
+git commit -m "docs: align README with project configuration"
+git push origin starter
+```
+
+The pre-commit hook runs Husky, lint-staged, and the TypeScript typecheck described in [Git Hooks](#git-hooks). Do not bypass the hook when committing changes.
+
+## Scope
+
+This stage focuses on the frontend foundation:
+
+- Application routing, the home and not-found pages, and the authentication routes.
+- Shared application providers.
+- TanStack Query configuration.
+- UI component setup.
+- TypeScript and Vite configuration.
+- Testing infrastructure.
+- Code formatting and linting tools.
+
+The current scope includes the implemented authentication UI and local validation. Backend authentication, account sessions, email/OTP delivery, password-reset token handling, and other business logic are not implemented yet.
+
+## Git Hooks
+
+Husky runs the following commands from `.husky/pre-commit`:
+
+```text
+npx lint-staged
+npm run typecheck
+```
+
+lint-staged runs ESLint with `--fix` followed by Prettier on staged JavaScript and TypeScript files. It runs Prettier on staged JSON, CSS, Markdown, and HTML files. The commands use the Node entrypoints below instead of the Windows `.cmd` shims:
+
+```text
+node ./node_modules/eslint/bin/eslint.js --fix
+node ./node_modules/prettier/bin/prettier.cjs --write
+```
+
+This keeps the pre-commit hook enabled and avoids the Windows child-process hang caused by invoking the bare executable shims.
+
+## License
+
+Internal project. Refer to the repository owner for licensing and distribution requirements.
