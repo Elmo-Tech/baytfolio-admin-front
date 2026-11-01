@@ -184,7 +184,7 @@ export default function AdminSidebar() {
                   <NavLink
                     key={item.to}
                     to={item.to}
-                    end
+                    end={item.to !== "/users"}
                     className={({ isActive }) =>
                       [
                         "flex min-h-[42px] items-center justify-between gap-3 rounded-md px-3 py-2 text-sm transition-colors duration-200",
@@ -232,12 +232,12 @@ export default function AdminSidebar() {
 
       {/* Sidebar Footer */}
       <div className="flex h-[56px] shrink-0 items-center justify-between border-t border-[#eee8e0] px-5">
+        <span className="text-xs text-[#aa9985]">v1.2.4-prod</span>
+
         <span className="flex items-center gap-2 text-sm text-[#46515d]">
           متصل
           <span className="size-2 rounded-full bg-emerald-600" />
         </span>
-
-        <span className="text-xs text-[#aa9985]">v1.2.4-prod</span>
       </div>
     </aside>
   );
