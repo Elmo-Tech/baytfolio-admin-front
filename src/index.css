@@ -138,3 +138,6 @@ body {
     @apply font-sans;
   }
 }
+input[type="search"]::-webkit-search-cancel-button {
+  cursor: pointer;
+}
