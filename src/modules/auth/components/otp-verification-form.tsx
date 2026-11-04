@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, Clock3 } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,64 @@ const RESEND_DELAY_SECONDS = 47;
 
 type RequestState = "idle" | "loading" | "error";
 
+type CountdownStore = {
+  getSnapshot: () => number;
+  subscribe: (listener: () => void) => () => void;
+};
+
+function createCountdownStore(initialSeconds: number): CountdownStore {
+  let startedAt: number | null = null;
+  let timer: ReturnType<typeof window.setInterval> | undefined;
+  const listeners = new Set<() => void>();
+
+  function getSnapshot() {
+    if (startedAt === null) {
+      return initialSeconds;
+    }
+
+    const elapsedSeconds = Math.floor((Date.now() - startedAt) / 1000);
+    return Math.max(0, initialSeconds - elapsedSeconds);
+  }
+
+  function stopTimer() {
+    if (timer !== undefined) {
+      window.clearInterval(timer);
+      timer = undefined;
+    }
+  }
+
+  function notify() {
+    const secondsRemaining = getSnapshot();
+    listeners.forEach((listener) => listener());
+
+    if (secondsRemaining === 0) {
+      stopTimer();
+    }
+  }
+
+  function subscribe(listener: () => void) {
+    listeners.add(listener);
+
+    if (startedAt === null) {
+      startedAt = Date.now();
+    }
+
+    if (timer === undefined && getSnapshot() > 0) {
+      timer = window.setInterval(notify, 1000);
+    }
+
+    return () => {
+      listeners.delete(listener);
+
+      if (listeners.size === 0) {
+        stopTimer();
+      }
+    };
+  }
+
+  return { getSnapshot, subscribe };
+}
+
 function formatCountdown(seconds: number) {
   return `00:${String(seconds).padStart(2, "0")}`;
 }
@@ -25,11 +83,18 @@ export default function OtpVerificationForm() {
   const [digits, setDigits] = useState<string[]>(() =>
     Array<string>(OTP_LENGTH).fill(""),
   );
-  const [secondsRemaining, setSecondsRemaining] =
-    useState(RESEND_DELAY_SECONDS);
   const [requestState, setRequestState] = useState<RequestState>("idle");
   const [resendError, setResendError] = useState(false);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const countdownStore = useMemo(
+    () => createCountdownStore(RESEND_DELAY_SECONDS),
+    [],
+  );
+  const secondsRemaining = useSyncExternalStore(
+    countdownStore.subscribe,
+    countdownStore.getSnapshot,
+    countdownStore.getSnapshot,
+  );
   const {
     handleSubmit,
     setValue,
@@ -38,18 +103,6 @@ export default function OtpVerificationForm() {
     resolver: zodResolver(otpVerificationSchema),
     defaultValues: { code: "" },
   });
-
-  useEffect(() => {
-    if (secondsRemaining === 0) {
-      return;
-    }
-
-    const timer = window.setInterval(() => {
-      setSecondsRemaining((seconds) => Math.max(0, seconds - 1));
-    }, 1000);
-
-    return () => window.clearInterval(timer);
-  }, [secondsRemaining]);
 
   function updateDigits(nextDigits: string[]) {
     const code = nextDigits.join("");

@@ -1,18 +1,18 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Download } from "lucide-react";
+import { useQueryStates } from "nuqs";
 import { mockUsers } from "../api/users.mock";
 import UsersFilters from "../components/users-filters";
 import UsersPagination from "../components/users-pagination";
 import UsersStats from "../components/users-stats";
 import UsersTable from "../components/users-table";
+import { usersSearchParams } from "./users-search-params";
 
 export default function UsersPage() {
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("all");
-  const [loginMethod, setLoginMethod] = useState("all");
-  const [sortOrder, setSortOrder] = useState("newest");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const [
+    { search, status, loginMethod, sortOrder, page: currentPage, pageSize },
+    setUsersSearchParams,
+  ] = useQueryStates(usersSearchParams);
 
   const filteredUsers = useMemo(() => {
     const searchValue = search.trim().toLowerCase();
@@ -47,36 +47,43 @@ export default function UsersPage() {
   );
 
   const handleReset = () => {
-    setSearch("");
-    setStatus("all");
-    setLoginMethod("all");
-    setSortOrder("newest");
-    setCurrentPage(1);
+    setUsersSearchParams({
+      search: "",
+      status: "all",
+      loginMethod: "all",
+      sortOrder: "newest",
+      page: 1,
+      pageSize: 20,
+    });
   };
 
   const handleSearchChange = (value: string) => {
-    setSearch(value);
-    setCurrentPage(1);
+    setUsersSearchParams({ search: value, page: 1 });
   };
 
   const handleStatusChange = (value: string) => {
-    setStatus(value);
-    setCurrentPage(1);
+    setUsersSearchParams({
+      status: value as typeof status,
+      page: 1,
+    });
   };
 
   const handleLoginMethodChange = (value: string) => {
-    setLoginMethod(value);
-    setCurrentPage(1);
+    setUsersSearchParams({
+      loginMethod: value as typeof loginMethod,
+      page: 1,
+    });
   };
 
   const handleSortOrderChange = (value: string) => {
-    setSortOrder(value);
-    setCurrentPage(1);
+    setUsersSearchParams({
+      sortOrder: value as typeof sortOrder,
+      page: 1,
+    });
   };
 
   const handlePageSizeChange = (size: number) => {
-    setPageSize(size);
-    setCurrentPage(1);
+    setUsersSearchParams({ pageSize: size, page: 1 });
   };
 
   const handleExportCsv = () => {
@@ -189,7 +196,7 @@ export default function UsersPage() {
         totalPages={totalPages}
         totalItems={filteredUsers.length}
         pageSize={pageSize}
-        onPageChange={setCurrentPage}
+        onPageChange={(page) => setUsersSearchParams({ page })}
         onPageSizeChange={handlePageSizeChange}
       />
     </div>
