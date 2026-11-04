@@ -57,6 +57,10 @@ const formatLastLogin = (date: string) => {
 export default function UsersTable({ users }: UsersTableProps) {
   const navigate = useNavigate();
 
+  const handleRowClick = (userId: string) => {
+    navigate(`/users/${userId}`);
+  };
+
   return (
     <div
       dir="rtl"
@@ -80,7 +84,18 @@ export default function UsersTable({ users }: UsersTableProps) {
           <tbody className="divide-y divide-[#f3eee8]">
             {users.length > 0 ? (
               users.map((user) => (
-                <tr key={user.id} className="transition hover:bg-[#fcfbf9]">
+                <tr
+                  key={user.id}
+                  tabIndex={0}
+                  aria-label={`عرض تفاصيل المستخدم ${user.name}`}
+                  onClick={() => handleRowClick(user.id)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      handleRowClick(user.id);
+                    }
+                  }}
+                  className="cursor-pointer transition-colors hover:bg-[#fcf9f5] focus-visible:bg-[#fcf9f5] focus-visible:outline-2 focus-visible:outline-[#bd853d] focus-visible:outline-offset-[-2px]"
+                >
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f0ebe5] text-sm font-semibold text-[#102233]">
@@ -134,15 +149,12 @@ export default function UsersTable({ users }: UsersTableProps) {
                   </td>
 
                   <td className="px-5 py-4 text-center">
-                    <button
-                      type="button"
-                      onClick={() => navigate(`/users/${user.id}`)}
-                      className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md text-[#8b8176] transition hover:bg-[#f0ebe5] hover:text-[#102233]"
+                    <span
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#8b8176]"
                       title="عرض التفاصيل"
-                      aria-label={`عرض تفاصيل ${user.name}`}
                     >
                       <Eye size={18} />
-                    </button>
+                    </span>
                   </td>
                 </tr>
               ))

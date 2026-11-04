@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Bell, ChevronLeft } from "lucide-react";
 import { Link, useLocation, useParams } from "react-router";
 import { mockUsers } from "@/modules/users/api/users.mock";
@@ -11,7 +11,49 @@ const pageTitles: Record<string, string> = {
 export default function AdminHeader() {
   const location = useLocation();
   const { userId } = useParams();
+
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  // Close notifications when clicking outside
+  const notificationsRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node || !isNotificationsOpen) return;
+
+      const handleOutsideClick = (event: PointerEvent) => {
+        if (!node.contains(event.target as Node)) {
+          setIsNotificationsOpen(false);
+        }
+      };
+
+      document.addEventListener("pointerdown", handleOutsideClick);
+
+      return () => {
+        document.removeEventListener("pointerdown", handleOutsideClick);
+      };
+    },
+    [isNotificationsOpen],
+  );
+
+  // Close profile menu when clicking outside
+  const profileMenuRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node || !isProfileMenuOpen) return;
+
+      const handleOutsideClick = (event: PointerEvent) => {
+        if (!node.contains(event.target as Node)) {
+          setIsProfileMenuOpen(false);
+        }
+      };
+
+      document.addEventListener("pointerdown", handleOutsideClick);
+
+      return () => {
+        document.removeEventListener("pointerdown", handleOutsideClick);
+      };
+    },
+    [isProfileMenuOpen],
+  );
 
   const currentPath = location.pathname;
   const isUserDetails = /^\/users\/[^/]+$/.test(currentPath);
@@ -37,7 +79,9 @@ export default function AdminHeader() {
         >
           لوحة التحكم
         </Link>
+
         <ChevronLeft size={14} className="shrink-0 text-[#b09e89] sm:size-4" />
+
         {isUserDetails && (
           <>
             <Link
@@ -53,6 +97,7 @@ export default function AdminHeader() {
             />
           </>
         )}
+
         <span className="shrink-0 font-semibold text-[#1d2935]">
           {currentPageTitle}
         </span>
@@ -61,12 +106,16 @@ export default function AdminHeader() {
       {/* Admin Actions */}
       <div className="flex shrink-0 items-center gap-2 sm:gap-4 lg:gap-6">
         {/* Notifications */}
-        <div className="relative">
+        <div ref={notificationsRef} className="relative">
           <button
             type="button"
             aria-label="الإشعارات"
             aria-expanded={isNotificationsOpen}
-            onClick={() => setIsNotificationsOpen((prev) => !prev)}
+            aria-haspopup="true"
+            onClick={() => {
+              setIsNotificationsOpen((prev) => !prev);
+              setIsProfileMenuOpen(false);
+            }}
             className="relative flex size-9 cursor-pointer items-center justify-center rounded-full border border-[#eee8e0] text-[#46515d] transition-colors hover:bg-[#f7f3ed] sm:size-10"
           >
             <Bell size={18} strokeWidth={1.8} />
@@ -89,20 +138,50 @@ export default function AdminHeader() {
         </div>
 
         {/* Admin Profile */}
-        <div className="flex items-center gap-2 border-r border-[#eee8e0] pr-2 sm:gap-3 sm:pr-4 lg:pr-5">
-          <div className="hidden flex-col items-start gap-1 sm:flex">
-            <p className="whitespace-nowrap text-xs font-semibold leading-5 text-[#1d2935] sm:text-sm">
-              مدير النظام
-            </p>
+        <div
+          ref={profileMenuRef}
+          className="relative border-r border-[#eee8e0] pr-2 sm:pr-4 lg:pr-5"
+        >
+          <button
+            type="button"
+            aria-label="قائمة حساب المدير"
+            aria-expanded={isProfileMenuOpen}
+            aria-haspopup="true"
+            onClick={() => {
+              setIsProfileMenuOpen((prev) => !prev);
+              setIsNotificationsOpen(false);
+            }}
+            className="flex cursor-pointer items-center gap-2 sm:gap-3"
+          >
+            <div className="hidden flex-col items-start gap-1 sm:flex">
+              <p className="whitespace-nowrap text-xs font-semibold leading-5 text-[#1d2935] sm:text-sm">
+                مدير النظام
+              </p>
 
-            <p className="whitespace-nowrap text-[10px] leading-5 text-[#aa9985] sm:text-xs">
-              المسؤول الأعلى
-            </p>
-          </div>
+              <p className="whitespace-nowrap text-[10px] leading-5 text-[#aa9985] sm:text-xs">
+                المسؤول الأعلى
+              </p>
+            </div>
 
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#102233] text-sm font-bold text-[#eab66e] sm:size-11">
-            م
-          </div>
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#102233] text-sm font-bold text-[#eab66e] sm:size-11">
+              م
+            </div>
+          </button>
+
+          {isProfileMenuOpen && (
+            <div
+              dir="ltr"
+              className="absolute left-0 top-14 z-50 w-40 rounded-lg border border-[#eee8e0] bg-white p-2 shadow-lg"
+            >
+              <button
+                type="button"
+                onClick={() => setIsProfileMenuOpen(false)}
+                className="w-full rounded-md px-3 py-2 text-left text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+              >
+                Log out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>
