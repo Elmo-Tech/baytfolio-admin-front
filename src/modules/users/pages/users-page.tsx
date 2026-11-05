@@ -150,16 +150,16 @@ export default function UsersPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-bold text-[#1d2935]">
+            <h1 className="text-2xl font-bold text-users-text-primary">
               إدارة المستخدمين
             </h1>
 
-            {/* <span className="rounded-sm bg-[#102233] px-2 py-1 text-xs font-medium text-white">
+            {/* <span className="rounded-sm bg-users-brand-navy px-2 py-1 text-xs font-medium text-primary-foreground">
               {filteredUsers.length.toLocaleString("en-US")} Users
             </span> */}
           </div>
 
-          <p className="mt-2 text-sm text-[#8b8176]">
+          <p className="mt-2 text-sm text-users-text-muted">
             إدارة ومتابعة حسابات المستخدمين وحالاتهم على المنصة
           </p>
         </div>
@@ -168,7 +168,7 @@ export default function UsersPage() {
           type="button"
           onClick={handleExportCsv}
           disabled={filteredUsers.length === 0}
-          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md border border-[#eee8e0] bg-white px-4 text-sm font-medium text-[#46515d] transition hover:bg-[#f7f3ed] disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md border border-users-panel-divider bg-users-surface px-4 text-sm font-medium text-users-text-secondary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Download size={17} />
           تصدير القائمة (CSV)

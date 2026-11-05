@@ -134,36 +134,36 @@ const navigationGroups = [
 ];
 
 const badgeStyles = {
-  orange: "bg-[#fff0d9] text-[#d97706]",
-  blue: "bg-[#e0edff] text-[#2563eb]",
-  red: "bg-[#ffe5e5] text-[#dc2626]",
+  orange: "bg-badge-warning-bg text-badge-warning-fg",
+  blue: "bg-badge-info-bg text-badge-info-fg",
+  red: "bg-badge-error-bg text-badge-error-fg",
 };
 
 export default function AdminSidebar() {
   return (
     <aside
       dir="rtl"
-      className="sticky top-0 flex h-screen w-[280px] shrink-0 self-start flex-col overflow-hidden border-l border-[#e9e1d7] bg-white"
+      className="sticky top-0 flex h-screen w-[280px] shrink-0 self-start flex-col overflow-hidden border-l border-border-subtle bg-card"
     >
       {/* Brand Header */}
-      <div className="flex h-[88px] shrink-0 items-center justify-between border-b border-[#eee8e0] px-5">
+      <div className="flex h-[88px] shrink-0 items-center justify-between border-b border-border-divider px-5">
         <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-[#102233] text-2xl font-bold text-[#eab66e]">
+          <div className="flex size-10 items-center justify-center rounded-lg bg-brand-navy text-2xl font-bold text-brand-gold">
             B
           </div>
 
           <div>
-            <h2 className="text-xl font-bold leading-6 text-[#1d2935]">
+            <h2 className="text-xl font-bold leading-6 text-text-primary">
               BaytFolio
             </h2>
 
-            <p className="mt-1 text-xs text-[#aa9985]">
+            <p className="mt-1 text-xs text-text-muted">
               بوابة الإدارة المركزية
             </p>
           </div>
         </div>
 
-        <span className="rounded-sm border border-[#e9dfd1] bg-[#f7f3ed] px-2 py-1 text-[10px] font-bold tracking-wider text-[#bd853d]">
+        <span className="rounded-sm border border-border-warm bg-background px-2 py-1 text-[10px] font-bold tracking-wider text-brand-gold-strong">
           ADMIN
         </span>
       </div>
@@ -172,7 +172,7 @@ export default function AdminSidebar() {
       <nav className="min-h-0 flex-1 space-y-6 overflow-y-auto px-3 py-5">
         {navigationGroups.map((group) => (
           <section key={group.title} className="space-y-3">
-            <h3 className="px-3 text-xs font-medium leading-5 text-[#aa9985]">
+            <h3 className="px-3 text-xs font-medium leading-5 text-text-muted">
               {group.title}
             </h3>
 
@@ -189,8 +189,8 @@ export default function AdminSidebar() {
                       [
                         "flex min-h-[42px] items-center justify-between gap-3 rounded-md px-3 py-2 text-sm transition-colors duration-200",
                         isActive
-                          ? "bg-[#102233] font-semibold text-white"
-                          : "text-[#46515d] hover:bg-[#f7f3ed]",
+                          ? "bg-brand-navy font-semibold text-primary-foreground"
+                          : "text-text-secondary-strong hover:bg-background",
                       ].join(" ")
                     }
                   >
@@ -201,7 +201,9 @@ export default function AdminSidebar() {
                             size={19}
                             strokeWidth={1.8}
                             className={
-                              isActive ? "text-white" : "text-[#aa9985]"
+                              isActive
+                                ? "text-primary-foreground"
+                                : "text-text-muted"
                             }
                           />
 

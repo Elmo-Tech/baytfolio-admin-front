@@ -9,8 +9,9 @@ import {
   type OtpVerificationValues,
 } from "@/modules/auth/schemas/otp-verification.schema";
 import ArrowIcon from "@/shared/components/ui/arrow-icon";
-import { Button } from "@/shared/components/ui/button";
+import { AsyncSubmitButton } from "@/shared/components/ui/async-submit-button";
 import { FieldError } from "@/shared/components/ui/field";
+import { FormAlert } from "@/shared/components/ui/form-alert";
 
 const OTP_LENGTH = 6;
 const RESEND_DELAY_SECONDS = 47;
@@ -204,7 +205,7 @@ export default function OtpVerificationForm() {
                 inputRefs.current[index] = element;
               }}
               aria-label={`رقم رمز التحقق ${index + 1}`}
-              className="size-10 rounded-md border border-[#E7DED2] bg-[#FBF9F6] text-center text-lg font-semibold text-[#172A3A] outline-none transition-colors placeholder:text-[#B7AA97] focus:border-[#B8914E] focus:ring-2 focus:ring-[#B8914E]/20 sm:size-11"
+              className="size-10 rounded-md border border-auth-border-input bg-auth-surface text-center text-lg font-semibold text-auth-navy outline-none transition-colors placeholder:text-auth-otp-placeholder focus:border-auth-focus focus:ring-2 focus:ring-auth-focus/20 sm:size-11"
               inputMode="numeric"
               maxLength={1}
               pattern="[0-9]*"
@@ -227,16 +228,19 @@ export default function OtpVerificationForm() {
           type="button"
           disabled={secondsRemaining > 0}
           onClick={handleResend}
-          className="cursor-pointer font-medium text-[#A99780] transition-colors enabled:text-[#9C7636] enabled:hover:underline disabled:cursor-not-allowed disabled:opacity-70"
+          className="cursor-pointer font-medium text-auth-text-muted transition-colors enabled:text-auth-link-hover enabled:hover:underline disabled:cursor-not-allowed disabled:opacity-70"
         >
           طلب رمز جديد
         </button>
-        <span className="flex items-center gap-1.5 text-[#37434B]">
-          <Clock3 aria-hidden="true" className="size-3.5 text-[#A99780]" />
+        <span className="flex items-center gap-1.5 text-text-secondary">
+          <Clock3
+            aria-hidden="true"
+            className="size-3.5 text-auth-text-muted"
+          />
           {secondsRemaining > 0 ? (
             <>
               إعادة الإرسال خلال:
-              <b dir="ltr" className="font-semibold text-[#172A3A]">
+              <b dir="ltr" className="font-semibold text-auth-navy">
                 {formatCountdown(secondsRemaining)}
               </b>
             </>
@@ -247,43 +251,39 @@ export default function OtpVerificationForm() {
       </div>
 
       {resendError && (
-        <p
-          role="alert"
-          className="rounded-md border border-[#E8C8C3] bg-[#FFF5F3] px-3 py-2 text-center text-sm leading-5 text-[#9E3D31]"
-        >
+        <FormAlert variant="error" className="text-center">
           خدمة إعادة إرسال الرمز غير متاحة حاليًا. لم يتم إرسال رمز جديد.
-        </p>
+        </FormAlert>
       )}
 
       {requestState === "error" && (
-        <p
-          role="alert"
-          className="rounded-md border border-[#E8C8C3] bg-[#FFF5F3] px-3 py-2 text-center text-sm leading-5 text-[#9E3D31]"
-        >
+        <FormAlert variant="error" className="text-center">
           خدمة التحقق بخطوتين غير متاحة حاليًا. لم يتم التحقق من الرمز.
-        </p>
+        </FormAlert>
       )}
 
-      <Button
-        type="submit"
+      <AsyncSubmitButton
+        label="تأكيد"
+        loadingLabel="جارٍ التحقق..."
+        loading={requestState === "loading"}
         size="lg"
-        disabled={requestState === "loading"}
-        className="h-10 w-full rounded-md bg-[#172A3A] text-base text-white shadow-sm hover:bg-[#243B4D] focus-visible:border-[#B8914E] focus-visible:ring-[#B8914E]/40"
-      >
-        <span>{requestState === "loading" ? "جارٍ التحقق..." : "تأكيد"}</span>
-        <ArrowIcon className="size-4" />
-      </Button>
+        className="h-10 w-full rounded-md bg-auth-navy text-base text-primary-foreground shadow-sm hover:bg-auth-navy-hover focus-visible:border-auth-focus focus-visible:ring-auth-focus/40"
+        icon={<ArrowIcon className="size-4" />}
+      />
 
-      <div className="rounded-md bg-[#F6F1EA] px-3 py-2 text-center text-sm leading-5 text-[#37434B]">
+      <div className="rounded-md bg-auth-notice-bg px-3 py-2 text-center text-sm leading-5 text-text-secondary">
         <span className="inline-flex items-center gap-1">
-          <AlertCircle aria-hidden="true" className="size-3.5 text-[#C58C43]" />
+          <AlertCircle
+            aria-hidden="true"
+            className="size-3.5 text-auth-warning"
+          />
           تنتهي صلاحية الرمز خلال 10 دقائق لحماية حسابك.
         </span>
       </div>
 
       <Link
         to="/login"
-        className="mx-auto flex w-fit items-center gap-1.5 text-sm font-medium text-[#3F515F] transition-colors hover:text-[#172A3A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8914E]/40"
+        className="mx-auto flex w-fit items-center gap-1.5 text-sm font-medium text-auth-link transition-colors hover:text-auth-navy hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-auth-focus/40"
       >
         <ArrowIcon className="size-4" />
         <span>العودة لتسجيل الدخول</span>

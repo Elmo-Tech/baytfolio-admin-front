@@ -11,7 +11,7 @@ export default function AdminLayout() {
 
   return (
     <NuqsAdapter>
-      <div dir="rtl" className="flex min-h-screen bg-[#f8f6f2]">
+      <div dir="rtl" className="flex min-h-screen bg-surface-admin">
         {/* Desktop Sidebar */}
         <div className="hidden lg:block">
           <AdminSidebar />
@@ -28,23 +28,23 @@ export default function AdminLayout() {
             type="button"
             aria-label="إغلاق القائمة"
             onClick={() => setIsSidebarOpen(false)}
-            className={`absolute inset-0 bg-black/40 transition-opacity ${
+            className={`absolute inset-0 bg-overlay/40 transition-opacity ${
               isSidebarOpen ? "opacity-100" : "opacity-0"
             }`}
           />
 
           {/* Sidebar Drawer */}
           <div
-            className={`absolute right-0 top-0 h-full w-[280px] max-w-[85vw] bg-white transition-transform duration-300 ${
+            className={`absolute right-0 top-0 h-full w-[280px] max-w-[85vw] bg-card transition-transform duration-300 ${
               isSidebarOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            <div className="flex justify-start border-b border-[#eee8e0] p-3">
+            <div className="flex justify-start border-b border-border-divider p-3">
               <button
                 type="button"
                 aria-label="إغلاق القائمة"
                 onClick={() => setIsSidebarOpen(false)}
-                className="rounded-md p-2 text-[#46515d] transition hover:bg-[#f7f3ed]"
+                className="rounded-md p-2 text-text-secondary-strong transition hover:bg-background"
               >
                 <X size={21} />
               </button>
@@ -59,7 +59,7 @@ export default function AdminLayout() {
           {/* Mobile Header */}
           <div
             dir="ltr"
-            className="flex min-w-0 items-center border-b border-[#e9e1d7] bg-white px-3 lg:hidden"
+            className="flex min-w-0 items-center border-b border-border-subtle bg-card px-3 lg:hidden"
           >
             <div className="min-w-0 flex-1">
               <AdminHeader />
@@ -71,7 +71,7 @@ export default function AdminLayout() {
               aria-label={isSidebarOpen ? "إغلاق القائمة" : "فتح القائمة"}
               aria-expanded={isSidebarOpen}
               onClick={() => setIsSidebarOpen((prev) => !prev)}
-              className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-[#46515d] transition hover:bg-[#f7f3ed]"
+              className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-text-secondary-strong transition hover:bg-background"
             >
               {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
             </button>

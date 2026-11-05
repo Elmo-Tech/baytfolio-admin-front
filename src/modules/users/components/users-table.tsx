@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { Eye } from "lucide-react";
+import { Badge } from "@/shared/components/ui";
 
 import type { User } from "../types/user";
 
@@ -12,13 +13,6 @@ const statusLabels: Record<User["status"], string> = {
   suspended: "محظور",
   pending_deletion: "طلب حذف",
   deleted: "محذوف",
-};
-
-const statusStyles: Record<User["status"], string> = {
-  active: "bg-[#e8f5ef] text-[#16845d]",
-  suspended: "bg-[#fff0f0] text-[#e5484d]",
-  pending_deletion: "bg-[#fff4e5] text-[#d97706]",
-  deleted: "bg-[#f1f1f1] text-[#777777]",
 };
 
 const loginMethodLabels: Record<User["loginMethod"], string> = {
@@ -64,11 +58,11 @@ export default function UsersTable({ users }: UsersTableProps) {
   return (
     <div
       dir="rtl"
-      className="overflow-hidden rounded-md border border-[#f0ebe5] bg-white"
+      className="overflow-hidden rounded-md border border-users-panel-border bg-users-surface"
     >
       <div className="overflow-x-auto">
         <table className="w-full min-w-[1100px] text-right">
-          <thead className="bg-[#faf8f5] text-xs text-[#8b8176]">
+          <thead className="bg-users-table-header text-xs text-users-text-muted">
             <tr>
               <th className="px-5 py-4 font-medium">المستخدم</th>
               <th className="px-5 py-4 font-medium">رقم الهاتف</th>
@@ -81,7 +75,7 @@ export default function UsersTable({ users }: UsersTableProps) {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-[#f3eee8]">
+          <tbody className="divide-y divide-users-table-divider">
             {users.length > 0 ? (
               users.map((user) => (
                 <tr
@@ -94,63 +88,74 @@ export default function UsersTable({ users }: UsersTableProps) {
                       handleRowClick(user.id);
                     }
                   }}
-                  className="cursor-pointer transition-colors hover:bg-[#fcf9f5] focus-visible:bg-[#fcf9f5] focus-visible:outline-2 focus-visible:outline-[#bd853d] focus-visible:outline-offset-[-2px]"
+                  className="cursor-pointer transition-colors hover:bg-users-surface-row-hover focus-visible:bg-users-surface-row-hover focus-visible:outline-2 focus-visible:outline-users-focus focus-visible:outline-offset-[-2px]"
                 >
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f0ebe5] text-sm font-semibold text-[#102233]">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-users-panel-border text-sm font-semibold text-users-brand-navy">
                         {user.avatarInitial}
                       </div>
 
                       <div>
-                        <p className="text-sm font-semibold text-[#1d2935]">
+                        <p className="text-sm font-semibold text-users-text-primary">
                           {user.name}
                         </p>
-                        <p className="mt-1 text-xs text-[#9a9187]">{user.id}</p>
+                        <p className="mt-1 text-xs text-users-text-subtle">
+                          {user.id}
+                        </p>
                       </div>
                     </div>
                   </td>
 
                   <td
                     dir="ltr"
-                    className="whitespace-nowrap px-5 py-4 text-sm text-[#46515d]"
+                    className="whitespace-nowrap px-5 py-4 text-sm text-users-text-secondary"
                   >
                     {user.phone}
                   </td>
 
                   <td
                     dir="ltr"
-                    className="whitespace-nowrap px-5 py-4 text-sm text-[#46515d]"
+                    className="whitespace-nowrap px-5 py-4 text-sm text-users-text-secondary"
                   >
                     {user.email}
                   </td>
 
-                  <td className="whitespace-nowrap px-5 py-4 text-sm text-[#46515d]">
+                  <td className="whitespace-nowrap px-5 py-4 text-sm text-users-text-secondary">
                     {loginMethodLabels[user.loginMethod]}
                   </td>
 
                   <td
                     dir="ltr"
-                    className="whitespace-nowrap px-5 py-4 text-sm text-[#46515d]"
+                    className="whitespace-nowrap px-5 py-4 text-sm text-users-text-secondary"
                   >
                     {formatDate(user.createdAt)}
                   </td>
 
                   <td className="px-5 py-4">
-                    <span
-                      className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium ${statusStyles[user.status]}`}
+                    <Badge
+                      variant="outline"
+                      className={`whitespace-nowrap border-transparent px-3 py-1 text-xs font-medium ${
+                        user.status === "active"
+                          ? "bg-status-active-bg text-status-active-fg"
+                          : user.status === "suspended"
+                            ? "bg-status-suspended-bg text-status-suspended-fg"
+                            : user.status === "pending_deletion"
+                              ? "bg-status-pending-bg text-status-pending-fg"
+                              : "bg-status-deleted-bg text-status-deleted-fg"
+                      }`}
                     >
                       {statusLabels[user.status]}
-                    </span>
+                    </Badge>
                   </td>
 
-                  <td className="whitespace-nowrap px-5 py-4 text-sm text-[#8b8176]">
+                  <td className="whitespace-nowrap px-5 py-4 text-sm text-users-text-muted">
                     {formatLastLogin(user.lastLogin)}
                   </td>
 
                   <td className="px-5 py-4 text-center">
                     <span
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#8b8176]"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-md text-users-text-muted"
                       title="عرض التفاصيل"
                     >
                       <Eye size={18} />
@@ -162,7 +167,7 @@ export default function UsersTable({ users }: UsersTableProps) {
               <tr>
                 <td
                   colSpan={8}
-                  className="px-5 py-12 text-center text-sm text-[#9a9187]"
+                  className="px-5 py-12 text-center text-sm text-users-text-subtle"
                 >
                   لا توجد نتائج مطابقة لبحثك
                 </td>
