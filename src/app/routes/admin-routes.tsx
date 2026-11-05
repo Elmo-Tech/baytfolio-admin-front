@@ -1,7 +1,6 @@
 import AdminLayoutWithNuqs from "@/app/layouts/admin-layout-with-nuqs";
 
 import { DashboardPage } from "@/modules/dashboard";
-import { PlatformAnalyticsPage } from "@/modules/platform-analytics";
 import UsersPage from "@/modules/users/pages/users-page";
 import UserDetailsPage from "@/modules/users/pages/user-details-page";
 
@@ -21,10 +20,6 @@ export const adminRoutes = [
       {
         path: "users/:userId",
         Component: UserDetailsPage,
-      },
-      {
-        path: "analytics",
-        Component: PlatformAnalyticsPage,
       },
     ],
   },

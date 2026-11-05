@@ -6,7 +6,6 @@ import { mockUsers } from "@/modules/users/api/users.mock";
 const pageTitles: Record<string, string> = {
   "/dashboard": "نظرة عامة",
   "/users": "المستخدمون",
-  "/analytics": "التحليلات والتقارير",
 };
 
 export default function AdminHeader() {
@@ -161,7 +160,7 @@ export default function AdminHeader() {
           >
             <div className="hidden flex-col items-start gap-1 sm:flex">
               <p className="whitespace-nowrap text-xs font-semibold leading-5 text-text-primary sm:text-sm">
-                أشرف قبية
+                محمود صابر
               </p>
 
               <p className="whitespace-nowrap text-[10px] leading-5 text-text-muted sm:text-xs">

@@ -1,6 +1,5 @@
 import {
   Building2,
-  ChartNoAxesColumn,
   Clock3,
   FileText,
   Flag,
@@ -103,11 +102,6 @@ const navigationGroups = [
         label: "إدارة المحتوى CMS",
         to: "/cms",
         icon: FileText,
-      },
-      {
-        label: "التحليلات والتقارير",
-        to: "/analytics",
-        icon: ChartNoAxesColumn,
       },
     ],
   },

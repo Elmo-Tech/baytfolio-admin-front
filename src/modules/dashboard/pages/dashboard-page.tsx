@@ -2,9 +2,10 @@ import {
   ContentGrowthCard,
   ContractStatusCard,
   ShowroomStatusCard,
-} from "@/modules/platform-analytics";
+} from "../components/platform-analytics";
 
 import DashboardHeader from "../components/dashboard-header";
+import NeedsAttention from "../components/needs-attention";
 import DashboardStats from "../components/dashboard-stats";
 
 export default function DashboardPage() {
@@ -37,6 +38,7 @@ export default function DashboardPage() {
           <ContractStatusCard />
         </div>
       </section>
+      <NeedsAttention />
     </div>
   );
 }
