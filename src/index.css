@@ -2,14 +2,14 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/noto-sans-arabic";
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@ibm/plex-sans-arabic/css/ibm-plex-sans-arabic-all.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter-sans);
-  --font-heading: var(--font-inter-sans);
+  --font-sans: var(--font-ibm-plex-sans-arabic), var(--font-ibm-plex-sans);
+  --font-heading: var(--font-ibm-plex-sans-arabic), var(--font-ibm-plex-sans);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -68,6 +68,14 @@
   --color-overlay: var(--overlay);
   --color-text-secondary: var(--text-secondary);
   --color-dashboard-text-secondary: var(--dashboard-text-secondary);
+  --text-dashboard-label: 0.9375rem;
+  --text-dashboard-label--line-height: 1.5rem;
+
+  --text-dashboard-value: 1.75rem;
+  --text-dashboard-value--line-height: 2rem;
+
+  --text-dashboard-description: 0.9375rem;
+  --text-dashboard-description--line-height: 1.25rem;
   --color-auth-brand-navy: var(--auth-brand-navy);
   --color-auth-navy: var(--auth-navy);
   --color-auth-navy-hover: var(--auth-navy-hover);
@@ -173,8 +181,8 @@
 }
 
 :root {
-  --font-inter-sans: "Inter Variable";
-  --font-noto-sans-arabic: "Noto Sans Arabic Variable";
+  --font-ibm-plex-sans: "IBM Plex Sans Variable";
+  --font-ibm-plex-sans-arabic: "IBM Plex Sans Arabic";
 
   --background: #f7f3ed;
   --foreground: #1c2a34;
@@ -329,13 +337,6 @@
   --card-shadow: 0 8px 28px rgba(16, 32, 48, 0.08);
   --floating-shadow: 0 16px 48px rgba(16, 32, 48, 0.14);
   --auth-card-shadow: 0 20px 55px rgba(42, 35, 25, 0.12);
-}
-
-:lang(ar),
-[dir="rtl"] {
-  --font-sans: var(--font-noto-sans-arabic), var(--font-inter-sans), sans-serif;
-  --font-heading:
-    var(--font-noto-sans-arabic), var(--font-inter-sans), sans-serif;
 }
 
 .dark {

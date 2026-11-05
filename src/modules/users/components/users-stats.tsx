@@ -1,5 +1,6 @@
 import { Ban, Clock3, Users, UserRoundCheck } from "lucide-react";
 
+import { StatCard } from "@/shared/components/ui";
 import { mockUsersStats } from "../api/users.mock";
 
 const statsItems = [
@@ -52,40 +53,22 @@ export default function UsersStats() {
         const Icon = item.icon;
 
         return (
-          <article
+          <StatCard
             key={item.title}
-            className="flex min-h-[108px] flex-col justify-between rounded-md border border-users-panel-border bg-users-surface p-4 shadow-sm"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-medium text-text-muted">
-                  {item.title}
-                </p>
-
-                <div className="mt-2 flex items-center gap-2">
-                  <h3 className="text-2xl font-bold leading-none text-users-text-primary">
-                    {item.value.toLocaleString("en-US")}
-                  </h3>
-
-                  {item.percentage && (
-                    <span className="rounded-sm bg-users-stat-success-bg px-2 py-1 text-[10px] font-semibold text-users-stat-success-fg">
-                      {item.percentage}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div
-                className={`flex size-10 shrink-0 items-center justify-center rounded-sm ${item.iconBackground}`}
-              >
-                <Icon size={20} strokeWidth={1.9} className={item.iconColor} />
-              </div>
-            </div>
-
-            <p className={`mt-4 text-[11px] ${item.descriptionColor}`}>
-              {item.description}
-            </p>
-          </article>
+            title={item.title}
+            value={item.value}
+            description={item.description}
+            icon={Icon}
+            iconClassName={`${item.iconBackground} ${item.iconColor}`}
+            descriptionClassName={item.descriptionColor}
+            valueAdornment={
+              item.percentage && (
+                <span className="rounded-sm bg-users-stat-success-bg px-2 py-1 text-[10px] font-semibold text-users-stat-success-fg">
+                  {item.percentage}
+                </span>
+              )
+            }
+          />
         );
       })}
     </section>

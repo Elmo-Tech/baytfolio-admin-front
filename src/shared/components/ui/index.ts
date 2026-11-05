@@ -8,6 +8,7 @@ export { Label } from "./label";
 export { PasswordInput } from "./password-input";
 export { FormAlert } from "./form-alert";
 export { Separator } from "./separator";
+export { StatCard, StatCardIcon } from "./stat-card";
 
 export {
   Field,
