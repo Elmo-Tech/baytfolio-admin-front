@@ -13,7 +13,7 @@ export default function VerifyOtpPage() {
           {" "}
           <div dir="rtl" className="text-center">
             <div className="mb-5 flex justify-center">
-              <span className="flex items-center gap-2 rounded-full bg-[#F2EDE6] px-2 py-1 text-xs font-medium text-[#37434B]">
+              <span className="flex items-center gap-2 rounded-full bg-auth-soft-bg px-2 py-1 text-xs font-medium text-text-secondary">
                 <img
                   src={authShieldUser}
                   alt=""
@@ -24,25 +24,25 @@ export default function VerifyOtpPage() {
               </span>
             </div>
 
-            <div className="mx-auto mb-4 flex size-10 items-center justify-center rounded-lg bg-[#F2EDE6]">
+            <div className="mx-auto mb-4 flex size-10 items-center justify-center rounded-lg bg-auth-soft-bg">
               <ShieldCheck
                 aria-hidden="true"
-                className="size-5 text-[#172A3A]"
+                className="size-5 text-auth-navy"
                 strokeWidth={1.8}
               />
             </div>
 
-            <h1 className="text-[26px] font-bold text-[#172A3A]">
+            <h1 className="text-[26px] font-bold text-auth-navy">
               التحقق بخطوتين
             </h1>
-            <p className="mt-1 text-sm text-[#37434B]">
+            <p className="mt-1 text-sm text-text-secondary">
               أدخل رمز التحقق المكون من 6 أرقام للمتابعة.
             </p>
-            <p className="mt-1 text-sm text-[#37434B]">
+            <p className="mt-1 text-sm text-text-secondary">
               تم إرسال الرمز إلى البريد المسجل
               <span
                 dir="ltr"
-                className="mr-1 inline-block text-sm text-[#37434B]"
+                className="mr-1 inline-block text-sm text-text-secondary"
               >
                 a•••••@baytfolio.com
               </span>
@@ -53,17 +53,17 @@ export default function VerifyOtpPage() {
 
         <p
           dir="rtl"
-          className="mt-5 flex items-center justify-center gap-2 text-center text-sm text-[#A99780]"
+          className="mt-5 flex items-center justify-center gap-2 text-center text-sm text-auth-text-muted"
         >
           <ShieldCheck
             aria-hidden="true"
-            className="size-4 shrink-0 text-[#3D8D79]"
+            className="size-4 shrink-0 text-auth-success"
           />
           <span>بروتوكول مصادقة مصرفي مشفر</span>
-          <span aria-hidden="true" className="text-[#D8CBB9]">
+          <span aria-hidden="true" className="text-auth-divider">
             •
           </span>
-          <span dir="ltr" className="text-[#A99780]">
+          <span dir="ltr" className="text-auth-text-muted">
             Session: #ADM-8831
           </span>
         </p>

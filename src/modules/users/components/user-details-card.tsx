@@ -31,32 +31,37 @@ export default function UserDetailsCard({ user }: UserDetailsCardProps) {
   ];
 
   return (
-    <section className="rounded-lg border border-[#e9e1d7] bg-white p-5">
-      <div className="mb-4 flex items-center gap-2 border-b border-[#eee8e0] pb-4">
-        <div className="rounded-md bg-[#f7f3ed] p-1.5">
-          <UserRound size={17} className="text-[#46515d]" />
+    <section className="rounded-lg border border-border-subtle bg-card p-5">
+      <div className="mb-4 flex items-center gap-2 border-b border-users-panel-divider pb-4">
+        <div className="rounded-md bg-background p-1.5">
+          <UserRound size={17} className="text-users-text-secondary" />
         </div>
 
-        <h2 className="font-semibold text-[#1d2935]">بيانات الحساب</h2>
+        <h2 className="font-semibold text-users-text-primary">بيانات الحساب</h2>
       </div>
 
       <div className="space-y-2.5">
         {accountFields.map((field) => (
           <div
             key={field.label}
-            className="flex min-h-10 items-center justify-between gap-4 rounded-md border border-[#eee8e0] bg-[#fcfaf8] px-3 py-2"
+            className="flex min-h-10 items-center justify-between gap-4 rounded-md border border-users-panel-divider bg-users-surface-input px-3 py-2"
           >
-            <span className="text-xs text-[#a89987]">{field.label}</span>
+            <span className="text-xs text-users-text-subtle">
+              {field.label}
+            </span>
 
-            <span dir="auto" className="text-sm font-medium text-[#263442]">
+            <span
+              dir="auto"
+              className="text-sm font-medium text-users-text-detail"
+            >
               {field.value}
             </span>
           </div>
         ))}
       </div>
 
-      <div className="mt-4 flex items-center gap-2 border-t border-[#eee8e0] pt-3 text-xs text-[#a89987]">
-        <ShieldCheck size={14} className="text-[#278363]" />
+      <div className="mt-4 flex items-center gap-2 border-t border-users-panel-divider pt-3 text-xs text-users-text-subtle">
+        <ShieldCheck size={14} className="text-users-status-active-fg" />
         <span>حماية الخصوصية مفعّلة لبيانات الاتصال.</span>
       </div>
     </section>

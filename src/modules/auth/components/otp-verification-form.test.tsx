@@ -57,9 +57,16 @@ describe("OtpVerificationForm", () => {
 
     const resendButton = screen.getByRole("button", { name: "طلب رمز جديد" });
     expect(resendButton).toBeDisabled();
+    expect(screen.getByText("00:47")).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(47_000);
+      vi.advanceTimersByTime(1_000);
+    });
+
+    expect(screen.getByText("00:46")).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(46_000);
     });
 
     expect(resendButton).toBeEnabled();

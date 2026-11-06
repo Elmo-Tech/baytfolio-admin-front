@@ -21,13 +21,15 @@ export default function UserDetailsPage() {
     return (
       <div
         dir="rtl"
-        className="rounded-lg border border-[#e9e1d7] bg-white p-8 text-center"
+        className="rounded-lg border border-border-subtle bg-card p-8 text-center"
       >
-        <h2 className="font-semibold text-[#1d2935]">المستخدم غير موجود</h2>
+        <h2 className="font-semibold text-users-text-primary">
+          المستخدم غير موجود
+        </h2>
 
         <Link
           to="/users"
-          className="mt-4 inline-flex items-center gap-2 text-sm text-[#46515d] hover:underline"
+          className="mt-4 inline-flex items-center gap-2 text-sm text-users-text-secondary hover:underline"
         >
           <ArrowLeft size={16} />
           العودة إلى المستخدمين
@@ -45,29 +47,31 @@ export default function UserDetailsPage() {
 
   return (
     <div dir="rtl" className="space-y-7">
-      <header className="flex flex-col gap-5 border-b border-[#e9e1d7] pb-6 sm:flex-row sm:items-center sm:justify-between">
+      <header className="flex flex-col gap-5 border-b border-border-subtle pb-6 sm:flex-row sm:items-center sm:justify-between">
         <Link
           to="/users"
-          className="inline-flex h-9 items-center gap-2 self-start rounded-md border border-[#e9e1d7] bg-white px-3 text-sm text-[#263442] transition hover:bg-[#f7f3ed]"
+          className="inline-flex h-9 items-center gap-2 self-start rounded-md border border-border-subtle bg-card px-3 text-sm text-users-text-detail transition hover:bg-background"
         >
           <ArrowLeft size={16} />
           العودة إلى المستخدمين
         </Link>
 
         <div className="flex items-center gap-3">
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#102233] text-lg font-semibold text-white">
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-users-brand-navy text-lg font-semibold text-primary-foreground">
             {user.avatarInitial}
           </div>
 
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-xl font-bold text-[#1d2935]">{user.name}</h1>
+              <h1 className="text-xl font-bold text-users-text-primary">
+                {user.name}
+              </h1>
 
               <span
                 className={`rounded-md px-2 py-1 text-xs font-medium ${
                   isActive
-                    ? "bg-[#e8f2ec] text-[#278363]"
-                    : "bg-red-50 text-red-600"
+                    ? "bg-users-status-active-bg text-users-status-active-fg"
+                    : "bg-users-status-error-bg text-users-status-error-fg"
                 }`}
               >
                 {isActive
@@ -79,16 +83,16 @@ export default function UserDetailsPage() {
                       : "في انتظار الحذف"}
               </span>
 
-              <span className="rounded-md border border-[#e9e1d7] bg-[#f7f3ed] px-2 py-1 text-xs text-[#46515d]">
+              <span className="rounded-md border border-border-subtle bg-background px-2 py-1 text-xs text-users-text-secondary">
                 {loginMethodLabels[user.loginMethod]}
               </span>
             </div>
 
-            <p className="text-xs text-[#a89987]">
+            <p className="text-xs text-users-text-subtle">
               مرجع الحساب التشغيلي:
               <span
                 dir="ltr"
-                className="mr-2 inline-block rounded bg-[#f7f3ed] px-2 py-1 text-[#46515d]"
+                className="mr-2 inline-block rounded bg-background px-2 py-1 text-users-text-secondary"
               >
                 #{user.id}-EG
               </span>

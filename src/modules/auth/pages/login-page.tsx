@@ -15,8 +15,10 @@ export default function LoginPage() {
           >
             <div className="flex items-center gap-2" dir="ltr">
               <div className="flex flex-col items-start">
-                <p className="text-lg font-bold text-[#102131]">BaytFolio</p>
-                <span dir="rtl" className="text-base text-[#A99780]">
+                <p className="text-lg font-bold text-auth-brand-navy">
+                  BaytFolio
+                </p>
+                <span dir="rtl" className="text-base text-auth-text-muted">
                   المسؤول الأعلى
                 </span>
               </div>
@@ -29,7 +31,7 @@ export default function LoginPage() {
               />
             </div>
 
-            <div className="flex items-center gap-2 rounded-md bg-[#F2EDE6] px-3 py-2">
+            <div className="flex items-center gap-2 rounded-md bg-auth-soft-bg px-3 py-2">
               <img
                 src={authShieldUser}
                 alt=""
@@ -37,7 +39,7 @@ export default function LoginPage() {
                 className="h-4 w-4 shrink-0 object-contain"
               />
 
-              <span className="whitespace-nowrap text-sm text-[#37434B]">
+              <span className="whitespace-nowrap text-sm text-text-secondary">
                 بوابة الإدارة المركزية
               </span>
             </div>
@@ -45,7 +47,7 @@ export default function LoginPage() {
           <div className="mb-7 text-right">
             <h1 className="mb-2 text-[26px] font-bold">تسجيل الدخول</h1>
 
-            <p className="text-sm leading-6 text-[#37434B]">
+            <p className="text-sm leading-6 text-text-secondary">
               سجّل الدخول إلى بوابة إدارة BaytFolio الموحدة للأصول
               والعمليات.{" "}
             </p>
