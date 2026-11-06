@@ -6,6 +6,7 @@ import { mockUsers } from "@/modules/users/api/users.mock";
 const pageTitles: Record<string, string> = {
   "/dashboard": "نظرة عامة",
   "/users": "المستخدمون",
+  "/showrooms": "المعارض والمصانع",
 };
 
 export default function AdminHeader() {

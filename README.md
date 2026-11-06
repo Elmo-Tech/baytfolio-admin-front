@@ -60,6 +60,10 @@ work. They are not currently connected to application flows.
   insight cards.
 - Users Management with search, status/login-method filters, sorting,
   URL-backed pagination, CSV export, statistics, and mock user details.
+- Showrooms and Factories Management with typed mock data, activity/status
+  filters, reference sorting, URL-backed pagination, statistics, verification
+  badges, contract badges, and row-level navigation to the reserved details
+  route.
 - Shared UI primitives for buttons, inputs, selects, badges, fields, alerts,
   password inputs, separators, and statistic cards.
 - Centralized semantic color, surface, border, typography, radius, and shadow
@@ -128,7 +132,12 @@ src/
 │   │   │       └── types/
 │   │   ├── pages/
 │   │   └── types/
-│   └── users/
+│   ├── users/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── types/
+│   └── showrooms/
 │       ├── api/
 │       ├── components/
 │       ├── pages/
@@ -163,12 +172,15 @@ The `@/*` TypeScript and Vite alias resolves to `src/*`.
 | `/dashboard`       | Admin Dashboard                          |
 | `/users`           | Users Management listing                 |
 | `/users/:userId`   | Mock user details                        |
+| `/showrooms`       | Showrooms and Factories Management       |
+| `/showrooms/:id`   | Reserved for the future details page     |
 | `*`                | Not-found page                           |
 
 The sidebar includes navigation labels for future modules such as showroom
-applications, showrooms, categories, promotions, commercial accounts, CMS,
-admin users, settings, and activity logs. Those destinations do not currently
-have matching routes or feature modules.
+applications, categories, promotions, commercial accounts, CMS, admin users,
+settings, and activity logs. Those destinations do not currently have matching
+routes or feature modules. Showrooms is currently the exception and has a
+listing route; its details route is intentionally not implemented yet.
 
 ## Installation and Setup
 
@@ -243,7 +255,7 @@ There are no API calls, backend endpoints, persistence, authentication
 sessions, authorization checks, or production server-state queries.
 
 - Dashboard metrics, attention items, priority items, analytics, activities,
-  showrooms, and contracts are mocked.
+  showrooms, factories, and contracts are mocked.
 - Users, user statistics, and user details are mocked.
 - Authentication form submissions intentionally show unavailable-service
   feedback instead of calling a backend.
@@ -260,15 +272,19 @@ Implemented and validated:
 - Authentication screens and client-side schema validation.
 - Dashboard sections listed above with typed mock data.
 - Users listing, filtering, sorting, pagination, CSV export, and details UI.
+- Showrooms and factories listing, filtering, sorting, pagination, and status
+  badges using typed mock data.
 - Shared UI primitives and semantic design tokens.
 - TypeScript, ESLint, Vitest, and Vite build configuration.
 
 Known limitations:
 
 - Authentication and admin authorization are not connected to a backend.
-- Sidebar destinations outside `/dashboard`, `/users`, and
-  `/users/:userId` are placeholders and currently resolve to the not-found
-  page.
+- Showrooms details, add/export actions, and backend-driven filtering are not
+  implemented; the listing and displayed statistics currently use local mock
+  data.
+- Sidebar destinations outside `/dashboard`, `/users`, `/users/:userId`, and
+  `/showrooms` are placeholders and currently resolve to the not-found page.
 - Dashboard, analytics, and responsive-layout coverage is primarily manual;
   the existing automated suite focuses on routing, providers, authentication
   form interactions, and Users URL-state parsing.
