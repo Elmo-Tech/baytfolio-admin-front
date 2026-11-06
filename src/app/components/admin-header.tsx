@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { Bell, ChevronLeft } from "lucide-react";
 import { Link, useLocation, useParams } from "react-router";
+import { mockShowrooms } from "@/modules/showrooms/api/showrooms.mock";
 import { mockUsers } from "@/modules/users/api/users.mock";
 
 const pageTitles: Record<string, string> = {
@@ -11,7 +12,7 @@ const pageTitles: Record<string, string> = {
 
 export default function AdminHeader() {
   const location = useLocation();
-  const { userId } = useParams();
+  const { showroomId, userId } = useParams();
 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -62,10 +63,16 @@ export default function AdminHeader() {
   const currentUser = isUserDetails
     ? mockUsers.find((user) => user.id === userId)
     : undefined;
+  const isShowroomDetails = /^\/showrooms\/[^/]+$/.test(currentPath);
+  const currentShowroom = isShowroomDetails
+    ? mockShowrooms.find((showroom) => showroom.id === showroomId)
+    : undefined;
 
   const currentPageTitle = isUserDetails
     ? (currentUser?.name ?? "تفاصيل المستخدم")
-    : (pageTitles[currentPath] ?? "لوحة الإدارة");
+    : isShowroomDetails
+      ? (currentShowroom?.name ?? "تفاصيل المعرض")
+      : (pageTitles[currentPath] ?? "لوحة الإدارة");
 
   return (
     <header
@@ -93,6 +100,22 @@ export default function AdminHeader() {
               className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
             >
               المستخدمون
+            </Link>
+
+            <ChevronLeft
+              size={14}
+              className="shrink-0 text-text-muted-icon sm:size-4"
+            />
+          </>
+        )}
+
+        {isShowroomDetails && (
+          <>
+            <Link
+              to="/showrooms"
+              className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
+            >
+              المعارض والمصانع
             </Link>
 
             <ChevronLeft

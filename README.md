@@ -3,7 +3,8 @@
 BaytFolio Admin Frontend is an Arabic-first, right-to-left React single-page
 application for administering the BaytFolio platform. It currently provides
 the responsive admin shell, client-side authentication screens, Dashboard
-views, and mock-data-driven Users Management flows.
+views, mock-data-driven Users Management flows, and Showrooms and Factories
+listing and details views.
 
 This repository is a frontend foundation. Authentication, authorization,
 persistence, backend APIs, and production server-state integration are not
@@ -62,8 +63,8 @@ work. They are not currently connected to application flows.
   URL-backed pagination, CSV export, statistics, and mock user details.
 - Showrooms and Factories Management with typed mock data, activity/status
   filters, reference sorting, URL-backed pagination, statistics, verification
-  badges, contract badges, and row-level navigation to the reserved details
-  route.
+  badges, contract badges, row-level navigation, and a typed details view with
+  overview, content, and commercial-contract tabs.
 - Shared UI primitives for buttons, inputs, selects, badges, fields, alerts,
   password inputs, separators, and statistic cards.
 - Centralized semantic color, surface, border, typography, radius, and shadow
@@ -140,6 +141,7 @@ src/
 │   └── showrooms/
 │       ├── api/
 │       ├── components/
+│       │   └── details/
 │       ├── pages/
 │       └── types/
 ├── shared/
@@ -162,25 +164,45 @@ The `@/*` TypeScript and Vite alias resolves to `src/*`.
 
 ## Routing Structure
 
-| Route              | Current implementation                   |
-| ------------------ | ---------------------------------------- |
-| `/`                | Foundation home screen                   |
-| `/login`           | Login form with client-side validation   |
-| `/forgot-password` | Forgot-password form                     |
-| `/verify-otp`      | OTP verification and resend-countdown UI |
-| `/reset-password`  | Reset-password form                      |
-| `/dashboard`       | Admin Dashboard                          |
-| `/users`           | Users Management listing                 |
-| `/users/:userId`   | Mock user details                        |
-| `/showrooms`       | Showrooms and Factories Management       |
-| `/showrooms/:id`   | Reserved for the future details page     |
-| `*`                | Not-found page                           |
+| Route                    | Current implementation                   |
+| ------------------------ | ---------------------------------------- |
+| `/`                      | Foundation home screen                   |
+| `/login`                 | Login form with client-side validation   |
+| `/forgot-password`       | Forgot-password form                     |
+| `/verify-otp`            | OTP verification and resend-countdown UI |
+| `/reset-password`        | Reset-password form                      |
+| `/dashboard`             | Admin Dashboard                          |
+| `/users`                 | Users Management listing                 |
+| `/users/:userId`         | Mock user details                        |
+| `/showrooms`             | Showrooms and Factories Management       |
+| `/showrooms/:showroomId` | Mock showroom/factory details            |
+| `*`                      | Not-found page                           |
 
 The sidebar includes navigation labels for future modules such as showroom
 applications, categories, promotions, commercial accounts, CMS, admin users,
 settings, and activity logs. Those destinations do not currently have matching
-routes or feature modules. Showrooms is currently the exception and has a
-listing route; its details route is intentionally not implemented yet.
+routes or feature modules. Showrooms is currently the exception and has both
+listing and mock details routes.
+
+## State Management
+
+- Component state manages local interface concerns such as open menus and the
+  active Showroom Details tab.
+- `nuqs` stores Users and Showrooms search, filters, sorting, and pagination in
+  URL query parameters so views can be reloaded and shared.
+- TanStack React Query is configured as provider infrastructure for future
+  server state, but no feature currently performs server queries or mutations.
+- No global client store is currently used; Zustand remains a declared
+  dependency for future integration.
+
+## Styling and Design Tokens
+
+Tailwind CSS v4 is configured through `@tailwindcss/vite`. Global design
+tokens, Arabic and Latin font families, semantic colors, surfaces, borders,
+status colors, typography, radii, and shadows are defined in `src/index.css`.
+Components consume those tokens through Tailwind utility classes. The
+application uses IBM Plex Sans Arabic as its primary Arabic typeface and
+supports RTL layouts at the page and component boundaries.
 
 ## Installation and Setup
 
@@ -280,14 +302,15 @@ Implemented and validated:
 Known limitations:
 
 - Authentication and admin authorization are not connected to a backend.
-- Showrooms details, add/export actions, and backend-driven filtering are not
-  implemented; the listing and displayed statistics currently use local mock
-  data.
+- Showrooms add/export actions, detail-page action buttons, and backend-driven
+  filtering are not implemented; the listing, displayed statistics, and
+  details tabs currently use local mock data.
 - Sidebar destinations outside `/dashboard`, `/users`, `/users/:userId`, and
   `/showrooms` are placeholders and currently resolve to the not-found page.
 - Dashboard, analytics, and responsive-layout coverage is primarily manual;
   the existing automated suite focuses on routing, providers, authentication
-  form interactions, and Users URL-state parsing.
+  form interactions, and Users URL-state parsing. Showroom listing and details
+  flows do not yet have dedicated automated tests.
 - The production build reports a non-blocking warning about a JavaScript chunk
   larger than 500 kB. Code splitting can be considered as feature scope grows.
 
@@ -298,3 +321,17 @@ test files and eleven tests covering routing, providers, OTP interactions,
 password reset behavior, and Users URL-state behavior.
 
 There is no coverage script or coverage configuration.
+
+## Development Conventions
+
+- Keep business-domain code inside its feature module and expose only intended
+  public surfaces through module `index.ts` files.
+- Keep shared UI primitives in `src/shared/components/ui` and reuse them
+  instead of duplicating controls.
+- Use typed mock data in feature `api` folders until backend integration is
+  explicitly implemented.
+- Avoid `useEffect` and `any` in `src`; preserve strict TypeScript checks.
+- Use semantic design tokens from `src/index.css` instead of hardcoded
+  component colors or font families.
+- Preserve accessible controls, responsive behavior, and RTL/LTR direction
+  where content requires it.

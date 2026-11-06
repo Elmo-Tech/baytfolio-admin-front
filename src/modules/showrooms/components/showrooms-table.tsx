@@ -1,5 +1,5 @@
 import { BadgeCheck, Eye } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import ShowroomStatusBadge from "./showroom-status-badge";
 import ContractStatusBadge from "./contract-status-badge";
