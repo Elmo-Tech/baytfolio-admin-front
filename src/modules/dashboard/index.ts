@@ -7,6 +7,7 @@ export {
   ShowroomStatusCard,
 } from "./components/platform-analytics";
 export { default as NeedsAttention } from "./components/needs-attention";
+export { default as PriorityItems } from "./components/priority-items";
 
 export type {
   DashboardMetricId,

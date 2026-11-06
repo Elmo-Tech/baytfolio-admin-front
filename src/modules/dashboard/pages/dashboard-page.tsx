@@ -7,12 +7,15 @@ import {
 import DashboardHeader from "../components/dashboard-header";
 import NeedsAttention from "../components/needs-attention";
 import DashboardStats from "../components/dashboard-stats";
+import PriorityItems from "../components/priority-items";
+import DashboardInsights from "../components/dashboard-insights";
 
 export default function DashboardPage() {
   return (
     <div dir="rtl" className="space-y-6">
       <DashboardHeader />
       <DashboardStats />
+
       <section
         aria-labelledby="platform-analytics-heading"
         className="space-y-4"
@@ -38,7 +41,10 @@ export default function DashboardPage() {
           <ContractStatusCard />
         </div>
       </section>
+
       <NeedsAttention />
+      <PriorityItems />
+      <DashboardInsights />
     </div>
   );
 }

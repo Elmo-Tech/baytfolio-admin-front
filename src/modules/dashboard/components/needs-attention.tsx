@@ -8,6 +8,7 @@ import {
   Store,
   type LucideIcon,
 } from "lucide-react";
+import { toast } from "sonner";
 
 import { needsAttentionMock } from "../api/needs-attention.mock";
 import type {
@@ -61,6 +62,10 @@ const toneClasses: Record<
 };
 
 export default function NeedsAttention() {
+  function handleAction(action: string) {
+    toast.info(`صفحة ${action} قيد التطوير`);
+  }
+
   return (
     <section aria-labelledby="needs-attention-heading" className="space-y-4">
       <header className="flex items-center justify-between gap-4">
@@ -71,6 +76,7 @@ export default function NeedsAttention() {
           <span className="h-5 w-1 shrink-0 rounded-full bg-notification-unread" />
           <span>يحتاج إلى إجراء فوري (Needs Attention)</span>
         </h2>
+
         <p className="min-w-0 text-left text-xs leading-5 text-text-muted sm:text-sm">
           مهام تتطلب تخطيطًا واهتمامًا رسميًا
         </p>
@@ -91,6 +97,7 @@ export default function NeedsAttention() {
                   <h3 className="text-base font-bold leading-6 text-users-text-primary">
                     {item.title}
                   </h3>
+
                   <p className="mt-1 text-sm leading-5 text-users-text-muted">
                     {item.description}
                   </p>
@@ -110,6 +117,7 @@ export default function NeedsAttention() {
                   {item.value}
                 </strong>
               </div>
+
               <p
                 className={`mt-3 text-sm leading-5 ${
                   item.detailTone === "danger"
@@ -132,12 +140,15 @@ export default function NeedsAttention() {
                 >
                   {item.secondary}
                 </span>
-                <span
-                  className={`flex items-center gap-1 text-sm font-semibold ${classes.action}`}
+
+                <button
+                  type="button"
+                  onClick={() => handleAction(item.action)}
+                  className={`inline-flex cursor-pointer items-center gap-1 text-sm font-semibold transition-colors hover:opacity-75 ${classes.action}`}
                 >
                   {item.action}
                   <ArrowLeft size={14} strokeWidth={1.8} aria-hidden="true" />
-                </span>
+                </button>
               </div>
             </article>
           );

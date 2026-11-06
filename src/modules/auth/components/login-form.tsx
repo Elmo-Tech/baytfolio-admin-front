@@ -27,8 +27,8 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: LoginFormValues) {
-    console.log(values);
+  function onSubmit() {
+    // Authentication is not connected to a backend yet.
   }
 
   return (

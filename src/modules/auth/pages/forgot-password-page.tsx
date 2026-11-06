@@ -54,8 +54,11 @@ export default function ForgotPasswordPage() {
           dir="rtl"
           className="mt-5 flex items-center justify-center gap-1 text-sm text-text-secondary"
         >
-          <Headset aria-hidden="true" className="size-3.5 shrink-0" />
-          <span>الدعم الفني والعمليات:</span>
+          <Headset
+            aria-hidden="true"
+            className="size-3.5 shrink-0 text-auth-link-hover"
+          />
+          <span className="text-auth-link-hover">الدعم الفني والعمليات:</span>
           <a
             href="mailto:sec-ops@baytfolio.com"
             dir="ltr"
