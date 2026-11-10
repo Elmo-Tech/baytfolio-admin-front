@@ -137,7 +137,7 @@ export default function AdminSidebar() {
   return (
     <aside
       dir="rtl"
-      className="sticky top-0 flex h-screen w-[280px] shrink-0 self-start flex-col overflow-hidden border-l border-border-subtle bg-card"
+      className="sticky top-0 flex h-screen w-[280px] shrink-0 self-start flex-col overflow-hidden border-l border-border-subtle bg-card "
     >
       {/* Brand Header */}
       <div className="flex h-[88px] shrink-0 items-center justify-between border-b border-border-divider px-5">

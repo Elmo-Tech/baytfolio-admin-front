@@ -77,22 +77,21 @@ export default function AdminHeader() {
   return (
     <header
       dir="rtl"
-      className="flex h-[88px] min-w-0 shrink-0 items-center justify-between gap-3 border-b border-border-subtle bg-card px-3 sm:px-6 lg:px-8 max-[459px]:justify-end"
+      className="flex h-[88px] min-w-0 shrink-0 items-center justify-between gap-3 border-b border-border-subtle bg-card px-3 sm:px-6 lg:px-8 max-[721px]:justify-end"
     >
       {/* Breadcrumbs */}
-      <div className="hidden min-w-0 flex-1 items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs min-[460px]:flex sm:gap-2 sm:text-sm">
+      <div className="hidden min-w-0 flex-1 items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs min-[721px]:flex sm:gap-2 sm:text-sm">
+        {" "}
         <Link
           to="/dashboard"
           className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
         >
           لوحة التحكم
         </Link>
-
         <ChevronLeft
           size={14}
           className="shrink-0 text-text-muted-icon sm:size-4"
         />
-
         {isUserDetails && (
           <>
             <Link
@@ -108,7 +107,6 @@ export default function AdminHeader() {
             />
           </>
         )}
-
         {isShowroomDetails && (
           <>
             <Link
@@ -124,7 +122,6 @@ export default function AdminHeader() {
             />
           </>
         )}
-
         <span className="shrink-0 font-semibold text-text-primary">
           {currentPageTitle}
         </span>

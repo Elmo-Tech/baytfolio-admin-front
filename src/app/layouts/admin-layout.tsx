@@ -10,18 +10,15 @@ export default function AdminLayout() {
 
   return (
     <div dir="rtl" className="flex min-h-screen bg-surface-admin">
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:block">
+      <div className="hidden min-[1225px]:block">
         <AdminSidebar />
       </div>
 
-      {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-0 z-50 lg:hidden ${
+        className={`fixed inset-0 z-50 min-[1225px]:hidden ${
           isSidebarOpen ? "visible" : "invisible pointer-events-none"
         }`}
       >
-        {/* Overlay */}
         <button
           type="button"
           aria-label="إغلاق القائمة"
@@ -31,7 +28,6 @@ export default function AdminLayout() {
           }`}
         />
 
-        {/* Sidebar Drawer */}
         <div
           className={`absolute right-0 top-0 h-full w-[280px] max-w-[85vw] bg-card transition-transform duration-300 ${
             isSidebarOpen ? "translate-x-0" : "translate-x-full"
@@ -52,18 +48,15 @@ export default function AdminLayout() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="flex min-w-0 flex-1 flex-col">
-        {/* Mobile Header */}
         <div
           dir="ltr"
-          className="flex min-w-0 items-center border-b border-border-subtle bg-card px-3 lg:hidden"
+          className="flex min-w-0 items-center border-b border-border-subtle bg-card px-3 min-[1041px]:hidden"
         >
           <div className="min-w-0 flex-1">
             <AdminHeader />
           </div>
 
-          {/* Mobile Menu Toggle */}
           <button
             type="button"
             aria-label={isSidebarOpen ? "إغلاق القائمة" : "فتح القائمة"}
@@ -75,12 +68,10 @@ export default function AdminLayout() {
           </button>
         </div>
 
-        {/* Desktop Header */}
-        <div className="hidden lg:block">
+        <div className="hidden min-[1041px]:block">
           <AdminHeader />
         </div>
 
-        {/* Page Content */}
         <main className="min-w-0 flex-1 overflow-y-auto p-3 sm:p-5 lg:p-8">
           <Outlet />
         </main>
