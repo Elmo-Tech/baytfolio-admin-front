@@ -1,4 +1,12 @@
 import { ChevronLeft, ChevronRight, ShieldCheck } from "lucide-react";
+import {
+  Button,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/components/ui";
 
 interface UsersPaginationProps {
   currentPage: number;
@@ -56,90 +64,108 @@ export default function UsersPagination({
 
   return (
     <div dir="rtl" className="space-y-3">
-      <div className="flex flex-col items-center justify-between gap-4 rounded-lg border border-[#eee8e0] bg-[#f8f6f2] px-4 py-3 sm:flex-row">
-        <p className="text-sm text-[#8b8176]">
+      <div className="flex flex-col items-center justify-between gap-4 rounded-lg border border-border bg-muted/30 px-4 py-3 sm:flex-row">
+        {/* Items Count */}
+        <p className="text-sm text-muted-foreground">
           عرض{" "}
-          <span className="font-semibold text-[#1d2935]">
+          <span className="font-semibold text-foreground">
             {startItem}–{endItem}
           </span>{" "}
           من إجمالي{" "}
-          <span className="font-semibold text-[#1d2935]">
+          <span className="font-semibold text-foreground">
             {totalItems.toLocaleString("en-US")}
           </span>{" "}
           مستخدم مسجل
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <div className="flex items-center gap-2 text-xs text-[#8b8176]">
+          {/* Page Size */}
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <span>عرض:</span>
 
-            <select
-              value={pageSize}
-              onChange={(event) => onPageSizeChange(Number(event.target.value))}
-              className="h-8 cursor-pointer rounded border border-[#e9e2d9] bg-white px-2 text-xs text-[#46515d] outline-none focus:border-[#102233]"
-              aria-label="عدد المستخدمين في الصفحة"
+            <Select
+              dir="rtl"
+              value={String(pageSize)}
+              onValueChange={(value) => onPageSizeChange(Number(value))}
             >
-              <option value={10}>10 في الصفحة</option>
-              <option value={20}>20 في الصفحة</option>
-              <option value={50}>50 في الصفحة</option>
-            </select>
+              <SelectTrigger
+                aria-label="عدد المستخدمين في الصفحة"
+                className="h-8 w-[100px] cursor-pointer rounded-md border-border bg-background px-2 text-xs shadow-none"
+              >
+                <SelectValue />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="10">10 في الصفحة</SelectItem>
+                <SelectItem value="20">20 في الصفحة</SelectItem>
+                <SelectItem value="50">50 في الصفحة</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
+          {/* Page Navigation */}
           <div className="flex items-center gap-1">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               disabled={currentPage === 1}
               onClick={() => onPageChange(currentPage - 1)}
-              className="flex h-8 min-w-8 cursor-pointer items-center justify-center rounded border border-[#e9e2d9] bg-white text-[#647080] transition hover:bg-[#eee9e1] disabled:cursor-not-allowed disabled:opacity-40"
               aria-label="الصفحة السابقة"
+              className="size-8 rounded-md border-border bg-background text-muted-foreground shadow-none hover:bg-muted"
             >
               <ChevronRight size={16} />
-            </button>
+            </Button>
 
             {pageNumbers.map((page, index) =>
               page === "..." ? (
                 <span
                   key={`ellipsis-${index}`}
-                  className="px-1 text-sm text-[#a69b8e]"
+                  className="px-1 text-sm text-muted-foreground"
                 >
                   ...
                 </span>
               ) : (
-                <button
+                <Button
                   key={page}
                   type="button"
+                  variant={currentPage === page ? "default" : "outline"}
+                  size="icon"
                   onClick={() => {
                     if (typeof page === "number") {
                       onPageChange(page);
                     }
                   }}
                   aria-current={currentPage === page ? "page" : undefined}
-                  className={`flex h-8 min-w-8 cursor-pointer items-center justify-center rounded px-2 text-xs transition ${
+                  className={`size-8 rounded-md px-2 text-xs shadow-none ${
                     currentPage === page
-                      ? "bg-[#102233] font-semibold text-white"
-                      : "border border-[#e9e2d9] bg-white text-[#46515d] hover:bg-[#eee9e1]"
+                      ? "border-primary bg-primary font-semibold text-primary-foreground hover:bg-primary/90"
+                      : "border-border bg-background text-foreground hover:bg-muted"
                   }`}
                 >
                   {page}
-                </button>
+                </Button>
               ),
             )}
 
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               disabled={currentPage === totalPages || totalPages === 0}
               onClick={() => onPageChange(currentPage + 1)}
-              className="flex h-8 min-w-8 cursor-pointer items-center justify-center rounded border border-[#e9e2d9] bg-white text-[#647080] transition hover:bg-[#eee9e1] disabled:cursor-not-allowed disabled:opacity-40"
               aria-label="الصفحة التالية"
+              className="size-8 rounded-md border-border bg-background text-muted-foreground shadow-none hover:bg-muted"
             >
               <ChevronLeft size={16} />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
 
-      <div className="flex items-start gap-2 px-2 py-1 text-xs leading-6 text-[#a69b8e]">
-        <ShieldCheck size={16} className="mt-1 shrink-0 text-[#aa9985]" />
+      {/* Privacy Notice */}
+      <div className="flex items-start gap-2 px-2 py-1 text-xs leading-6 text-muted-foreground">
+        <ShieldCheck size={16} className="mt-1 shrink-0 text-text-muted" />
 
         <p>
           تلتزم المنصة بمعايير خصوصية بيانات العملاء (GDPR/PDPL)، ويتم حجب

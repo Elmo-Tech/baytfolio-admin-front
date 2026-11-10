@@ -13,9 +13,9 @@ export default function AuthBrand() {
       <div className="flex items-center gap-1.5" dir="ltr">
         <span
           aria-hidden="true"
-          className="size-1.5 rounded-full bg-[#C89B3C]"
+          className="size-1.5 rounded-full bg-auth-gold"
         />
-        <p className="text-lg font-bold text-[#102131]">BaytFolio</p>
+        <p className="text-lg font-bold text-auth-brand-navy">BaytFolio</p>
       </div>
     </div>
   );
