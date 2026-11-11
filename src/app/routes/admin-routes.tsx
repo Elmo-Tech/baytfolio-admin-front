@@ -1,9 +1,15 @@
 import AdminLayoutWithNuqs from "@/app/layouts/admin-layout-with-nuqs";
 
 import { DashboardPage } from "@/modules/dashboard";
+
 import UsersPage from "@/modules/users/pages/users-page";
 import UserDetailsPage from "@/modules/users/pages/user-details-page";
+
 import { ShowroomsPage, ShowroomDetailsPage } from "@/modules/showrooms";
+
+import CMSPage from "@/modules/cms/pages/cms-page";
+import HelpCenterPage from "@/modules/cms/pages/help-center-page";
+import ContactInformationPage from "@/modules/cms/pages/contact-information-page";
 
 export const adminRoutes = [
   {
@@ -29,6 +35,18 @@ export const adminRoutes = [
       {
         path: "showrooms/:showroomId",
         Component: ShowroomDetailsPage,
+      },
+      {
+        path: "cms",
+        Component: CMSPage,
+      },
+      {
+        path: "cms/help-center",
+        Component: HelpCenterPage,
+      },
+      {
+        path: "cms/contact-information",
+        Component: ContactInformationPage,
       },
     ],
   },

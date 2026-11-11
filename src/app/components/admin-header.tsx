@@ -8,6 +8,8 @@ const pageTitles: Record<string, string> = {
   "/dashboard": "نظرة عامة",
   "/users": "المستخدمون",
   "/showrooms": "المعارض والمصانع",
+  "/cms": "إدارة المحتوى CMS",
+  "/cms/help-center": "مركز المساعدة",
 };
 
 export default function AdminHeader() {

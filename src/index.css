@@ -375,6 +375,22 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* Hide page scrollbar while Help Center modal is open */
+html:has([data-help-center-modal]),
+body:has([data-help-center-modal]) {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+}
+
+html:has([data-help-center-modal])::-webkit-scrollbar,
+body:has([data-help-center-modal])::-webkit-scrollbar {
+  display: none !important;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -392,8 +408,4 @@
     min-height: 100vh;
     @apply bg-background text-foreground;
   }
-}
-
-input[type="search"]::-webkit-search-cancel-button {
-  cursor: pointer;
 }

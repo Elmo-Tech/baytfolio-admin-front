@@ -10,12 +10,12 @@ export default function AdminLayout() {
 
   return (
     <div dir="rtl" className="flex min-h-screen bg-surface-admin">
-      <div className="hidden min-[1225px]:block">
+      <div className="hidden min-[1226px]:block">
         <AdminSidebar />
       </div>
 
       <div
-        className={`fixed inset-0 z-50 min-[1225px]:hidden ${
+        className={`fixed inset-0 z-50 min-[1226px]:hidden ${
           isSidebarOpen ? "visible" : "invisible pointer-events-none"
         }`}
       >
@@ -51,7 +51,7 @@ export default function AdminLayout() {
       <div className="flex min-w-0 flex-1 flex-col">
         <div
           dir="ltr"
-          className="flex min-w-0 items-center border-b border-border-subtle bg-card px-3 min-[1041px]:hidden"
+          className="flex min-w-0 items-center border-b border-border-subtle bg-card px-3 min-[1226px]:hidden"
         >
           <div className="min-w-0 flex-1">
             <AdminHeader />
@@ -68,7 +68,7 @@ export default function AdminLayout() {
           </button>
         </div>
 
-        <div className="hidden min-[1041px]:block">
+        <div className="hidden min-[1226px]:block">
           <AdminHeader />
         </div>
 
