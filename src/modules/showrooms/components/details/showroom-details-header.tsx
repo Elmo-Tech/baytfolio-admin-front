@@ -1,4 +1,4 @@
-import { ArrowLeft, Clock3, FileText } from "lucide-react";
+import { ArrowRight, Clock3, FileText } from "lucide-react";
 import { useNavigate } from "react-router";
 
 import type { ShowroomDetails } from "../../types/showroom-details";
@@ -50,7 +50,7 @@ export default function ShowroomDetailsHeader({
           onClick={() => navigate("/showrooms")}
           className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-xl border border-users-panel-border px-4 py-3 text-sm font-medium text-users-text-primary transition-colors hover:bg-users-stat-neutral-bg min-[1501px]:col-start-1 min-[1501px]:row-start-1"
         >
-          <ArrowLeft size={18} />
+          <ArrowRight size={18} />
           العودة للمعارض
         </button>
 
