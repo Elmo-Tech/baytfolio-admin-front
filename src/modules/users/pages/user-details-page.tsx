@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link, useParams } from "react-router";
 import { mockUsers } from "../api/users.mock";
 import UserDetailsCard from "../components/user-details-card";
@@ -31,7 +31,7 @@ export default function UserDetailsPage() {
           to="/users"
           className="mt-4 inline-flex items-center gap-2 text-sm text-users-text-secondary hover:underline"
         >
-          <ArrowLeft size={16} />
+          <ArrowRight size={16} />
           العودة إلى المستخدمين
         </Link>
       </div>
@@ -48,14 +48,6 @@ export default function UserDetailsPage() {
   return (
     <div dir="rtl" className="space-y-7">
       <header className="flex flex-col gap-5 border-b border-border-subtle pb-6 sm:flex-row sm:items-center sm:justify-between">
-        <Link
-          to="/users"
-          className="inline-flex h-9 items-center gap-2 self-start rounded-md border border-border-subtle bg-card px-3 text-sm text-users-text-detail transition hover:bg-background"
-        >
-          <ArrowLeft size={16} />
-          العودة إلى المستخدمين
-        </Link>
-
         <div className="flex items-center gap-3">
           <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-users-brand-navy text-lg font-semibold text-primary-foreground">
             {user.avatarInitial}
@@ -99,6 +91,14 @@ export default function UserDetailsPage() {
             </p>
           </div>
         </div>
+
+        <Link
+          to="/users"
+          className="inline-flex h-9 flex-row-reverse items-center gap-2 self-start rounded-md border border-border-subtle bg-card px-3 text-sm text-users-text-detail transition hover:bg-background"
+        >
+          العودة إلى المستخدمين
+          <ArrowRight size={16} />
+        </Link>
       </header>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
