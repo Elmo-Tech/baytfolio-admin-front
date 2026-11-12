@@ -164,14 +164,13 @@ export default function CMSPage() {
           icon={Shield}
           badge="الحالة: منشور"
           action={
-            <button
-              type="button"
-              disabled
-              className="inline-flex min-h-10 cursor-not-allowed items-center gap-2 rounded-md bg-brand-navy px-4 py-2 text-sm font-medium text-primary-foreground opacity-60"
+            <Link
+              to="/cms/privacy-policy"
+              className="inline-flex min-h-10 items-center gap-2 rounded-md bg-brand-navy px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-secondary"
             >
               <FilePenLine size={16} />
               تعديل المحتوى
-            </button>
+            </Link>
           }
         >
           <LegalContentDetails content={privacyPolicy} />

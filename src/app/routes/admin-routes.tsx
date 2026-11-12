@@ -10,6 +10,7 @@ import { ShowroomsPage, ShowroomDetailsPage } from "@/modules/showrooms";
 import CMSPage from "@/modules/cms/pages/cms-page";
 import HelpCenterPage from "@/modules/cms/pages/help-center-page";
 import ContactInformationPage from "@/modules/cms/pages/contact-information-page";
+import PrivacyPolicyPage from "@/modules/cms/pages/privacy-policy-page";
 
 export const adminRoutes = [
   {
@@ -47,6 +48,10 @@ export const adminRoutes = [
       {
         path: "cms/contact-information",
         Component: ContactInformationPage,
+      },
+      {
+        path: "cms/privacy-policy",
+        Component: PrivacyPolicyPage,
       },
     ],
   },
