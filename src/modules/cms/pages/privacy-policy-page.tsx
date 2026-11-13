@@ -269,7 +269,8 @@ export default function PrivacyPolicyPage() {
       </section>
 
       {/* Bottom Actions */}
-      <footer className="fixed inset-x-0 bottom-0 z-30 border-t border-users-panel-divider bg-users-surface/95 px-4 py-3 backdrop-blur sm:px-8">
+      <footer className="fixed bottom-0 left-0 right-0 z-30 border-t border-users-panel-divider bg-users-surface/95 px-4 py-3 backdrop-blur sm:px-8 xl:right-[280px]">
+        {" "}
         <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <Button
