@@ -10,6 +10,9 @@ const pageTitles: Record<string, string> = {
   "/showrooms": "المعارض والمصانع",
   "/cms": "إدارة المحتوى CMS",
   "/cms/help-center": "مركز المساعدة",
+  "/cms/contact-information": "تواصل معنا",
+  "/cms/privacy-policy": "سياسة الخصوصية",
+  "/cms/terms-and-conditions": "الشروط والأحكام",
 };
 
 export default function AdminHeader() {

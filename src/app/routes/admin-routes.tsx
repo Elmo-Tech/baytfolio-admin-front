@@ -11,6 +11,7 @@ import CMSPage from "@/modules/cms/pages/cms-page";
 import HelpCenterPage from "@/modules/cms/pages/help-center-page";
 import ContactInformationPage from "@/modules/cms/pages/contact-information-page";
 import PrivacyPolicyPage from "@/modules/cms/pages/privacy-policy-page";
+import TermsAndConditionsPage from "@/modules/cms/pages/terms-and-conditions-page";
 
 export const adminRoutes = [
   {
@@ -52,6 +53,10 @@ export const adminRoutes = [
       {
         path: "cms/privacy-policy",
         Component: PrivacyPolicyPage,
+      },
+      {
+        path: "cms/terms-and-conditions",
+        Component: TermsAndConditionsPage,
       },
     ],
   },
