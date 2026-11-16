@@ -1,24 +1,24 @@
 # BaytFolio Admin Frontend
 
-BaytFolio Admin Frontend is an Arabic-first, right-to-left React single-page application for administering the BaytFolio platform.
+BaytFolio Admin Frontend is an Arabic-first, right-to-left React application for managing the BaytFolio platform.
 
-The application provides a responsive administrative interface with Dashboard analytics, client-side authentication screens, Users Management, Showrooms and Factories Management, and CMS tools for managing customer-facing content.
+It provides a responsive administrative interface with authentication screens, Dashboard, Analytics, Users Management, Showrooms and Factories Management, and CMS tools for managing customer-facing content.
 
-This repository is a frontend foundation. Authentication, authorization, backend APIs, persistent storage, and production server-state integration are not implemented yet. Current feature data is primarily powered by local mock data.
+The project uses a modular, feature-based architecture built with React, TypeScript, Vite, and React Router. Feature data is currently based primarily on typed local mock data.
 
 ---
 
 ## Project Overview
 
-The application is organized as a Vite-powered React 19 application with a modular, feature-based architecture.
+The application is organized into three main layers:
 
-- **Application layer:** Routing, layouts, providers, and shared application components under `src/app`.
-- **Feature modules:** Authentication, Dashboard, Users, Showrooms, and CMS under `src/modules`.
-- **Shared layer:** Reusable UI components, utilities, API infrastructure, hooks, and configuration under `src/shared`.
+- **App:** Application routing, layouts, providers, and administrative navigation.
+- **Modules:** Independent business features such as Authentication, Dashboard, Analytics, Users, Showrooms, and CMS.
+- **Shared:** Reusable UI components, utilities, configuration, and common infrastructure.
 
-The interface is optimized for Arabic content and RTL navigation. IBM Plex Sans Arabic is the primary Arabic font, with IBM Plex Sans available for Latin text.
+The interface is optimized for Arabic content and RTL navigation. Inter is the primary typeface for Latin text, with Noto Sans Arabic used for Arabic text.
 
-Design tokens and Tailwind CSS v4 utilities are centralized in `src/index.css`.
+Global styling and design tokens are centralized in `src/index.css`.
 
 ## Technologies and Dependencies
 
@@ -28,29 +28,31 @@ Design tokens and Tailwind CSS v4 utilities are centralized in `src/index.css`.
 - TypeScript
 - Vite
 - React Router 7
-- Tailwind CSS v4 with `@tailwindcss/vite`
-- `nuqs` for URL-backed search, filters, sorting, and pagination state
-- TanStack React Query 5 provider and development tools
-- React Hook Form and Zod for form state and validation
-- Lucide React for icons
-- Sonner for development feedback and toast infrastructure
+- Tailwind CSS v4
+- `nuqs` for URL-based search, filters, sorting, and pagination
+- TanStack React Query 5
+- React Hook Form
+- Zod
+- Lucide React
+- Sonner
 - Base UI and Radix UI
 - Class Variance Authority
-- `clsx` and `tailwind-merge`
-- IBM Plex Sans and IBM Plex Sans Arabic font packages
+- `clsx`
+- `tailwind-merge`
+- Inter and Noto Sans Arabic
 
 ### Development and Testing
 
+- ESLint
 - TypeScript and `typescript-eslint`
-- ESLint with React Hooks and React Refresh plugins
+- Prettier
 - Vitest
 - JSDOM
 - React Testing Library
-- Prettier
 - Husky
 - lint-staged
 
-The dependency manifest also declares Axios, Zustand, and Motion for future development. They are not currently connected to application feature flows.
+Axios, Zustand, and Motion are declared dependencies for potential future use and are not currently connected to the main feature workflows.
 
 ---
 
@@ -58,13 +60,14 @@ The dependency manifest also declares Axios, Zustand, and Motion for future deve
 
 ### 1. Responsive Admin Layout
 
-- Responsive RTL administrative layout.
-- Desktop sidebar navigation.
+- Responsive administrative layout.
+- RTL sidebar navigation.
 - Mobile navigation drawer.
-- Admin header with breadcrumbs.
+- Admin header.
+- Breadcrumb navigation.
 - Notification menu.
 - Profile menu.
-- Shared application layout and providers.
+- Shared application providers.
 
 ### 2. Authentication
 
@@ -74,17 +77,17 @@ Client-side authentication screens include:
 - Forgot Password.
 - OTP Verification.
 - Reset Password.
-- Zod-based form validation.
-- Explicit unavailable-service states for backend-dependent operations.
+- Form validation using Zod.
+- Backend-unavailable states for operations that require authentication services.
 
 Authentication is currently frontend-only and is not connected to a backend authentication service.
 
 ### 3. Dashboard
 
-The Dashboard provides an administrative overview of platform operations.
+The Dashboard provides an overview of platform operations.
 
 - KPI statistics cards.
-- Period and date filters.
+- Period filters.
 - Custom date-range selection.
 - Platform analytics.
 - Content-growth visualizations.
@@ -97,51 +100,71 @@ The Dashboard provides an administrative overview of platform operations.
 - Recent activity.
 - Expiring-contract information.
 
-All Dashboard data currently comes from local mock data.
+Dashboard data currently comes from local mock data.
 
-### 4. Users Management
+### 4. Analytics
 
-Provides tools for managing and reviewing platform user accounts.
+A dedicated Analytics module provides a separate view for reviewing platform performance and commercial activity.
+
+- Analytics header.
+- Overview statistics.
+- Commercial overview.
+- Platform activity chart.
+- Most Active Showrooms table.
+- Contracts Needing Attention table.
+- Typed mock analytics data.
+- Showroom navigation from analytics tables.
+- Contract status and remaining-time information.
+
+Analytics is implemented as an independent feature module under `src/modules/analytics`.
+
+The current implementation uses local mock data and is not connected to analytics APIs.
+
+### 5. Users Management
+
+Provides tools for reviewing and managing platform user accounts.
 
 - Users listing.
 - User details page.
 - Search by name, email, and phone number.
-- Filter by account status.
-- Filter by login method.
-- Sort by registration date.
+- Account-status filtering.
+- Login-method filtering.
+- Registration-date sorting.
 - URL-backed pagination.
 - Page-size selection.
 - CSV export.
 - User statistics.
-- Account status badges.
-- Login method information.
-- Registration date and last login information.
+- Account-status badges.
+- Login-method information.
+- Registration and last-login information.
 - Responsive RTL table layout.
 
 The current implementation uses typed mock user data.
 
-### 5. Showrooms and Factories Management
+### 6. Showrooms and Factories Management
 
-Provides management views for showrooms and factories.
+Provides listing and details interfaces for showrooms and factories.
 
 - Showrooms and Factories listing.
-- Showroom and Factory details page.
+- Showroom and Factory details pages.
 - Typed mock data.
 - Activity and status filters.
 - Reference sorting.
 - URL-backed pagination.
 - Statistics cards.
 - Verification badges.
-- Contract badges.
+- Contract-status badges.
 - Row-level navigation.
-- Details tabs:
-  - Overview.
-  - Content.
-  - Commercial Contract.
+
+The details page includes three tabs:
+
+- Overview.
+- Content.
+- Commercial Contract.
 
 The listing and details views currently use local mock data.
 
-### 6. Content Management System (CMS)
+### 7. Content Management System (CMS)
 
 The CMS module provides a centralized area for managing customer-facing platform content.
 
@@ -150,80 +173,65 @@ The CMS module provides a centralized area for managing customer-facing platform
 - Centralized CMS entry point.
 - Navigation to content management sections.
 - Content management overview cards.
-- Navigation to individual CMS management pages.
+- Navigation to individual CMS pages.
 
 #### Help Center Management
 
 Provides FAQ management for questions displayed on the BaytFolio website and mobile application.
 
-Features include:
-
-- Help Center listing page.
-- Search questions in Arabic and English.
+- Help Center listing.
+- Search in Arabic and English.
 - Search across question and answer content.
-- Filter by category.
-- Filter by status.
+- Category filtering.
+- Status filtering.
 - URL-backed search and filters.
 - Pagination and page-size selection.
-- Add new questions.
-- Edit existing questions.
+- Add and edit questions.
 - Arabic and English question fields.
 - Arabic and English answer fields.
 - Question category selection.
 - Active and Draft statuses.
 - Activate and deactivate questions.
-- Status indicators.
 - Modal-based question creation and editing.
-- Navigation back to the CMS dashboard.
 
 #### Contact Information Settings
 
-Provides an administrative interface for managing official BaytFolio contact information.
+Provides an interface for managing official BaytFolio contact information.
 
-Features include:
-
-- Contact Information settings page.
-- Direct phone number management.
+- Phone number management.
 - WhatsApp number management.
 - Support email management.
-- Official working-hours management.
+- Working-hours management.
 - Editable contact settings form.
-- Save changes functionality.
+- Save changes interaction.
 - Reset unsaved changes.
 - Live customer-facing preview.
 - Phone, WhatsApp, and email preview links.
 - Working-hours preview.
-- Synchronization status notice.
-- Centralized update-security notice.
-- Responsive two-column settings and preview layout.
+- Synchronization and update-security notices.
 
-The preview reflects local form state. Actual publication and synchronization with the customer-facing website and mobile application require backend integration.
+The preview reflects local form state. Publishing and synchronization require backend integration.
 
 #### Privacy Policy Management
 
-Provides an administrative interface for editing the privacy policy displayed on the BaytFolio website and mobile application.
-
-Features include:
+Provides an interface for editing the privacy policy displayed on the customer-facing applications.
 
 - Privacy Policy management page.
 - Document identification.
 - Published document status display.
 - Arabic and English language switching.
-- Editable privacy policy section titles and content.
+- Editable policy section titles and content.
 - Multiple policy sections.
-- Last updated date display.
-- Save changes functionality.
+- Last-updated date display.
+- Save changes interaction.
 - Reset unsaved changes.
 - Fixed bottom action bar.
-- Responsive layout with sidebar-aware footer positioning.
 
-The current implementation uses typed local mock data and React component state. Persistent storage and publication workflows require backend integration.
+The current implementation uses typed mock data and local component state.
 
 #### Terms and Conditions Management
 
-Provides an administrative interface for editing the terms and conditions displayed on the BaytFolio website and mobile application.
-
-Features include:
+Provides an interface for editing the terms and conditions displayed on the customer-facing applications.
 
 - Terms and Conditions management page.
 - Document identification.
@@ -234,40 +242,40 @@ Features include:
 - Editable legal and operational text.
 - Character count for each section.
 - Highlighted key section.
-- Last updated date display.
-- Save changes functionality.
+- Last-updated date display.
+- Save changes interaction.
 - Reset unsaved changes.
 - Fixed bottom action bar.
-- Responsive layout with sidebar-aware footer positioning.
 
-The current implementation uses typed local mock data and React component state. Legal content requires appropriate review and approval before publication. Persistent storage and publishing workflows require backend integration.
+The current implementation uses typed mock data and local component state. Legal content requires appropriate review and approval before publication.
 
 ---
 
 ## Dashboard Sections
 
-The `/dashboard` route renders the following sections:
+The Dashboard includes the following sections:
 
-1. **Dashboard Header** — Arabic overview text, URL-backed period filters, optional custom date range, and local refresh feedback.
-2. **Dashboard Stats** — Six typed KPI cards using mock metrics.
-3. **Platform Analytics** — Content-growth, showroom-status, and contract-status visualizations.
-4. **Needs Attention** — Responsive operational attention cards with typed mock data, semantic tones, and toast feedback for unfinished destinations.
-5. **Priority Items** — Typed mock-data table with search, status filtering, semantic statuses/actions, RTL support, and pagination.
-6. **Dashboard Insights** — Active-showroom rankings, recent activity, and expiring-contract cards with mock data and development-only toast actions.
+1. **Dashboard Header:** Overview text, period filters, custom date range, and local refresh feedback.
+2. **Dashboard Stats:** KPI cards using typed mock metrics.
+3. **Platform Analytics:** Content-growth, showroom-status, and contract-status visualizations.
+4. **Needs Attention:** Operational attention cards with typed mock data.
+5. **Priority Items:** Searchable and filterable table with status indicators and pagination.
+6. **Dashboard Insights:** Active-showroom rankings, recent activity, and expiring-contract information.
 
-All Dashboard data is local mock data. No Dashboard API calls or server-state queries are currently made.
+All Dashboard data is currently local mock data.
 
 ---
 
-## Project Architecture and Folder Structure
+## Project Architecture
 
-The application follows a modular, feature-based architecture.
+The project follows a modular, feature-based architecture.
 
 ```text
 src/
 ├── app/
 │   ├── app.tsx
 │   ├── router.tsx
+│   ├── router.test.tsx
 │   ├── components/
 │   │   ├── admin-header.tsx
 │   │   └── admin-sidebar.tsx
@@ -287,76 +295,195 @@ src/
 │
 ├── assets/
 │   ├── icons/
+│   │   └── auth-shield-user.svg
 │   ├── baytfolio-icon.png
 │   ├── baytfolio-logo-full.png
 │   ├── baytfolio-logo-horizontal.png
 │   └── index.ts
 │
 ├── modules/
+│   ├── analytics/
+│   │   ├── api/
+│   │   │   └── analytics.mock.ts
+│   │   ├── components/
+│   │   │   ├── analytics-header.tsx
+│   │   │   ├── analytics-overview.tsx
+│   │   │   ├── analytics-tables.tsx
+│   │   │   ├── commercial-overview.tsx
+│   │   │   └── platform-activity-chart.tsx
+│   │   └── pages/
+│   │       └── analytics-page.tsx
+│   │
 │   ├── auth/
 │   │   ├── components/
+│   │   │   ├── auth-brand.tsx
+│   │   │   ├── auth-card.tsx
+│   │   │   ├── auth-layout.tsx
+│   │   │   ├── forgot-password-form.tsx
+│   │   │   ├── login-form.tsx
+│   │   │   ├── otp-verification-form.tsx
+│   │   │   ├── otp-verification-form.test.tsx
+│   │   │   ├── reset-password-form.tsx
+│   │   │   └── reset-password-form.test.tsx
 │   │   ├── pages/
+│   │   │   ├── forgot-password-page.tsx
+│   │   │   ├── login-page.tsx
+│   │   │   ├── reset-password-page.tsx
+│   │   │   └── verify-otp-page.tsx
 │   │   └── schemas/
+│   │       ├── forgot-password.schema.ts
+│   │       ├── login.schema.ts
+│   │       ├── otp-verification.schema.ts
+│   │       └── reset-password.schema.ts
+│   │
+│   ├── cms/
+│   │   ├── api/
+│   │   │   ├── cms.mock.ts
+│   │   │   ├── contact-information.mock.ts
+│   │   │   ├── help-center.mock.ts
+│   │   │   ├── privacy-policy.mock.ts
+│   │   │   └── terms-and-conditions.mock.ts
+│   │   ├── components/
+│   │   │   ├── contact-information/
+│   │   │   │   ├── contact-information-form.tsx
+│   │   │   │   ├── contact-information-preview.tsx
+│   │   │   │   └── contact-information-stats.tsx
+│   │   │   ├── help-center/
+│   │   │   │   ├── add-question-modal.tsx
+│   │   │   │   ├── help-center-filters.tsx
+│   │   │   │   ├── help-center-pagination.tsx
+│   │   │   │   └── help-center-table.tsx
+│   │   │   └── overview/
+│   │   │       └── cms-overview-card.tsx
+│   │   ├── pages/
+│   │   │   ├── cms-page.tsx
+│   │   │   ├── contact-information-page.tsx
+│   │   │   ├── help-center-page.tsx
+│   │   │   ├── help-center-search-params.ts
+│   │   │   ├── privacy-policy-page.tsx
+│   │   │   └── terms-and-conditions-page.tsx
+│   │   ├── types/
+│   │   │   ├── cms.ts
+│   │   │   ├── contact-information.ts
+│   │   │   ├── help-center.ts
+│   │   │   ├── privacy-policy.ts
+│   │   │   └── terms-and-conditions.ts
+│   │   └── index.ts
 │   │
 │   ├── dashboard/
 │   │   ├── api/
+│   │   │   ├── dashboard-insights.mock.ts
+│   │   │   ├── dashboard.mock.ts
+│   │   │   ├── needs-attention.mock.ts
+│   │   │   └── priority-items.mock.ts
 │   │   ├── components/
+│   │   │   ├── dashboard-header.tsx
+│   │   │   ├── dashboard-insights.tsx
+│   │   │   ├── dashboard-stats.tsx
+│   │   │   ├── needs-attention.tsx
+│   │   │   ├── priority-items.tsx
+│   │   │   └── platform-analytics/
+│   │   │       ├── api/
+│   │   │       │   └── platform-analytics.mock.ts
+│   │   │       ├── components/
+│   │   │       │   ├── analytics-card.tsx
+│   │   │       │   ├── content-growth-card.tsx
+│   │   │       │   ├── contract-status-card.tsx
+│   │   │       │   └── showroom-status-card.tsx
+│   │   │       ├── types/
+│   │   │       │   └── platform-analytics.types.ts
+│   │   │       └── index.ts
 │   │   ├── pages/
-│   │   └── types/
-│   │
-│   ├── users/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── types/
+│   │   │   └── dashboard-page.tsx
+│   │   ├── types/
+│   │   │   ├── dashboard-insights.types.ts
+│   │   │   ├── dashboard.types.ts
+│   │   │   ├── needs-attention.types.ts
+│   │   │   └── priority-items.types.ts
+│   │   └── index.ts
 │   │
 │   ├── showrooms/
 │   │   ├── api/
+│   │   │   ├── showroom-details.mock.ts
+│   │   │   └── showrooms.mock.ts
 │   │   ├── components/
+│   │   │   ├── contract-status-badge.tsx
+│   │   │   ├── showroom-status-badge.tsx
+│   │   │   ├── showrooms-filters.tsx
+│   │   │   ├── showrooms-header.tsx
+│   │   │   ├── showrooms-pagination.tsx
+│   │   │   ├── showrooms-stats.tsx
+│   │   │   ├── showrooms-table.tsx
+│   │   │   ├── index.ts
+│   │   │   └── details/
+│   │   │       ├── showroom-content-card.tsx
+│   │   │       ├── showroom-contract-card.tsx
+│   │   │       ├── showroom-detail-field.tsx
+│   │   │       ├── showroom-details-header.tsx
+│   │   │       ├── showroom-details-not-found.tsx
+│   │   │       ├── showroom-info-card.tsx
+│   │   │       ├── showroom-owner-card.tsx
+│   │   │       ├── showroom-promotion-card.tsx
+│   │   │       └── index.ts
 │   │   ├── pages/
-│   │   └── types/
+│   │   │   ├── showroom-details-page.tsx
+│   │   │   ├── showrooms-page.tsx
+│   │   │   └── showrooms-search-params.ts
+│   │   ├── types/
+│   │   │   ├── showroom-details.ts
+│   │   │   └── showroom.ts
+│   │   └── index.ts
 │   │
-│   └── cms/
+│   └── users/
 │       ├── api/
-│       │   ├── privacy-policy.mock.ts
-│       │   └── terms-and-conditions.mock.ts
-│       │
+│       │   └── users.mock.ts
 │       ├── components/
-│       │   ├── contact-information/
-│       │   │   ├── contact-information-form.tsx
-│       │   │   ├── contact-information-preview.tsx
-│       │   │   └── contact-information-stats.tsx
-│       │   │
-│       │   └── help-center/
-│       │       ├── add-question-modal.tsx
-│       │       ├── help-center-filters.tsx
-│       │       ├── help-center-pagination.tsx
-│       │       └── help-center-table.tsx
-│       │
+│       │   ├── user-account-status-card.tsx
+│       │   ├── user-details-card.tsx
+│       │   ├── users-filters.tsx
+│       │   ├── users-pagination.tsx
+│       │   ├── users-stats.tsx
+│       │   └── users-table.tsx
 │       ├── pages/
-│       │   ├── cms-page.tsx
-│       │   ├── contact-information-page.tsx
-│       │   ├── help-center-page.tsx
-│       │   ├── privacy-policy-page.tsx
-│       │   └── terms-and-conditions-page.tsx
-│       │
-│       └── types/
-│           ├── cms.ts
-│           ├── contact-information.ts
-│           ├── help-center.ts
-│           ├── privacy-policy.ts
-│           └── terms-and-conditions.ts
+│       │   ├── user-details-page.tsx
+│       │   ├── users-page.test.tsx
+│       │   ├── users-page.tsx
+│       │   └── users-search-params.ts
+│       ├── types/
+│       │   └── user.ts
+│       └── index.ts
 │
 ├── shared/
 │   ├── api/
+│   │   └── .gitkeep
 │   ├── components/
 │   │   ├── common/
+│   │   │   └── .gitkeep
 │   │   └── ui/
+│   │       ├── arrow-icon.tsx
+│   │       ├── async-submit-button.tsx
+│   │       ├── badge-variants.ts
+│   │       ├── badge.tsx
+│   │       ├── button.tsx
+│   │       ├── field.tsx
+│   │       ├── form-alert.tsx
+│   │       ├── index.ts
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       ├── password-input.tsx
+│   │       ├── select.tsx
+│   │       ├── separator.tsx
+│   │       └── stat-card.tsx
 │   ├── config/
+│   │   └── query-client.ts
 │   ├── constants/
+│   │   └── .gitkeep
 │   ├── hooks/
+│   │   └── .gitkeep
 │   ├── types/
+│   │   └── .gitkeep
 │   └── utils/
+│       └── cn.ts
 │
 ├── test/
 │   └── setup.ts
@@ -365,45 +492,46 @@ src/
 └── main.tsx
 ```
 
-The `@/*` TypeScript and Vite alias resolves to `src/*`.
+The `@/*` alias resolves to `src/*`.
 
 ---
 
 ## Routing Structure
 
-| Route                       | Implementation                           |
-| --------------------------- | ---------------------------------------- |
-| `/`                         | Foundation home screen                   |
-| `/login`                    | Login form with client-side validation   |
-| `/forgot-password`          | Forgot-password form                     |
-| `/verify-otp`               | OTP verification and resend-countdown UI |
-| `/reset-password`           | Reset-password form                      |
-| `/dashboard`                | Admin Dashboard                          |
-| `/users`                    | Users Management listing                 |
-| `/users/:userId`            | Mock user details                        |
-| `/showrooms`                | Showrooms and Factories Management       |
-| `/showrooms/:showroomId`    | Mock showroom/factory details            |
-| `/cms`                      | CMS Dashboard                            |
-| `/cms/help-center`          | Help Center Management                   |
-| `/cms/contact-information`  | Contact Information Settings             |
-| `/cms/privacy-policy`       | Privacy Policy Management                |
-| `/cms/terms-and-conditions` | Terms and Conditions Management          |
-| `*`                         | Not-found page                           |
+The application uses React Router for application navigation.
 
-All administrative routes are rendered through the shared administrative layout.
+| Route                       | Page                        |
+| --------------------------- | --------------------------- |
+| `/`                         | Foundation home page        |
+| `/login`                    | Login                       |
+| `/forgot-password`          | Forgot Password             |
+| `/verify-otp`               | OTP Verification            |
+| `/reset-password`           | Reset Password              |
+| `/dashboard`                | Dashboard                   |
+| `/users`                    | Users Management            |
+| `/users/:userId`            | User Details                |
+| `/showrooms`                | Showrooms and Factories     |
+| `/showrooms/:showroomId`    | Showroom or Factory Details |
+| `/cms`                      | CMS Dashboard               |
+| `/cms/help-center`          | Help Center                 |
+| `/cms/contact-information`  | Contact Information         |
+| `/cms/privacy-policy`       | Privacy Policy              |
+| `/cms/terms-and-conditions` | Terms and Conditions        |
+| `*`                         | Not Found                   |
+
+Administrative route definitions are maintained in `src/app/routes/admin-routes.tsx`.
+
+The Analytics page and its navigation are maintained through the Analytics module and administrative routing configuration. Its exact route should be documented here after confirming the registered path in `admin-routes.tsx`.
 
 ---
 
 ## State Management
 
-- React component state manages local interface concerns, modal visibility, form values, and other interactive UI states.
-- `nuqs` stores Users, Showrooms, and Help Center search, filters, sorting, and pagination in URL query parameters.
-- TanStack React Query is configured as provider infrastructure for future server state, but feature-level server queries and mutations are not implemented.
-- CMS Help Center currently manages questions using local React state and mock initial data.
-- Contact Information currently uses local React state and mock save functionality.
-- Privacy Policy uses local React state and typed mock data for bilingual content editing.
-- Terms and Conditions uses local React state and typed mock data for bilingual content editing.
-- No global client store is currently used; Zustand remains a declared dependency for future integration.
+- React component state handles local UI interactions, form values, and modal visibility.
+- `nuqs` manages URL-backed search, filters, sorting, and pagination.
+- TanStack React Query is configured through the application providers for future server-state integration.
+- Feature data currently comes from local mock files and component state.
+- Zustand is declared as a dependency but is not currently used for application state.
 
 ---
 
@@ -414,19 +542,17 @@ Tailwind CSS v4 is configured through `@tailwindcss/vite`.
 Global design tokens are defined in `src/index.css`, including:
 
 - Semantic colors.
-- Surface colors.
-- Border colors.
+- Surface and border colors.
 - Status colors.
-- Typography.
-- Font families.
+- Typography and font families.
 - Border radii.
 - Shadows.
 
-Components consume these tokens through Tailwind utility classes.
+The application uses Inter as its primary typeface for Latin text and Noto Sans Arabic for Arabic content.
 
-The application uses IBM Plex Sans Arabic as its primary Arabic typeface and supports RTL layouts at page and component boundaries, with LTR handling for English text and international contact information where appropriate.
+Shared UI components are maintained under `src/shared/components/ui`.
 
-Shared UI primitives are maintained under `src/shared/components/ui`.
+The interface supports RTL layouts and LTR content where needed.
 
 ---
 
@@ -434,8 +560,8 @@ Shared UI primitives are maintained under `src/shared/components/ui`.
 
 ### Prerequisites
 
-- Node.js and npm compatible with the checked-in `package-lock.json`.
-- No environment variables are currently required.
+- Node.js
+- npm
 
 ### Install Dependencies
 
@@ -449,12 +575,15 @@ npm ci
 npm run dev
 ```
 
-Vite prints the local development URL after startup.
-
-### Build and Preview
+### Build for Production
 
 ```bash
 npm run build
+```
+
+### Preview Production Build
+
+```bash
 npm run preview
 ```
 
@@ -462,24 +591,24 @@ npm run preview
 
 ## Available NPM Scripts
 
-| Command                | Description                                          |
-| ---------------------- | ---------------------------------------------------- |
-| `npm run dev`          | Start the Vite development server.                   |
-| `npm run build`        | Run TypeScript checks and create a production build. |
-| `npm run typecheck`    | Run the TypeScript project build without bundling.   |
-| `npm run lint`         | Run ESLint across the repository.                    |
-| `npm run test`         | Run the Vitest suite once.                           |
-| `npm run test:watch`   | Run Vitest in watch mode.                            |
-| `npm run format`       | Format the repository with Prettier.                 |
-| `npm run format:check` | Check repository formatting with Prettier.           |
-| `npm run preview`      | Serve the production build with Vite preview.        |
-| `npm run prepare`      | Run Husky setup after installation.                  |
+| Command                | Description                        |
+| ---------------------- | ---------------------------------- |
+| `npm run dev`          | Start the Vite development server. |
+| `npm run build`        | Run the production build.          |
+| `npm run typecheck`    | Run TypeScript checks.             |
+| `npm run lint`         | Run ESLint.                        |
+| `npm run test`         | Run the Vitest test suite.         |
+| `npm run test:watch`   | Run Vitest in watch mode.          |
+| `npm run format`       | Format files with Prettier.        |
+| `npm run format:check` | Check formatting with Prettier.    |
+| `npm run preview`      | Preview the production build.      |
+| `npm run prepare`      | Set up Husky.                      |
 
 ---
 
-## Development Commands
+## Development and Validation
 
-Run the focused checks while developing:
+Run the following checks before committing changes:
 
 ```bash
 npm run typecheck
@@ -488,13 +617,13 @@ npm test
 npm run build
 ```
 
-To run a specific Vitest file:
+Run a specific test file:
 
 ```bash
 npx vitest run src/modules/users/pages/users-page.test.tsx
 ```
 
-To check formatting for a specific file:
+Check formatting for a specific file:
 
 ```bash
 npx prettier --check path/to/file.tsx
@@ -502,38 +631,40 @@ npx prettier --check path/to/file.tsx
 
 ---
 
-## Mock Data and Backend Integration Status
+## Mock Data and Backend Integration
 
-The current application uses typed local mock data from feature `api` folders and local component state.
+The current frontend uses typed mock data in feature-specific `api` folders.
 
-Backend integration and persistent storage are not implemented yet.
+### Mock-Based Features
 
-### Current Mock-Based Features
+- Dashboard statistics and insights.
+- Dashboard platform analytics.
+- Analytics overview and commercial data.
+- Platform activity chart data.
+- Most Active Showrooms and Contracts Needing Attention tables.
+- Users and user details.
+- Showrooms and factories.
+- Showroom details.
+- Help Center questions.
+- Contact Information settings.
+- Privacy Policy content.
+- Terms and Conditions content.
 
-- Dashboard metrics, attention items, priority items, analytics, activities, showrooms, factories, and contracts.
-- Users, user statistics, and user details.
-- Showrooms and Factories listing and details.
-- Help Center questions and category data.
-- Contact Information initial settings and mock save behavior.
-- Privacy Policy document content and mock save behavior.
-- Terms and Conditions document content and mock save behavior.
+### Pending Backend Integration
 
-### Backend Integration Pending
-
-- Authentication sessions and backend authentication.
+- Authentication and session management.
 - Admin authorization and role-based access control.
-- API endpoints and server-side data persistence.
+- Backend API endpoints.
+- Persistent data storage.
 - Server-side filtering, sorting, and pagination.
-- CMS content persistence and publishing workflows.
-- Contact Information publication and synchronization.
-- Privacy Policy persistence and publication.
-- Terms and Conditions persistence and publication.
-- Production server-state queries and mutations.
+- Analytics data endpoints.
+- CMS content persistence.
+- Contact Information publishing and synchronization.
+- Privacy Policy and Terms and Conditions publishing.
+- Server-state queries and mutations.
 - Audit logging for administrative changes.
 
-TanStack React Query is configured as provider infrastructure, but feature-level queries and mutations are not currently connected.
-
-Axios and Zustand are declared for future integration but are not currently used by application flows.
+TanStack React Query is configured as application infrastructure, but feature-level API queries and mutations are not yet connected.
 
 ---
 
@@ -541,79 +672,75 @@ Axios and Zustand are declared for future integration but are not currently used
 
 ### Implemented
 
-- Responsive RTL admin shell and navigation.
-- Client-side authentication screens and schema validation.
-- Dashboard sections with typed mock data.
-- Users listing, filtering, sorting, pagination, CSV export, statistics, and details UI.
-- Showrooms and Factories listing, filtering, sorting, pagination, badges, and details UI.
+- Responsive RTL administrative layout.
+- Authentication screens and form validation.
+- Dashboard and platform analytics sections.
+- Dedicated Analytics module.
+- Analytics overview and commercial sections.
+- Platform activity chart.
+- Analytics data tables.
+- Users listing and details interfaces.
+- User search, filters, sorting, and pagination.
+- CSV export.
+- Showrooms and Factories listing.
+- Showroom and Factory details pages.
 - CMS Dashboard.
 - Help Center management interface.
-- Help Center search, category/status filters, pagination, and URL state.
-- Add and edit FAQ functionality.
-- Activate and deactivate FAQ questions.
-- Arabic and English FAQ fields.
-- Contact Information settings interface.
-- Phone, WhatsApp, email, and working-hours form fields.
-- Live customer-facing contact preview.
-- Local save and reset interactions.
-- Privacy Policy management interface.
-- Arabic and English Privacy Policy content editing.
-- Privacy Policy sections and last-updated information.
-- Terms and Conditions management interface.
-- Six editable Terms and Conditions sections.
-- Arabic and English Terms and Conditions content editing.
-- Section character counters.
-- Terms and Conditions last-updated information.
-- CMS navigation and administrative route integration.
-- Shared UI primitives and semantic design tokens.
+- FAQ creation and editing.
+- FAQ search and filters.
+- Contact Information settings.
+- Live contact information preview.
+- Privacy Policy editing interface.
+- Terms and Conditions editing interface.
+- Arabic and English content editing.
+- Shared UI components.
+- Centralized design tokens.
 
 ### Known Limitations
 
-- Authentication and admin authorization are not connected to a backend.
-- Feature data is currently mock-based and does not persist to a backend.
-- Help Center changes are maintained in local component state.
-- Contact Information changes use mock save behavior and are not published to production customer applications.
-- Privacy Policy and Terms and Conditions changes currently use local mock save behavior.
-- Legal content requires appropriate legal and administrative review before production publication.
-- Showrooms add/export actions, detail-page action buttons, and backend-driven filtering are not implemented.
-- Dashboard, analytics, and responsive-layout coverage is primarily manual.
-- CMS features still require backend integration, API validation, and production workflow testing.
-- The production build previously reported a non-blocking warning about a JavaScript chunk larger than 500 kB. Code splitting can be considered as feature scope grows.
+- Authentication is not connected to a backend service.
+- Admin authorization is not implemented.
+- Feature data is primarily mock-based.
+- Changes are not persisted to a production backend.
+- CMS publishing workflows require backend integration.
+- Analytics currently uses mock data.
+- Dashboard and Analytics do not use production analytics APIs.
+- Some administrative actions are interface-only.
+- Production behavior requires API integration and end-to-end validation.
 
 ---
 
 ## Testing
 
-Vitest runs in JSDOM with `src/test/setup.ts`.
+The project uses Vitest, JSDOM, and React Testing Library.
 
-The existing baseline test suite contains five test files and eleven tests covering:
+Test files currently present in the repository include:
 
-- Routing.
-- Application providers.
-- OTP interactions.
-- Password reset behavior.
-- Users URL-state behavior.
+- `src/app/router.test.tsx`
+- `src/app/providers/app-providers.test.tsx`
+- `src/modules/auth/components/otp-verification-form.test.tsx`
+- `src/modules/auth/components/reset-password-form.test.tsx`
+- `src/modules/users/pages/users-page.test.tsx`
 
-There is no coverage script or coverage configuration.
-
-New CMS features should receive dedicated automated tests as the implementation progresses.
+Testing coverage should be expanded as new modules and workflows are implemented.
 
 ---
 
 ## Development Conventions
 
-- Keep business-domain code inside its feature module.
-- Expose intended public module surfaces through `index.ts` files.
-- Keep shared UI primitives in `src/shared/components/ui`.
-- Reuse shared controls instead of duplicating UI implementations.
-- Use typed mock data in feature `api` folders until backend integration is implemented.
-- Avoid `useEffect` and `any` in `src`; preserve strict TypeScript checks.
-- Use semantic design tokens from `src/index.css` instead of hardcoded component colors or font families.
-- Preserve accessible controls and responsive behavior.
-- Maintain RTL layouts and use LTR direction where English or international contact data requires it.
-- Keep URL-backed filters and pagination consistent across listing pages.
+- Keep business-specific code inside its feature module.
+- Keep shared components inside `src/shared/components`.
+- Use typed data and avoid TypeScript `any`.
+- Avoid unnecessary `useEffect` usage.
+- Use design tokens from `src/index.css`.
+- Avoid hardcoded colors and font families inside components.
+- Preserve RTL and LTR behavior.
+- Maintain responsive layouts.
+- Reuse existing shared UI components.
+- Keep URL-backed filters and pagination consistent.
+- Run TypeScript, lint, tests, and build checks before committing.
 
 ---
 
 **BaytFolio Admin Frontend**  
-A modular administrative interface for the BaytFolio platform.
+Modular administration interface for the BaytFolio platform.
