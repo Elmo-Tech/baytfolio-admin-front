@@ -1,4 +1,13 @@
 import { RotateCcw, Search } from "lucide-react";
+import {
+  Button,
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/components/ui";
 
 interface UsersFiltersProps {
   search: string;
@@ -26,72 +35,83 @@ export default function UsersFilters({
   return (
     <section
       dir="rtl"
-      className="flex flex-col gap-3 rounded-md border border-[#f0ebe5] bg-white p-4 lg:flex-row lg:items-center"
+      className="flex flex-col gap-3 rounded-md border border-users-panel-border bg-users-surface p-4 lg:flex-row lg:items-center"
     >
+      {/* Search */}
       <div className="relative min-w-0 flex-1">
         <Search
           size={18}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#aa9985]"
+          aria-hidden="true"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted"
         />
 
-        <input
+        <Input
           type="search"
           value={search}
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="ابحث بالاسم أو البريد الإلكتروني أو رقم الهاتف..."
-          className="h-11 w-full rounded-md border border-[#eee8e0] bg-[#fcfbf9] pr-10 pl-4 text-sm text-[#1d2935] outline-none transition focus:border-[#102233]"
+          className="h-11 w-full rounded-md border-users-panel-divider bg-users-surface-input pr-10 pl-4 text-sm text-users-text-primary focus-visible:border-brand-navy focus-visible:ring-0"
         />
       </div>
 
-      <div className="flex flex-wrap gap-3">
-        <select
-          value={status}
-          onChange={(event) => onStatusChange(event.target.value)}
-          className="h-11 min-w-[145px] cursor-pointer rounded-md border border-[#eee8e0] bg-white px-3 text-sm text-[#46515d] outline-none focus:border-[#102233]"
-        >
-          <option value="all">كل الحالات</option>
-          <option value="active">نشط</option>
-          <option value="suspended">محظور</option>
-          <option value="pending_deletion">طلب حذف</option>
-          <option value="deleted">محذوف</option>
-        </select>
+      {/* Filters */}
+      <div className="flex shrink-0 flex-nowrap items-center gap-3">
+        {/* Status */}
+        <Select dir="rtl" value={status} onValueChange={onStatusChange}>
+          <SelectTrigger className="h-11 w-[145px] shrink-0 cursor-pointer rounded-md border-users-panel-divider bg-users-surface px-3 text-sm text-users-text-secondary shadow-none">
+            <SelectValue placeholder="كل الحالات" />
+          </SelectTrigger>
 
-        <select
+          <SelectContent>
+            <SelectItem value="all">كل الحالات</SelectItem>
+            <SelectItem value="active">نشط</SelectItem>
+            <SelectItem value="suspended">محظور</SelectItem>
+            <SelectItem value="pending_deletion">طلب حذف</SelectItem>
+            <SelectItem value="deleted">محذوف</SelectItem>
+          </SelectContent>
+        </Select>
+
+        {/* Login Method */}
+        <Select
+          dir="rtl"
           value={loginMethod}
-          onChange={(event) => onLoginMethodChange(event.target.value)}
-          className="h-11 min-w-[165px] cursor-pointer rounded-md border border-[#eee8e0] bg-white px-3 text-sm text-[#46515d] outline-none focus:border-[#102233]"
+          onValueChange={onLoginMethodChange}
         >
-          <option value="all">كل طرق الدخول</option>
-          <option value="phone_password">الهاتف وكلمة المرور</option>
-          <option value="google">Google</option>
-          <option value="apple">Apple</option>
-        </select>
+          <SelectTrigger className="h-11 w-[165px] shrink-0 cursor-pointer rounded-md border-users-panel-divider bg-users-surface px-3 text-sm text-users-text-secondary shadow-none">
+            <SelectValue placeholder="كل طرق الدخول" />
+          </SelectTrigger>
 
-        <select
-          value={sortOrder}
-          onChange={(event) => onSortOrderChange(event.target.value)}
-          className="h-11 min-w-[165px] cursor-pointer rounded-md border border-[#eee8e0] bg-white px-3 text-sm text-[#46515d] outline-none focus:border-[#102233]"
-        >
-          <option value="newest">الأحدث تسجيلًا</option>
-          <option value="oldest">الأقدم تسجيلًا</option>
-        </select>
+          <SelectContent>
+            <SelectItem value="all">كل طرق الدخول</SelectItem>
+            <SelectItem value="phone_password">الهاتف وكلمة المرور</SelectItem>
+            <SelectItem value="google">Google</SelectItem>
+            <SelectItem value="apple">Apple</SelectItem>
+          </SelectContent>
+        </Select>
 
-        {/* <button
+        {/* Sort */}
+        <Select dir="rtl" value={sortOrder} onValueChange={onSortOrderChange}>
+          <SelectTrigger className="h-11 w-[165px] shrink-0 cursor-pointer rounded-md border-users-panel-divider bg-users-surface px-3 text-sm text-users-text-secondary shadow-none">
+            <SelectValue placeholder="الأحدث تسجيلًا" />
+          </SelectTrigger>
+
+          <SelectContent>
+            <SelectItem value="newest">الأحدث تسجيلًا</SelectItem>
+            <SelectItem value="oldest">الأقدم تسجيلًا</SelectItem>
+          </SelectContent>
+        </Select>
+
+        {/* Reset */}
+        <Button
           type="button"
-          className="flex h-11 cursor-pointer items-center justify-center gap-2 rounded-md border border-[#eee8e0] px-4 text-sm text-[#46515d] transition hover:bg-[#f7f3ed]"
-        >
-          <SlidersHorizontal size={17} />
-          خيارات الفلترة
-        </button> */}
-
-        <button
-          type="button"
+          variant="outline"
+          size="lg"
           onClick={onReset}
-          className="flex h-11 cursor-pointer items-center justify-center gap-2 rounded-md border border-[#eee8e0] px-4 text-sm text-[#46515d] transition hover:bg-[#f7f3ed]"
+          className="h-11 min-w-[105px] shrink-0 cursor-pointer gap-2 rounded-md border-users-panel-divider px-4 text-sm text-users-text-secondary shadow-none transition hover:bg-background"
         >
           <RotateCcw size={17} />
           إعادة ضبط
-        </button>
+        </Button>
       </div>
     </section>
   );

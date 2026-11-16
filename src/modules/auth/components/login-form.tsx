@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import {
   loginSchema,
@@ -11,11 +10,10 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { Field, FieldLabel, FieldError } from "@/shared/components/ui/field";
 import { Button } from "@/shared/components/ui/button";
+import { PasswordInput } from "@/shared/components/ui/password-input";
 import ArrowIcon from "@/shared/components/ui/arrow-icon";
 
 export default function LoginForm() {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -29,22 +27,22 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: LoginFormValues) {
-    console.log(values);
+  function onSubmit() {
+    // Authentication is not connected to a backend yet.
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} dir="rtl" className="space-y-5">
       {/* Email */}
       <Field>
-        <FieldLabel className="text-[#263746]" htmlFor="email">
+        <FieldLabel className="text-auth-text-label" htmlFor="email">
           البريد الإلكتروني
         </FieldLabel>
 
         <div className="relative">
           <Mail
             aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#A99780]"
+            className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-auth-text-muted"
           />
 
           <Input
@@ -53,7 +51,7 @@ export default function LoginForm() {
             autoComplete="email"
             placeholder="admin@baytfolio.com"
             dir="ltr"
-            className="h-11 border-[#DDD4C7] bg-[#FFFEFC] pl-10 pr-3 text-left text-[#263746] placeholder:text-[#A99780] focus-visible:border-[#B8914E] focus-visible:ring-[#B8914E]/20"
+            className="h-11 border-auth-border-login bg-auth-input-bg-login pl-10 pr-3 text-left text-auth-text-label placeholder:text-auth-text-muted focus-visible:border-auth-focus focus-visible:ring-auth-focus/20"
             {...register("email")}
             aria-invalid={!!errors.email}
           />
@@ -64,38 +62,20 @@ export default function LoginForm() {
 
       {/* Password */}
       <Field>
-        <FieldLabel className="text-[#263746]" htmlFor="password">
+        <FieldLabel className="text-auth-text-label" htmlFor="password">
           كلمة المرور
         </FieldLabel>
 
-        <div className="relative">
-          <Input
-            id="password"
-            dir="ltr"
-            type={isPasswordVisible ? "text" : "password"}
-            autoComplete="current-password"
-            placeholder="أدخل كلمة المرور"
-            className="h-11 border-[#DDD4C7] bg-[#FFFEFC] pl-10 pr-3 text-left text-[#263746] placeholder:text-[#A99780] focus-visible:border-[#B8914E] focus-visible:ring-[#B8914E]/20"
-            {...register("password")}
-            aria-invalid={!!errors.password}
-          />
-
-          <button
-            type="button"
-            className="absolute top-1/2 left-1.5 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-[#8B7964] transition-colors hover:bg-[#F7F3ED] hover:text-[#263746] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8914E]/40"
-            onClick={() => setIsPasswordVisible((visible) => !visible)}
-            aria-label={
-              isPasswordVisible ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"
-            }
-            aria-pressed={isPasswordVisible}
-          >
-            {isPasswordVisible ? (
-              <EyeOff aria-hidden="true" className="size-4" />
-            ) : (
-              <Eye aria-hidden="true" className="size-4" />
-            )}
-          </button>
-        </div>
+        <PasswordInput
+          id="password"
+          dir="ltr"
+          autoComplete="current-password"
+          placeholder="أدخل كلمة المرور"
+          className="h-11 border-auth-border-login bg-auth-input-bg-login text-left text-auth-text-label placeholder:text-auth-text-muted focus-visible:border-auth-focus focus-visible:ring-auth-focus/20"
+          {...register("password")}
+          aria-invalid={!!errors.password}
+          visibilityButtonClassName="size-8"
+        />
 
         <FieldError errors={[errors.password]} />
       </Field>
@@ -104,15 +84,15 @@ export default function LoginForm() {
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 text-sm">
         <a
           href="/forgot-password"
-          className="font-medium text-[#9C7636] transition-colors hover:text-[#765522] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8914E]/40"
+          className="font-medium text-auth-link transition-colors hover:text-auth-link-hover hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-auth-focus/40"
         >
           هل نسيت كلمة المرور؟
         </a>
 
-        <label className="flex cursor-pointer items-center gap-2 text-[#5F6C75]">
+        <label className="flex cursor-pointer items-center gap-2 text-auth-text-secondary">
           <input
             type="checkbox"
-            className="size-4 rounded border-[#CFC2B1] accent-[#A97C32]"
+            className="size-4 rounded border-auth-checkbox-border accent-auth-checkbox-accent"
             {...register("rememberDevice")}
           />
           <span>تذكرني على هذا الجهاز</span>
@@ -123,7 +103,7 @@ export default function LoginForm() {
       <Button
         type="submit"
         size="lg"
-        className="h-12 w-full rounded-lg bg-[#172A3A] text-base text-white shadow-sm hover:bg-[#243B4D] focus-visible:border-[#B8914E] focus-visible:ring-[#B8914E]/40"
+        className="h-12 w-full rounded-lg bg-auth-navy text-base text-primary-foreground shadow-sm hover:bg-auth-navy-hover focus-visible:border-auth-focus focus-visible:ring-auth-focus/40"
       >
         <span>تسجيل الدخول</span>
         <ArrowIcon className="size-5" />

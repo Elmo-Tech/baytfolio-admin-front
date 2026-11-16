@@ -11,7 +11,7 @@ export default function ResetPasswordPage() {
         <AuthCard className="!max-w-none">
           <div dir="rtl" className="text-center">
             <div className="mb-5 flex justify-center">
-              <span className="flex items-center gap-2 rounded-full bg-[#F2EDE6] px-2 py-1 text-xs font-medium text-[#37434B]">
+              <span className="flex items-center gap-2 rounded-full bg-auth-soft-bg px-2 py-1 text-xs font-medium text-text-secondary">
                 <img
                   src={authShieldUser}
                   alt=""
@@ -22,14 +22,14 @@ export default function ResetPasswordPage() {
               </span>
             </div>
 
-            <div className="mx-auto mb-3 flex size-10 items-center justify-center rounded-lg bg-[#F2EDE6]">
-              <KeyRound aria-hidden="true" className="size-5 text-[#172A3A]" />
+            <div className="mx-auto mb-3 flex size-10 items-center justify-center rounded-lg bg-auth-soft-bg">
+              <KeyRound aria-hidden="true" className="size-5 text-auth-navy" />
             </div>
 
-            <h1 className="text-[26px] font-bold text-[#172A3A]">
+            <h1 className="text-[26px] font-bold text-auth-navy">
               إنشاء كلمة مرور جديدة
             </h1>
-            <p className="mt-2 text-sm leading-6 text-[#37434B]">
+            <p className="mt-2 text-sm leading-6 text-text-secondary">
               أدخل كلمة المرور الجديدة لحساب الإدارة الخاص بك للمتابعة بصلاحيات
               آمنة.
             </p>
@@ -37,7 +37,7 @@ export default function ResetPasswordPage() {
 
           <div
             dir="rtl"
-            className="mt-5 flex items-center justify-start gap-3 rounded-md border border-[#EEE7DE] bg-[#F8F4EF] px-3 py-2.5"
+            className="mt-5 flex items-center justify-start gap-3 rounded-md border border-auth-border-muted bg-auth-surface-muted px-3 py-2.5"
           >
             <img
               src={authShieldUser}
@@ -51,10 +51,10 @@ export default function ResetPasswordPage() {
             />
 
             <div className="min-w-0 text-right">
-              <p className="text-xs text-[#A99780]">الحساب المرتبط</p>
+              <p className="text-xs text-auth-text-muted">الحساب المرتبط</p>
               <p
                 dir="ltr"
-                className="truncate text-sm font-medium text-[#172A3A]"
+                className="truncate text-sm font-medium text-auth-navy"
               >
                 admin-security@baytfolio.sa
               </p>
@@ -65,14 +65,14 @@ export default function ResetPasswordPage() {
 
           <div
             dir="rtl"
-            className="-mx-6 mt-7 flex flex-wrap items-center justify-center gap-2 border-t border-[#F0EBE4] px-6 pt-3 text-sm text-[#A99780] sm:-mx-9 sm:px-9"
+            className="-mx-6 mt-7 flex flex-wrap items-center justify-center gap-2 border-t border-auth-border px-6 pt-3 text-sm text-auth-text-muted sm:-mx-9 sm:px-9"
           >
             <span className="inline-flex items-center gap-1.5">
               <KeyRound aria-hidden="true" className="size-4 shrink-0" />
               تشفير فيدرالي FIPS
             </span>
 
-            <span aria-hidden="true" className="text-[#E5DCCF]">
+            <span aria-hidden="true" className="text-auth-divider-muted">
               •
             </span>
 
@@ -83,11 +83,11 @@ export default function ResetPasswordPage() {
           </div>
         </AuthCard>
 
-        <p dir="rtl" className="mt-5 text-center text-sm text-[#A99780]">
+        <p dir="rtl" className="mt-5 text-center text-sm text-auth-text-muted">
           تواجه مشكلة في الاستعادة؟{" "}
           <a
             href="mailto:sec-ops@baytfolio.com"
-            className="font-medium text-[#435562] hover:underline"
+            className="font-medium text-auth-link hover:underline"
           >
             تواصل مع الدعم التقني المؤسسي
           </a>
