@@ -1,8 +1,10 @@
 import { useCallback, useState } from "react";
 import { Bell, ChevronLeft } from "lucide-react";
 import { Link, useLocation, useParams } from "react-router";
+
 import { mockShowrooms } from "@/modules/showrooms/api/showrooms.mock";
 import { mockUsers } from "@/modules/users/api/users.mock";
+import { mockShowroomJoinRequests } from "@/modules/showroom-join-requests/api/showroom-join-requests.mock";
 
 const pageTitles: Record<string, string> = {
   "/dashboard": "نظرة عامة",
@@ -14,16 +16,16 @@ const pageTitles: Record<string, string> = {
   "/cms/privacy-policy": "سياسة الخصوصية",
   "/cms/terms-and-conditions": "الشروط والأحكام",
   "/analytics": "التحليلات والتقارير",
+  "/showroom-join-requests": "طلبات انضمام المعارض",
 };
 
 export default function AdminHeader() {
   const location = useLocation();
-  const { showroomId, userId } = useParams();
+  const { showroomId, userId, requestId } = useParams();
 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
-  // Close notifications when clicking outside
   const notificationsRef = useCallback(
     (node: HTMLDivElement | null) => {
       if (!node || !isNotificationsOpen) return;
@@ -43,7 +45,6 @@ export default function AdminHeader() {
     [isNotificationsOpen],
   );
 
-  // Close profile menu when clicking outside
   const profileMenuRef = useCallback(
     (node: HTMLDivElement | null) => {
       if (!node || !isProfileMenuOpen) return;
@@ -64,21 +65,38 @@ export default function AdminHeader() {
   );
 
   const currentPath = location.pathname;
+
   const isUserDetails = /^\/users\/[^/]+$/.test(currentPath);
+  const isShowroomDetails = /^\/showrooms\/[^/]+$/.test(currentPath);
+
+  const isShowroomJoinRequestDetails = /^\/showroom-join-requests\/[^/]+$/.test(
+    currentPath,
+  );
+
+  const isCmsSubpage = /^\/cms\/[^/]+$/.test(currentPath);
 
   const currentUser = isUserDetails
     ? mockUsers.find((user) => user.id === userId)
     : undefined;
-  const isShowroomDetails = /^\/showrooms\/[^/]+$/.test(currentPath);
+
   const currentShowroom = isShowroomDetails
     ? mockShowrooms.find((showroom) => showroom.id === showroomId)
+    : undefined;
+
+  const currentJoinRequest = isShowroomJoinRequestDetails
+    ? mockShowroomJoinRequests.find(
+        (request) =>
+          request.id === requestId || request.reference === requestId,
+      )
     : undefined;
 
   const currentPageTitle = isUserDetails
     ? (currentUser?.name ?? "تفاصيل المستخدم")
     : isShowroomDetails
       ? (currentShowroom?.name ?? "تفاصيل المعرض")
-      : (pageTitles[currentPath] ?? "لوحة الإدارة");
+      : isShowroomJoinRequestDetails
+        ? (currentJoinRequest?.showroomName ?? "تفاصيل طلب الانضمام")
+        : (pageTitles[currentPath] ?? "لوحة الإدارة");
 
   return (
     <header
@@ -87,17 +105,18 @@ export default function AdminHeader() {
     >
       {/* Breadcrumbs */}
       <div className="hidden min-w-0 flex-1 items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs min-[721px]:flex sm:gap-2 sm:text-sm">
-        {" "}
         <Link
           to="/dashboard"
           className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
         >
           لوحة التحكم
         </Link>
+
         <ChevronLeft
           size={14}
           className="shrink-0 text-text-muted-icon sm:size-4"
         />
+
         {isUserDetails && (
           <>
             <Link
@@ -113,6 +132,7 @@ export default function AdminHeader() {
             />
           </>
         )}
+
         {isShowroomDetails && (
           <>
             <Link
@@ -128,6 +148,39 @@ export default function AdminHeader() {
             />
           </>
         )}
+
+        {isShowroomJoinRequestDetails && (
+          <>
+            <Link
+              to="/showroom-join-requests"
+              className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
+            >
+              طلبات انضمام المعارض
+            </Link>
+
+            <ChevronLeft
+              size={14}
+              className="shrink-0 text-text-muted-icon sm:size-4"
+            />
+          </>
+        )}
+
+        {isCmsSubpage && (
+          <>
+            <Link
+              to="/cms"
+              className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
+            >
+              إدارة المحتوى CMS
+            </Link>
+
+            <ChevronLeft
+              size={14}
+              className="shrink-0 text-text-muted-icon sm:size-4"
+            />
+          </>
+        )}
+
         <span className="shrink-0 font-semibold text-text-primary">
           {currentPageTitle}
         </span>
@@ -187,7 +240,7 @@ export default function AdminHeader() {
           >
             <div className="hidden flex-col items-start gap-1 sm:flex">
               <p className="whitespace-nowrap text-xs font-semibold leading-5 text-text-primary sm:text-sm">
-                إبراهيم المهدي{" "}
+                إبراهيم المهدي
               </p>
 
               <p className="whitespace-nowrap text-[10px] leading-5 text-text-muted sm:text-xs">
