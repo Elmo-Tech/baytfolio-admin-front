@@ -27,6 +27,14 @@ const parseAsPageSize = createParser<number>({
   serialize: (value) => parseAsInteger.serialize(value),
 });
 
+export function clampUsersPage(page: number, totalPages: number): number {
+  if (totalPages <= 0) {
+    return 1;
+  }
+
+  return Math.min(Math.max(1, page), totalPages);
+}
+
 export const usersSearchParams = {
   search: parseAsString.withDefault(""),
   status: parseAsStringEnum([

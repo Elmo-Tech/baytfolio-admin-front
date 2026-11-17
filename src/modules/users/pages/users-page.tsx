@@ -1,14 +1,16 @@
 import { useMemo } from "react";
 import { Download } from "lucide-react";
 import { useQueryStates } from "nuqs";
+import { Navigate, useLocation } from "react-router";
 import { mockUsers } from "../api/users.mock";
 import UsersFilters from "../components/users-filters";
 import UsersPagination from "../components/users-pagination";
 import UsersStats from "../components/users-stats";
 import UsersTable from "../components/users-table";
-import { usersSearchParams } from "./users-search-params";
+import { clampUsersPage, usersSearchParams } from "./users-search-params";
 
 export default function UsersPage() {
+  const location = useLocation();
   const [
     { search, status, loginMethod, sortOrder, page: currentPage, pageSize },
     setUsersSearchParams,
@@ -40,12 +42,32 @@ export default function UsersPage() {
   }, [search, status, loginMethod, sortOrder]);
 
   const totalPages = Math.ceil(filteredUsers.length / pageSize);
+  const safePage = clampUsersPage(currentPage, totalPages);
+
+  if (currentPage !== safePage) {
+    const nextSearchParams = new URLSearchParams(location.search);
+    if (safePage <= 1) {
+      nextSearchParams.delete("page");
+    } else {
+      nextSearchParams.set("page", String(safePage));
+    }
+
+    const searchString = nextSearchParams.toString();
+    return (
+      <Navigate
+        to={{
+          pathname: location.pathname,
+          search: searchString ? `?${searchString}` : "",
+        }}
+        replace
+      />
+    );
+  }
 
   const paginatedUsers = filteredUsers.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize,
+    (safePage - 1) * pageSize,
+    safePage * pageSize,
   );
-
   const handleReset = () => {
     setUsersSearchParams({
       search: "",
@@ -192,7 +214,7 @@ export default function UsersPage() {
       <UsersTable users={paginatedUsers} />
 
       <UsersPagination
-        currentPage={currentPage}
+        currentPage={safePage}
         totalPages={totalPages}
         totalItems={filteredUsers.length}
         pageSize={pageSize}
