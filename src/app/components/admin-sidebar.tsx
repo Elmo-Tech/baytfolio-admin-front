@@ -31,7 +31,7 @@ const navigationGroups = [
     items: [
       {
         label: "طلبات انضمام المعارض",
-        to: "/showroom-applications",
+        to: "/showroom-join-requests",
         icon: Store,
         badge: 14,
         badgeVariant: "orange",

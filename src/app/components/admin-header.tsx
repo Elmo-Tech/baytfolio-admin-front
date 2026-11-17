@@ -1,10 +1,15 @@
 import { useCallback, useState } from "react";
 import { Bell, ChevronLeft } from "lucide-react";
-import { Link, useLocation, useParams } from "react-router";
+import { Link, useLocation } from "react-router";
 
 import { mockShowrooms } from "@/modules/showrooms/api/showrooms.mock";
 import { mockUsers } from "@/modules/users/api/users.mock";
 import { mockShowroomJoinRequests } from "@/modules/showroom-join-requests/api/showroom-join-requests.mock";
+
+type BreadcrumbItem = {
+  label: string;
+  to?: string;
+};
 
 const pageTitles: Record<string, string> = {
   "/dashboard": "نظرة عامة",
@@ -19,9 +24,127 @@ const pageTitles: Record<string, string> = {
   "/showroom-join-requests": "طلبات انضمام المعارض",
 };
 
+function getBreadcrumbs(pathname: string): BreadcrumbItem[] {
+  const segments = pathname.split("/").filter(Boolean);
+  const normalizedPath = `/${segments.join("/")}`;
+
+  const breadcrumbs: BreadcrumbItem[] = [
+    {
+      label: "لوحة التحكم",
+      to: "/dashboard",
+    },
+  ];
+
+  if (normalizedPath === "/dashboard") {
+    breadcrumbs.push({ label: "نظرة عامة" });
+    return breadcrumbs;
+  }
+
+  // Users
+  if (segments[0] === "users") {
+    breadcrumbs.push({
+      label: pageTitles["/users"],
+      to: "/users",
+    });
+
+    if (segments.length >= 2) {
+      const userId = segments[1];
+
+      const user = mockUsers.find((item) => item.id === userId);
+
+      breadcrumbs.push({
+        label: user?.name ?? "تفاصيل المستخدم",
+      });
+    }
+
+    return breadcrumbs;
+  }
+
+  // Showrooms
+  if (segments[0] === "showrooms") {
+    breadcrumbs.push({
+      label: pageTitles["/showrooms"],
+      to: "/showrooms",
+    });
+
+    if (segments.length >= 2) {
+      const showroomId = segments[1];
+
+      const showroom = mockShowrooms.find((item) => item.id === showroomId);
+
+      breadcrumbs.push({
+        label: showroom?.name ?? "تفاصيل المعرض",
+      });
+
+      if (segments.length >= 3) {
+        breadcrumbs.push({
+          label: "تعديل بيانات المعرض",
+        });
+      }
+    }
+
+    return breadcrumbs;
+  }
+
+  // Showroom Join Requests
+  if (segments[0] === "showroom-join-requests") {
+    breadcrumbs.push({
+      label: pageTitles["/showroom-join-requests"],
+      to: "/showroom-join-requests",
+    });
+
+    if (segments.length >= 2) {
+      const requestId = segments[1];
+
+      const request = mockShowroomJoinRequests.find(
+        (item) => item.id === requestId || item.reference === requestId,
+      );
+
+      breadcrumbs.push({
+        label: request?.showroomName ?? "تفاصيل طلب الانضمام",
+        to: `/showroom-join-requests/${requestId}`,
+      });
+
+      if (segments[2] === "onboarding") {
+        breadcrumbs.push({
+          label: "إنشاء وتجهيز المعرض",
+        });
+      } else if (segments.length >= 3) {
+        breadcrumbs.push({
+          label: "تفاصيل الطلب",
+        });
+      }
+    }
+
+    return breadcrumbs;
+  }
+
+  // CMS
+  if (segments[0] === "cms") {
+    breadcrumbs.push({
+      label: pageTitles["/cms"],
+      to: "/cms",
+    });
+
+    if (segments.length >= 2) {
+      breadcrumbs.push({
+        label: pageTitles[normalizedPath] ?? "تفاصيل المحتوى",
+      });
+    }
+
+    return breadcrumbs;
+  }
+
+  // Other pages
+  breadcrumbs.push({
+    label: pageTitles[normalizedPath] ?? "لوحة الإدارة",
+  });
+
+  return breadcrumbs;
+}
+
 export default function AdminHeader() {
   const location = useLocation();
-  const { showroomId, userId, requestId } = useParams();
 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -64,39 +187,7 @@ export default function AdminHeader() {
     [isProfileMenuOpen],
   );
 
-  const currentPath = location.pathname;
-
-  const isUserDetails = /^\/users\/[^/]+$/.test(currentPath);
-  const isShowroomDetails = /^\/showrooms\/[^/]+$/.test(currentPath);
-
-  const isShowroomJoinRequestDetails = /^\/showroom-join-requests\/[^/]+$/.test(
-    currentPath,
-  );
-
-  const isCmsSubpage = /^\/cms\/[^/]+$/.test(currentPath);
-
-  const currentUser = isUserDetails
-    ? mockUsers.find((user) => user.id === userId)
-    : undefined;
-
-  const currentShowroom = isShowroomDetails
-    ? mockShowrooms.find((showroom) => showroom.id === showroomId)
-    : undefined;
-
-  const currentJoinRequest = isShowroomJoinRequestDetails
-    ? mockShowroomJoinRequests.find(
-        (request) =>
-          request.id === requestId || request.reference === requestId,
-      )
-    : undefined;
-
-  const currentPageTitle = isUserDetails
-    ? (currentUser?.name ?? "تفاصيل المستخدم")
-    : isShowroomDetails
-      ? (currentShowroom?.name ?? "تفاصيل المعرض")
-      : isShowroomJoinRequestDetails
-        ? (currentJoinRequest?.showroomName ?? "تفاصيل طلب الانضمام")
-        : (pageTitles[currentPath] ?? "لوحة الإدارة");
+  const breadcrumbs = getBreadcrumbs(location.pathname);
 
   return (
     <header
@@ -104,87 +195,48 @@ export default function AdminHeader() {
       className="flex h-[88px] min-w-0 shrink-0 items-center justify-between gap-3 border-b border-border-subtle bg-card px-3 sm:px-6 lg:px-8 max-[721px]:justify-end"
     >
       {/* Breadcrumbs */}
-      <div className="hidden min-w-0 flex-1 items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs min-[721px]:flex sm:gap-2 sm:text-sm">
-        <Link
-          to="/dashboard"
-          className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
-        >
-          لوحة التحكم
-        </Link>
+      <nav
+        aria-label="مسار التنقل"
+        className="hidden min-w-0 flex-1 items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs min-[721px]:flex sm:gap-2 sm:text-sm"
+      >
+        {breadcrumbs.map((item, index) => {
+          const isLast = index === breadcrumbs.length - 1;
 
-        <ChevronLeft
-          size={14}
-          className="shrink-0 text-text-muted-icon sm:size-4"
-        />
-
-        {isUserDetails && (
-          <>
-            <Link
-              to="/users"
-              className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
+          return (
+            <div
+              key={`${item.label}-${index}`}
+              className="flex shrink-0 items-center gap-1.5 sm:gap-2"
             >
-              المستخدمون
-            </Link>
+              {index > 0 && (
+                <ChevronLeft
+                  size={14}
+                  className="shrink-0 text-text-muted-icon sm:size-4"
+                />
+              )}
 
-            <ChevronLeft
-              size={14}
-              className="shrink-0 text-text-muted-icon sm:size-4"
-            />
-          </>
-        )}
-
-        {isShowroomDetails && (
-          <>
-            <Link
-              to="/showrooms"
-              className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
-            >
-              المعارض والمصانع
-            </Link>
-
-            <ChevronLeft
-              size={14}
-              className="shrink-0 text-text-muted-icon sm:size-4"
-            />
-          </>
-        )}
-
-        {isShowroomJoinRequestDetails && (
-          <>
-            <Link
-              to="/showroom-join-requests"
-              className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
-            >
-              طلبات انضمام المعارض
-            </Link>
-
-            <ChevronLeft
-              size={14}
-              className="shrink-0 text-text-muted-icon sm:size-4"
-            />
-          </>
-        )}
-
-        {isCmsSubpage && (
-          <>
-            <Link
-              to="/cms"
-              className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
-            >
-              إدارة المحتوى CMS
-            </Link>
-
-            <ChevronLeft
-              size={14}
-              className="shrink-0 text-text-muted-icon sm:size-4"
-            />
-          </>
-        )}
-
-        <span className="shrink-0 font-semibold text-text-primary">
-          {currentPageTitle}
-        </span>
-      </div>
+              {item.to && !isLast ? (
+                <Link
+                  to={item.to}
+                  className="shrink-0 text-text-muted transition-colors hover:text-brand-navy"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span
+                  aria-current={isLast ? "page" : undefined}
+                  className={
+                    isLast
+                      ? "shrink-0 font-semibold text-text-primary"
+                      : "shrink-0 text-text-muted"
+                  }
+                >
+                  {item.label}
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </nav>
 
       {/* Admin Actions */}
       <div className="flex shrink-0 items-center gap-2 sm:gap-4 lg:gap-6">

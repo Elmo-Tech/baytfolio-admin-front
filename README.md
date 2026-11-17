@@ -2,9 +2,9 @@
 
 BaytFolio Admin Frontend is an Arabic-first, right-to-left React application for managing the BaytFolio platform.
 
-It provides a responsive administrative interface with authentication screens, Dashboard, Analytics, Users Management, Showrooms and Factories Management, and CMS tools for managing customer-facing content.
+It provides a responsive administrative interface for authentication, Dashboard, Analytics, Users Management, Showrooms and Factories Management, Showroom Join Requests, and CMS tools for customer-facing content.
 
-The project uses a modular, feature-based architecture built with React, TypeScript, Vite, and React Router. Feature data is currently based primarily on typed local mock data.
+The project follows a modular, feature-based architecture built with React, TypeScript, Vite, and React Router. Feature data is currently based primarily on typed local mock data.
 
 ---
 
@@ -13,7 +13,7 @@ The project uses a modular, feature-based architecture built with React, TypeScr
 The application is organized into three main layers:
 
 - **App:** Application routing, layouts, providers, and administrative navigation.
-- **Modules:** Independent business features such as Authentication, Dashboard, Analytics, Users, Showrooms, and CMS.
+- **Modules:** Independent business features such as Authentication, Dashboard, Analytics, Users, Showrooms, Showroom Join Requests, and CMS.
 - **Shared:** Reusable UI components, utilities, configuration, and common infrastructure.
 
 The interface is optimized for Arabic content and RTL navigation. Inter is the primary typeface for Latin text, with Noto Sans Arabic used for Arabic text.
@@ -29,7 +29,7 @@ Global styling and design tokens are centralized in `src/index.css`.
 - Vite
 - React Router 7
 - Tailwind CSS v4
-- `nuqs` for URL-based search, filters, sorting, and pagination
+- `nuqs` for URL-based state such as search, filters, sorting, pagination, and wizard steps
 - TanStack React Query 5
 - React Hook Form
 - Zod
@@ -164,7 +164,34 @@ The details page includes three tabs:
 
 The listing and details views currently use local mock data.
 
-### 7. Content Management System (CMS)
+### 7. Showroom Join Requests and Onboarding
+
+Provides administrative interfaces for reviewing showroom applications and preparing approved applicants for onboarding.
+
+#### Join Requests
+
+- Showroom join requests listing and details routes.
+- Typed request and legal-information models.
+- Request status and activity-type definitions.
+- Request history support in the data model.
+- Local mock request data.
+
+#### Onboarding Wizard
+
+The onboarding wizard is organized into four steps:
+
+1. **Showroom Information:** Displays the submitted showroom information for review.
+2. **Owner Account:** Collects and validates the proposed owner contact information.
+3. **Commercial Contract and Limits:** Captures contract dates, base value, operational limits, verification settings, legal information, and internal notes.
+4. **Review and Creation:** Presents a consolidated review of showroom, owner, contract, operational limits, legal information, and financial details.
+
+The wizard uses URL-backed step state through `nuqs`. The review screen shares the wizard header and stepper so the current step is represented consistently without rendering duplicate progress navigation.
+
+The onboarding interface currently uses local mock request data and frontend state. The final creation action is not connected to a backend endpoint and must not be treated as a completed showroom creation.
+
+The join request does not automatically create a vendor account. Backend business rules and the actual creation workflow remain the responsibility of the Laravel backend integration.
+
+### 8. Content Management System (CMS)
 
 The CMS module provides a centralized area for managing customer-facing platform content.
 
@@ -251,21 +278,6 @@ The current implementation uses typed mock data and local component state. Legal
 
 ---
 
-## Dashboard Sections
-
-The Dashboard includes the following sections:
-
-1. **Dashboard Header:** Overview text, period filters, custom date range, and local refresh feedback.
-2. **Dashboard Stats:** KPI cards using typed mock metrics.
-3. **Platform Analytics:** Content-growth, showroom-status, and contract-status visualizations.
-4. **Needs Attention:** Operational attention cards with typed mock data.
-5. **Priority Items:** Searchable and filterable table with status indicators and pagination.
-6. **Dashboard Insights:** Active-showroom rankings, recent activity, and expiring-contract information.
-
-All Dashboard data is currently local mock data.
-
----
-
 ## Project Architecture
 
 The project follows a modular, feature-based architecture.
@@ -275,219 +287,39 @@ src/
 ├── app/
 │   ├── app.tsx
 │   ├── router.tsx
-│   ├── router.test.tsx
 │   ├── components/
-│   │   ├── admin-header.tsx
-│   │   └── admin-sidebar.tsx
 │   ├── layouts/
-│   │   ├── admin-layout.tsx
-│   │   └── admin-layout-with-nuqs.tsx
 │   ├── pages/
-│   │   ├── home-page.tsx
-│   │   └── not-found-page.tsx
 │   ├── providers/
-│   │   ├── app-providers.tsx
-│   │   └── app-providers.test.tsx
 │   └── routes/
-│       ├── admin-routes.tsx
-│       ├── index.ts
-│       └── public-routes.tsx
 │
 ├── assets/
-│   ├── icons/
-│   │   └── auth-shield-user.svg
-│   ├── baytfolio-icon.png
-│   ├── baytfolio-logo-full.png
-│   ├── baytfolio-logo-horizontal.png
-│   └── index.ts
 │
 ├── modules/
 │   ├── analytics/
-│   │   ├── api/
-│   │   │   └── analytics.mock.ts
-│   │   ├── components/
-│   │   │   ├── analytics-header.tsx
-│   │   │   ├── analytics-overview.tsx
-│   │   │   ├── analytics-tables.tsx
-│   │   │   ├── commercial-overview.tsx
-│   │   │   └── platform-activity-chart.tsx
-│   │   └── pages/
-│   │       └── analytics-page.tsx
-│   │
 │   ├── auth/
-│   │   ├── components/
-│   │   │   ├── auth-brand.tsx
-│   │   │   ├── auth-card.tsx
-│   │   │   ├── auth-layout.tsx
-│   │   │   ├── forgot-password-form.tsx
-│   │   │   ├── login-form.tsx
-│   │   │   ├── otp-verification-form.tsx
-│   │   │   ├── otp-verification-form.test.tsx
-│   │   │   ├── reset-password-form.tsx
-│   │   │   └── reset-password-form.test.tsx
-│   │   ├── pages/
-│   │   │   ├── forgot-password-page.tsx
-│   │   │   ├── login-page.tsx
-│   │   │   ├── reset-password-page.tsx
-│   │   │   └── verify-otp-page.tsx
-│   │   └── schemas/
-│   │       ├── forgot-password.schema.ts
-│   │       ├── login.schema.ts
-│   │       ├── otp-verification.schema.ts
-│   │       └── reset-password.schema.ts
-│   │
 │   ├── cms/
-│   │   ├── api/
-│   │   │   ├── cms.mock.ts
-│   │   │   ├── contact-information.mock.ts
-│   │   │   ├── help-center.mock.ts
-│   │   │   ├── privacy-policy.mock.ts
-│   │   │   └── terms-and-conditions.mock.ts
-│   │   ├── components/
-│   │   │   ├── contact-information/
-│   │   │   │   ├── contact-information-form.tsx
-│   │   │   │   ├── contact-information-preview.tsx
-│   │   │   │   └── contact-information-stats.tsx
-│   │   │   ├── help-center/
-│   │   │   │   ├── add-question-modal.tsx
-│   │   │   │   ├── help-center-filters.tsx
-│   │   │   │   ├── help-center-pagination.tsx
-│   │   │   │   └── help-center-table.tsx
-│   │   │   └── overview/
-│   │   │       └── cms-overview-card.tsx
-│   │   ├── pages/
-│   │   │   ├── cms-page.tsx
-│   │   │   ├── contact-information-page.tsx
-│   │   │   ├── help-center-page.tsx
-│   │   │   ├── help-center-search-params.ts
-│   │   │   ├── privacy-policy-page.tsx
-│   │   │   └── terms-and-conditions-page.tsx
-│   │   ├── types/
-│   │   │   ├── cms.ts
-│   │   │   ├── contact-information.ts
-│   │   │   ├── help-center.ts
-│   │   │   ├── privacy-policy.ts
-│   │   │   └── terms-and-conditions.ts
-│   │   └── index.ts
-│   │
 │   ├── dashboard/
+│   ├── showroom-join-requests/
 │   │   ├── api/
-│   │   │   ├── dashboard-insights.mock.ts
-│   │   │   ├── dashboard.mock.ts
-│   │   │   ├── needs-attention.mock.ts
-│   │   │   └── priority-items.mock.ts
 │   │   ├── components/
-│   │   │   ├── dashboard-header.tsx
-│   │   │   ├── dashboard-insights.tsx
-│   │   │   ├── dashboard-stats.tsx
-│   │   │   ├── needs-attention.tsx
-│   │   │   ├── priority-items.tsx
-│   │   │   └── platform-analytics/
-│   │   │       ├── api/
-│   │   │       │   └── platform-analytics.mock.ts
-│   │   │       ├── components/
-│   │   │       │   ├── analytics-card.tsx
-│   │   │       │   ├── content-growth-card.tsx
-│   │   │       │   ├── contract-status-card.tsx
-│   │   │       │   └── showroom-status-card.tsx
-│   │   │       ├── types/
-│   │   │       │   └── platform-analytics.types.ts
-│   │   │       └── index.ts
 │   │   ├── pages/
-│   │   │   └── dashboard-page.tsx
-│   │   ├── types/
-│   │   │   ├── dashboard-insights.types.ts
-│   │   │   ├── dashboard.types.ts
-│   │   │   ├── needs-attention.types.ts
-│   │   │   └── priority-items.types.ts
-│   │   └── index.ts
-│   │
+│   │   └── types/
 │   ├── showrooms/
-│   │   ├── api/
-│   │   │   ├── showroom-details.mock.ts
-│   │   │   └── showrooms.mock.ts
-│   │   ├── components/
-│   │   │   ├── contract-status-badge.tsx
-│   │   │   ├── showroom-status-badge.tsx
-│   │   │   ├── showrooms-filters.tsx
-│   │   │   ├── showrooms-header.tsx
-│   │   │   ├── showrooms-pagination.tsx
-│   │   │   ├── showrooms-stats.tsx
-│   │   │   ├── showrooms-table.tsx
-│   │   │   ├── index.ts
-│   │   │   └── details/
-│   │   │       ├── showroom-content-card.tsx
-│   │   │       ├── showroom-contract-card.tsx
-│   │   │       ├── showroom-detail-field.tsx
-│   │   │       ├── showroom-details-header.tsx
-│   │   │       ├── showroom-details-not-found.tsx
-│   │   │       ├── showroom-info-card.tsx
-│   │   │       ├── showroom-owner-card.tsx
-│   │   │       ├── showroom-promotion-card.tsx
-│   │   │       └── index.ts
-│   │   ├── pages/
-│   │   │   ├── showroom-details-page.tsx
-│   │   │   ├── showrooms-page.tsx
-│   │   │   └── showrooms-search-params.ts
-│   │   ├── types/
-│   │   │   ├── showroom-details.ts
-│   │   │   └── showroom.ts
-│   │   └── index.ts
-│   │
 │   └── users/
-│       ├── api/
-│       │   └── users.mock.ts
-│       ├── components/
-│       │   ├── user-account-status-card.tsx
-│       │   ├── user-details-card.tsx
-│       │   ├── users-filters.tsx
-│       │   ├── users-pagination.tsx
-│       │   ├── users-stats.tsx
-│       │   └── users-table.tsx
-│       ├── pages/
-│       │   ├── user-details-page.tsx
-│       │   ├── users-page.test.tsx
-│       │   ├── users-page.tsx
-│       │   └── users-search-params.ts
-│       ├── types/
-│       │   └── user.ts
-│       └── index.ts
 │
 ├── shared/
 │   ├── api/
-│   │   └── .gitkeep
 │   ├── components/
 │   │   ├── common/
-│   │   │   └── .gitkeep
 │   │   └── ui/
-│   │       ├── arrow-icon.tsx
-│   │       ├── async-submit-button.tsx
-│   │       ├── badge-variants.ts
-│   │       ├── badge.tsx
-│   │       ├── button.tsx
-│   │       ├── field.tsx
-│   │       ├── form-alert.tsx
-│   │       ├── index.ts
-│   │       ├── input.tsx
-│   │       ├── label.tsx
-│   │       ├── password-input.tsx
-│   │       ├── select.tsx
-│   │       ├── separator.tsx
-│   │       └── stat-card.tsx
 │   ├── config/
-│   │   └── query-client.ts
 │   ├── constants/
-│   │   └── .gitkeep
 │   ├── hooks/
-│   │   └── .gitkeep
 │   ├── types/
-│   │   └── .gitkeep
 │   └── utils/
-│       └── cn.ts
 │
 ├── test/
-│   └── setup.ts
-│
 ├── index.css
 └── main.tsx
 ```
@@ -500,36 +332,37 @@ The `@/*` alias resolves to `src/*`.
 
 The application uses React Router for application navigation.
 
-| Route                       | Page                        |
-| --------------------------- | --------------------------- |
-| `/`                         | Foundation home page        |
-| `/login`                    | Login                       |
-| `/forgot-password`          | Forgot Password             |
-| `/verify-otp`               | OTP Verification            |
-| `/reset-password`           | Reset Password              |
-| `/dashboard`                | Dashboard                   |
-| `/users`                    | Users Management            |
-| `/users/:userId`            | User Details                |
-| `/showrooms`                | Showrooms and Factories     |
-| `/showrooms/:showroomId`    | Showroom or Factory Details |
-| `/cms`                      | CMS Dashboard               |
-| `/cms/help-center`          | Help Center                 |
-| `/cms/contact-information`  | Contact Information         |
-| `/cms/privacy-policy`       | Privacy Policy              |
-| `/cms/terms-and-conditions` | Terms and Conditions        |
-| `*`                         | Not Found                   |
+| Route                                           | Page                        |
+| ----------------------------------------------- | --------------------------- |
+| `/`                                             | Foundation home page        |
+| `/login`                                        | Login                       |
+| `/forgot-password`                              | Forgot Password             |
+| `/verify-otp`                                   | OTP Verification            |
+| `/reset-password`                               | Reset Password              |
+| `/dashboard`                                    | Dashboard                   |
+| `/users`                                        | Users Management            |
+| `/users/:userId`                                | User Details                |
+| `/showrooms`                                    | Showrooms and Factories     |
+| `/showrooms/:showroomId`                        | Showroom or Factory Details |
+| `/showroom-join-requests`                       | Showroom Join Requests      |
+| `/showroom-join-requests/:requestId`            | Join Request Details        |
+| `/showroom-join-requests/:requestId/onboarding` | Showroom Onboarding Wizard  |
+| `/cms`                                          | CMS Dashboard               |
+| `/cms/help-center`                              | Help Center                 |
+| `/cms/contact-information`                      | Contact Information         |
+| `/cms/privacy-policy`                           | Privacy Policy              |
+| `/cms/terms-and-conditions`                     | Terms and Conditions        |
+| `*`                                             | Not Found                   |
 
-Administrative route definitions are maintained in `src/app/routes/admin-routes.tsx`.
-
-The Analytics page and its navigation are maintained through the Analytics module and administrative routing configuration. Its exact route should be documented here after confirming the registered path in `admin-routes.tsx`.
+Administrative route definitions are maintained in `src/app/routes/admin-routes.tsx`. Confirm registered paths in that file when routes change.
 
 ---
 
 ## State Management
 
 - React component state handles local UI interactions, form values, and modal visibility.
-- `nuqs` manages URL-backed search, filters, sorting, and pagination.
-- TanStack React Query is configured through the application providers for future server-state integration.
+- `nuqs` manages URL-backed search, filters, sorting, pagination, and onboarding wizard step state.
+- TanStack React Query is configured through the application providers for server-state integration.
 - Feature data currently comes from local mock files and component state.
 - Zustand is declared as a dependency but is not currently used for application state.
 
@@ -615,12 +448,13 @@ npm run typecheck
 npm run lint
 npm test
 npm run build
+npm run format:check
 ```
 
 Run a specific test file:
 
 ```bash
-npx vitest run src/modules/users/pages/users-page.test.tsx
+npx vitest run path/to/file.test.tsx
 ```
 
 Check formatting for a specific file:
@@ -645,6 +479,7 @@ The current frontend uses typed mock data in feature-specific `api` folders.
 - Users and user details.
 - Showrooms and factories.
 - Showroom details.
+- Showroom join requests and onboarding data.
 - Help Center questions.
 - Contact Information settings.
 - Privacy Policy content.
@@ -661,16 +496,22 @@ The current frontend uses typed mock data in feature-specific `api` folders.
 - CMS content persistence.
 - Contact Information publishing and synchronization.
 - Privacy Policy and Terms and Conditions publishing.
+- Showroom join request API and server-side workflow.
+- Showroom onboarding creation endpoint and server-side validation.
+- Owner account creation and secure credential setup.
+- Contract persistence and operational-limit enforcement.
 - Server-state queries and mutations.
 - Audit logging for administrative changes.
 
-TanStack React Query is configured as application infrastructure, but feature-level API queries and mutations are not yet connected.
+TanStack React Query is configured as application infrastructure. Feature-level API queries and mutations must be connected to the backend as the corresponding endpoints become available.
+
+The Laravel backend remains authoritative for business rules, validation, persistence, and final showroom/account creation.
 
 ---
 
 ## Current Project Status
 
-### Implemented
+### Implemented Interfaces
 
 - Responsive RTL administrative layout.
 - Authentication screens and form validation.
@@ -684,6 +525,11 @@ TanStack React Query is configured as application infrastructure, but feature-le
 - CSV export.
 - Showrooms and Factories listing.
 - Showroom and Factory details pages.
+- Showroom Join Requests listing and details interfaces.
+- Four-step Showroom Onboarding Wizard interface.
+- Owner form validation.
+- Contract and operational-limit configuration interface.
+- Consolidated onboarding review interface.
 - CMS Dashboard.
 - Help Center management interface.
 - FAQ creation and editing.
@@ -705,6 +551,8 @@ TanStack React Query is configured as application infrastructure, but feature-le
 - CMS publishing workflows require backend integration.
 - Analytics currently uses mock data.
 - Dashboard and Analytics do not use production analytics APIs.
+- Showroom Join Requests and Onboarding are frontend interfaces using mock data.
+- The final showroom creation action is not connected to a backend API.
 - Some administrative actions are interface-only.
 - Production behavior requires API integration and end-to-end validation.
 
@@ -714,7 +562,7 @@ TanStack React Query is configured as application infrastructure, but feature-le
 
 The project uses Vitest, JSDOM, and React Testing Library.
 
-Test files currently present in the repository include:
+Test files currently documented in the repository include:
 
 - `src/app/router.test.tsx`
 - `src/app/providers/app-providers.test.tsx`
@@ -722,7 +570,7 @@ Test files currently present in the repository include:
 - `src/modules/auth/components/reset-password-form.test.tsx`
 - `src/modules/users/pages/users-page.test.tsx`
 
-Testing coverage should be expanded as new modules and workflows are implemented.
+Testing coverage should be expanded for the Showroom Join Requests and Onboarding workflows, including navigation, validation, URL step state, and review data.
 
 ---
 
@@ -738,7 +586,7 @@ Testing coverage should be expanded as new modules and workflows are implemented
 - Maintain responsive layouts.
 - Reuse existing shared UI components.
 - Keep URL-backed filters and pagination consistent.
-- Run TypeScript, lint, tests, and build checks before committing.
+- Run TypeScript, lint, tests, formatting, and build checks before committing.
 
 ---
 

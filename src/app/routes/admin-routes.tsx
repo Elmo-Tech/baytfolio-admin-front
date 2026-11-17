@@ -12,7 +12,12 @@ import HelpCenterPage from "@/modules/cms/pages/help-center-page";
 import ContactInformationPage from "@/modules/cms/pages/contact-information-page";
 import PrivacyPolicyPage from "@/modules/cms/pages/privacy-policy-page";
 import TermsAndConditionsPage from "@/modules/cms/pages/terms-and-conditions-page";
+
 import AnalyticsPage from "@/modules/analytics/pages/analytics-page";
+
+import ShowroomJoinRequestsPage from "@/modules/showroom-join-requests/pages/showroom-join-requests-page";
+import ShowroomJoinRequestDetailsPage from "@/modules/showroom-join-requests/pages/showroom-join-request-details-page";
+import ShowroomOnboardingWizardPage from "@/modules/showroom-join-requests/pages/showroom-onboarding-wizard-page";
 
 export const adminRoutes = [
   {
@@ -62,6 +67,20 @@ export const adminRoutes = [
       {
         path: "analytics",
         Component: AnalyticsPage,
+      },
+
+      // Showroom Join Requests
+      {
+        path: "showroom-join-requests",
+        Component: ShowroomJoinRequestsPage,
+      },
+      {
+        path: "showroom-join-requests/:requestId",
+        Component: ShowroomJoinRequestDetailsPage,
+      },
+      {
+        path: "showroom-join-requests/:requestId/setup",
+        Component: ShowroomOnboardingWizardPage,
       },
     ],
   },
