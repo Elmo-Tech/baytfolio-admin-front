@@ -1,18 +1,20 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Download } from "lucide-react";
+import { useQueryStates } from "nuqs";
+import { Navigate, useLocation } from "react-router";
 import { mockUsers } from "../api/users.mock";
 import UsersFilters from "../components/users-filters";
 import UsersPagination from "../components/users-pagination";
 import UsersStats from "../components/users-stats";
 import UsersTable from "../components/users-table";
+import { clampUsersPage, usersSearchParams } from "./users-search-params";
 
 export default function UsersPage() {
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("all");
-  const [loginMethod, setLoginMethod] = useState("all");
-  const [sortOrder, setSortOrder] = useState("newest");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const location = useLocation();
+  const [
+    { search, status, loginMethod, sortOrder, page: currentPage, pageSize },
+    setUsersSearchParams,
+  ] = useQueryStates(usersSearchParams);
 
   const filteredUsers = useMemo(() => {
     const searchValue = search.trim().toLowerCase();
@@ -40,43 +42,70 @@ export default function UsersPage() {
   }, [search, status, loginMethod, sortOrder]);
 
   const totalPages = Math.ceil(filteredUsers.length / pageSize);
+  const safePage = clampUsersPage(currentPage, totalPages);
+
+  if (currentPage !== safePage) {
+    const nextSearchParams = new URLSearchParams(location.search);
+    if (safePage <= 1) {
+      nextSearchParams.delete("page");
+    } else {
+      nextSearchParams.set("page", String(safePage));
+    }
+
+    const searchString = nextSearchParams.toString();
+    return (
+      <Navigate
+        to={{
+          pathname: location.pathname,
+          search: searchString ? `?${searchString}` : "",
+        }}
+        replace
+      />
+    );
+  }
 
   const paginatedUsers = filteredUsers.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize,
+    (safePage - 1) * pageSize,
+    safePage * pageSize,
   );
-
   const handleReset = () => {
-    setSearch("");
-    setStatus("all");
-    setLoginMethod("all");
-    setSortOrder("newest");
-    setCurrentPage(1);
+    setUsersSearchParams({
+      search: "",
+      status: "all",
+      loginMethod: "all",
+      sortOrder: "newest",
+      page: 1,
+      pageSize: 20,
+    });
   };
 
   const handleSearchChange = (value: string) => {
-    setSearch(value);
-    setCurrentPage(1);
+    setUsersSearchParams({ search: value, page: 1 });
   };
 
   const handleStatusChange = (value: string) => {
-    setStatus(value);
-    setCurrentPage(1);
+    setUsersSearchParams({
+      status: value as typeof status,
+      page: 1,
+    });
   };
 
   const handleLoginMethodChange = (value: string) => {
-    setLoginMethod(value);
-    setCurrentPage(1);
+    setUsersSearchParams({
+      loginMethod: value as typeof loginMethod,
+      page: 1,
+    });
   };
 
   const handleSortOrderChange = (value: string) => {
-    setSortOrder(value);
-    setCurrentPage(1);
+    setUsersSearchParams({
+      sortOrder: value as typeof sortOrder,
+      page: 1,
+    });
   };
 
   const handlePageSizeChange = (size: number) => {
-    setPageSize(size);
-    setCurrentPage(1);
+    setUsersSearchParams({ pageSize: size, page: 1 });
   };
 
   const handleExportCsv = () => {
@@ -143,16 +172,16 @@ export default function UsersPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-bold text-[#1d2935]">
+            <h1 className="text-2xl font-bold text-users-text-primary">
               إدارة المستخدمين
             </h1>
 
-            {/* <span className="rounded-sm bg-[#102233] px-2 py-1 text-xs font-medium text-white">
+            {/* <span className="rounded-sm bg-users-brand-navy px-2 py-1 text-xs font-medium text-primary-foreground">
               {filteredUsers.length.toLocaleString("en-US")} Users
             </span> */}
           </div>
 
-          <p className="mt-2 text-sm text-[#8b8176]">
+          <p className="mt-2 text-sm text-users-text-muted">
             إدارة ومتابعة حسابات المستخدمين وحالاتهم على المنصة
           </p>
         </div>
@@ -161,7 +190,7 @@ export default function UsersPage() {
           type="button"
           onClick={handleExportCsv}
           disabled={filteredUsers.length === 0}
-          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md border border-[#eee8e0] bg-white px-4 text-sm font-medium text-[#46515d] transition hover:bg-[#f7f3ed] disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md border border-users-panel-divider bg-users-surface px-4 text-sm font-medium text-users-text-secondary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Download size={17} />
           تصدير القائمة (CSV)
@@ -185,11 +214,11 @@ export default function UsersPage() {
       <UsersTable users={paginatedUsers} />
 
       <UsersPagination
-        currentPage={currentPage}
+        currentPage={safePage}
         totalPages={totalPages}
         totalItems={filteredUsers.length}
         pageSize={pageSize}
-        onPageChange={setCurrentPage}
+        onPageChange={(page) => setUsersSearchParams({ page })}
         onPageSizeChange={handlePageSizeChange}
       />
     </div>
