@@ -1,12 +1,13 @@
-import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Outlet } from "react-router";
 
 import AdminHeader from "@/app/components/admin-header";
+import AdminMobileSidebar from "@/app/components/admin-mobile-sidebar";
 import AdminSidebar from "@/app/components/admin-sidebar";
+import { useAdminLayout } from "@/app/hooks/use-admin-layout";
 
 export default function AdminLayout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { isSidebarOpen, onCloseSidebar, onToggleSidebar } = useAdminLayout();
 
   return (
     <div dir="rtl" className="flex min-h-screen bg-surface-admin">
@@ -14,39 +15,7 @@ export default function AdminLayout() {
         <AdminSidebar />
       </div>
 
-      <div
-        className={`fixed inset-0 z-50 min-[1226px]:hidden ${
-          isSidebarOpen ? "visible" : "invisible pointer-events-none"
-        }`}
-      >
-        <button
-          type="button"
-          aria-label="إغلاق القائمة"
-          onClick={() => setIsSidebarOpen(false)}
-          className={`absolute inset-0 bg-overlay/40 transition-opacity ${
-            isSidebarOpen ? "opacity-100" : "opacity-0"
-          }`}
-        />
-
-        <div
-          className={`absolute right-0 top-0 h-full w-[280px] max-w-[85vw] bg-card transition-transform duration-300 ${
-            isSidebarOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          <div className="flex justify-start border-b border-border-divider p-3">
-            <button
-              type="button"
-              aria-label="إغلاق القائمة"
-              onClick={() => setIsSidebarOpen(false)}
-              className="rounded-md p-2 text-text-secondary-strong transition hover:bg-background"
-            >
-              <X size={21} />
-            </button>
-          </div>
-
-          <AdminSidebar />
-        </div>
-      </div>
+      <AdminMobileSidebar isOpen={isSidebarOpen} onClose={onCloseSidebar} />
 
       <div className="flex min-w-0 flex-1 flex-col">
         <div
@@ -61,7 +30,7 @@ export default function AdminLayout() {
             type="button"
             aria-label={isSidebarOpen ? "إغلاق القائمة" : "فتح القائمة"}
             aria-expanded={isSidebarOpen}
-            onClick={() => setIsSidebarOpen((prev) => !prev)}
+            onClick={onToggleSidebar}
             className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-text-secondary-strong transition hover:bg-background"
           >
             {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
