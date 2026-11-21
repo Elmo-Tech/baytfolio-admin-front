@@ -6,55 +6,50 @@ import { authShieldUser, baytfolioIcon } from "@/assets";
 export default function LoginPage() {
   return (
     <AuthLayout>
-      <div className="w-full max-w-2xl">
-        <AuthCard className="!max-w-none">
-          {" "}
-          <div
-            dir="rtl"
-            className="mb-7 flex items-start justify-between gap-3"
-          >
-            <div className="flex items-center gap-2" dir="ltr">
-              <div className="flex flex-col items-start">
-                <p className="text-lg font-bold text-auth-brand-navy">
-                  BaytFolio
-                </p>
-                <span dir="rtl" className="text-base text-auth-text-muted">
-                  المسؤول الأعلى
-                </span>
-              </div>
-
-              <img
-                src={baytfolioIcon}
-                alt=""
-                aria-hidden="true"
-                className="h-10 w-10 shrink-0 object-contain"
-              />
-            </div>
-
-            <div className="flex items-center gap-2 rounded-md bg-auth-soft-bg px-3 py-2">
-              <img
-                src={authShieldUser}
-                alt=""
-                aria-hidden="true"
-                className="h-4 w-4 shrink-0 object-contain"
-              />
-
-              <span className="whitespace-nowrap text-sm text-text-secondary">
-                بوابة الإدارة المركزية
+      <AuthCard className="max-w-2xl">
+        <div dir="rtl" className="mb-7 flex items-start justify-between gap-3">
+          <div className="flex items-center gap-2" dir="ltr">
+            <div className="flex flex-col items-start">
+              <p className="text-lg font-bold text-auth-brand-navy">
+                BaytFolio
+              </p>
+              <span dir="rtl" className="text-base text-auth-text-muted">
+                المسؤول الأعلى
               </span>
             </div>
-          </div>
-          <div className="mb-7 text-right">
-            <h1 className="mb-2 text-[26px] font-bold">تسجيل الدخول</h1>
 
-            <p className="text-sm leading-6 text-text-secondary">
-              سجّل الدخول إلى بوابة إدارة BaytFolio الموحدة للأصول
-              والعمليات.{" "}
-            </p>
+            <img
+              src={baytfolioIcon}
+              alt=""
+              aria-hidden="true"
+              className="h-10 w-10 shrink-0 object-contain"
+            />
           </div>
-          <LoginForm />
-        </AuthCard>
-      </div>
+
+          <div className="flex items-center gap-2 rounded-md bg-auth-soft-bg px-3 py-2">
+            <img
+              src={authShieldUser}
+              alt=""
+              aria-hidden="true"
+              className="h-4 w-4 shrink-0 object-contain"
+            />
+
+            <span className="whitespace-nowrap text-sm text-text-secondary">
+              بوابة الإدارة المركزية
+            </span>
+          </div>
+        </div>
+
+        <div className="mb-7 text-right">
+          <h1 className="mb-2 text-[26px] font-bold">تسجيل الدخول</h1>
+
+          <p className="text-sm leading-6 text-text-secondary">
+            سجّل الدخول إلى بوابة إدارة BaytFolio الموحدة للأصول والعمليات.
+          </p>
+        </div>
+
+        <LoginForm />
+      </AuthCard>
     </AuthLayout>
   );
 }

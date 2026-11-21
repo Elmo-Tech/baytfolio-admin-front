@@ -8,9 +8,7 @@ export default function ForgotPasswordPage() {
   return (
     <AuthLayout>
       <div className="w-full max-w-2xl">
-        {" "}
-        <AuthCard className="!max-w-none">
-          {" "}
+        <AuthCard className="max-w-none">
           <div dir="ltr" className="mb-5 flex justify-start">
             <div
               dir="rtl"
@@ -27,6 +25,7 @@ export default function ForgotPasswordPage() {
               </span>
             </div>
           </div>
+
           <div dir="rtl" className="text-right">
             <h1 className="text-[26px] font-bold text-auth-navy">
               نسيت كلمة المرور؟
@@ -36,13 +35,15 @@ export default function ForgotPasswordPage() {
               لإعادة تعيين كلمة المرور.
             </p>
           </div>
+
           <ForgotPasswordForm />
+
           <div
             dir="rtl"
             className="-mx-6 mt-8 flex items-center justify-between gap-4 border-t border-auth-border bg-auth-surface px-6 py-3 text-sm text-text-secondary sm:-mx-9 sm:px-9"
           >
             <span className="flex items-center gap-1.5">
-              <ShieldCheck aria-hidden="true" className="size-3.5 shrink-0" />{" "}
+              <ShieldCheck aria-hidden="true" className="size-3.5 shrink-0" />
               استرداد معتمد عبر تشفير عالي الكفاءة
             </span>
             <span dir="ltr" className="whitespace-nowrap tracking-wide">
@@ -50,6 +51,7 @@ export default function ForgotPasswordPage() {
             </span>
           </div>
         </AuthCard>
+
         <p
           dir="rtl"
           className="mt-5 flex items-center justify-center gap-1 text-sm text-text-secondary"

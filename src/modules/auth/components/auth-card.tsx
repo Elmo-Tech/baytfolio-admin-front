@@ -1,14 +1,18 @@
 import type { ReactNode } from "react";
+import { cn } from "@/shared/utils/cn";
 
 type AuthCardProps = {
   children: ReactNode;
   className?: string;
 };
 
-export default function AuthCard({ children, className = "" }: AuthCardProps) {
+export default function AuthCard({ children, className }: AuthCardProps) {
   return (
     <section
-      className={`relative mx-auto w-full max-w-lg overflow-hidden rounded-2xl border border-auth-border bg-card shadow-auth-card ${className}`}
+      className={cn(
+        "relative mx-auto w-full max-w-lg overflow-hidden rounded-2xl border border-auth-border bg-card shadow-auth-card",
+        className,
+      )}
     >
       <div
         aria-hidden="true"

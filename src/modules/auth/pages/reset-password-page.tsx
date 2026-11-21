@@ -8,7 +8,7 @@ export default function ResetPasswordPage() {
   return (
     <AuthLayout>
       <div className="w-full max-w-2xl">
-        <AuthCard className="!max-w-none">
+        <AuthCard className="max-w-none">
           <div dir="rtl" className="text-center">
             <div className="mb-5 flex justify-center">
               <span className="flex items-center gap-2 rounded-full bg-auth-soft-bg px-2 py-1 text-xs font-medium text-text-secondary">

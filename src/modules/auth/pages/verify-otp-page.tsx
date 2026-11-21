@@ -9,7 +9,7 @@ export default function VerifyOtpPage() {
   return (
     <AuthLayout>
       <div className="w-full max-w-2xl">
-        <AuthCard className="!max-w-none">
+        <AuthCard className="max-w-none">
           {" "}
           <div dir="rtl" className="text-center">
             <div className="mb-5 flex justify-center">
