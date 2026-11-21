@@ -1,33 +1,10 @@
+import { SHOWROOM_DONUT_CHART } from "../constants/platform-analytics-charts";
+import { usePlatformAnalytics } from "../hooks/use-platform-analytics";
 import AnalyticsCard from "./analytics-card";
-import { platformAnalyticsMock } from "../api/platform-analytics.mock";
-
-const donutRadius = 50;
-const donutCircumference = 2 * Math.PI * donutRadius;
 
 export default function ShowroomStatusCard() {
-  const { showroomStatus } = platformAnalyticsMock;
-  const segments = showroomStatus.statuses.reduce<
-    Array<{
-      key: string;
-      colorClassName: string;
-      dashLength: number;
-      offset: number;
-    }>
-  >((segments, status) => {
-    const dashLength = (status.percentage / 100) * donutCircumference;
-    const previousOffset = segments.at(-1)?.offset ?? 0;
-    const previousLength = segments.at(-1)?.dashLength ?? 0;
-
-    return [
-      ...segments,
-      {
-        key: status.key,
-        colorClassName: status.colorClassName,
-        dashLength,
-        offset: previousOffset + previousLength,
-      },
-    ];
-  }, []);
+  const { showroomStatus } = usePlatformAnalytics();
+  const { radius, circumference } = SHOWROOM_DONUT_CHART;
 
   return (
     <AnalyticsCard
@@ -52,26 +29,24 @@ export default function ShowroomStatusCard() {
             <circle
               cx="60"
               cy="60"
-              r={donutRadius}
+              r={radius}
               fill="none"
               className="stroke-users-table-divider"
               strokeWidth="14"
             />
-            {segments.map((segment) => {
-              return (
-                <circle
-                  key={segment.key}
-                  cx="60"
-                  cy="60"
-                  r={donutRadius}
-                  fill="none"
-                  className={`stroke-current ${segment.colorClassName}`}
-                  strokeWidth="14"
-                  strokeDasharray={`${segment.dashLength} ${donutCircumference - segment.dashLength}`}
-                  strokeDashoffset={-segment.offset}
-                />
-              );
-            })}
+            {showroomStatus.segments.map((segment) => (
+              <circle
+                key={segment.key}
+                cx="60"
+                cy="60"
+                r={radius}
+                fill="none"
+                className={`stroke-current ${segment.colorClassName}`}
+                strokeWidth="14"
+                strokeDasharray={`${segment.dashLength} ${circumference - segment.dashLength}`}
+                strokeDashoffset={-segment.offset}
+              />
+            ))}
           </svg>
 
           <div className="absolute inset-0 flex flex-col items-center justify-center">

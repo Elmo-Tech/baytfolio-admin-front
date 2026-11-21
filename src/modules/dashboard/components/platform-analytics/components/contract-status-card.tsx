@@ -1,8 +1,8 @@
+import { usePlatformAnalytics } from "../hooks/use-platform-analytics";
 import AnalyticsCard from "./analytics-card";
-import { platformAnalyticsMock } from "../api/platform-analytics.mock";
 
 export default function ContractStatusCard() {
-  const { contractStatus } = platformAnalyticsMock;
+  const { contractStatus } = usePlatformAnalytics();
 
   return (
     <AnalyticsCard

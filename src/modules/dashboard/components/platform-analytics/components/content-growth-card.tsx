@@ -1,32 +1,14 @@
+import { CONTENT_GROWTH_CHART } from "../constants/platform-analytics-charts";
+import { usePlatformAnalytics } from "../hooks/use-platform-analytics";
+import {
+  getContentGrowthGridY,
+  getContentGrowthLabelX,
+} from "../utils/platform-analytics-charts";
 import AnalyticsCard from "./analytics-card";
-import { platformAnalyticsMock } from "../api/platform-analytics.mock";
-
-const chartWidth = 520;
-const chartHeight = 170;
-const chartPadding = { top: 12, right: 8, bottom: 24, left: 8 };
-const maxValue = 240;
-
-function getPointCoordinates(values: number[]) {
-  const width = chartWidth - chartPadding.left - chartPadding.right;
-  const height = chartHeight - chartPadding.top - chartPadding.bottom;
-
-  return values.map((value, index) => {
-    const x =
-      chartPadding.left + (index * width) / Math.max(values.length - 1, 1);
-    const y = chartPadding.top + height - (value / maxValue) * height;
-
-    return `${x},${y}`;
-  });
-}
 
 export default function ContentGrowthCard() {
-  const { contentGrowth } = platformAnalyticsMock;
-  const roomPoints = getPointCoordinates(
-    contentGrowth.points.map((point) => point.rooms),
-  );
-  const packagePoints = getPointCoordinates(
-    contentGrowth.points.map((point) => point.packages),
-  );
+  const { contentGrowth } = usePlatformAnalytics();
+  const { width, height, padding, gridLines } = CONTENT_GROWTH_CHART;
 
   return (
     <AnalyticsCard
@@ -51,23 +33,18 @@ export default function ContentGrowthCard() {
         <div className="min-h-0 flex-1">
           <svg
             className="h-full min-h-[170px] w-full overflow-visible"
-            viewBox={`0 0 ${chartWidth} ${chartHeight}`}
+            viewBox={`0 0 ${width} ${height}`}
             role="img"
             aria-label="مخطط نمو الغرف والباقات المنشورة"
             preserveAspectRatio="none"
           >
-            {[0, 1, 2, 3].map((line) => {
-              const y =
-                chartPadding.top +
-                (line *
-                  (chartHeight - chartPadding.top - chartPadding.bottom)) /
-                  3;
-
+            {gridLines.map((line) => {
+              const y = getContentGrowthGridY(line);
               return (
                 <line
                   key={line}
-                  x1={chartPadding.left}
-                  x2={chartWidth - chartPadding.right}
+                  x1={padding.left}
+                  x2={width - padding.right}
                   y1={y}
                   y2={y}
                   className="stroke-users-table-divider"
@@ -78,7 +55,7 @@ export default function ContentGrowthCard() {
             })}
 
             <polyline
-              points={roomPoints.join(" ")}
+              points={contentGrowth.roomPoints}
               fill="none"
               className="stroke-brand-navy"
               strokeWidth="2.5"
@@ -86,7 +63,7 @@ export default function ContentGrowthCard() {
               strokeLinejoin="round"
             />
             <polyline
-              points={packagePoints.join(" ")}
+              points={contentGrowth.packagePoints}
               fill="none"
               className="stroke-brand-gold-strong"
               strokeWidth="2"
@@ -97,13 +74,8 @@ export default function ContentGrowthCard() {
             {contentGrowth.points.map((point, index) => (
               <text
                 key={point.month}
-                x={
-                  chartPadding.left +
-                  (index *
-                    (chartWidth - chartPadding.left - chartPadding.right)) /
-                    Math.max(contentGrowth.points.length - 1, 1)
-                }
-                y={chartHeight - 4}
+                x={getContentGrowthLabelX(index, contentGrowth.points.length)}
+                y={height - 4}
                 textAnchor="middle"
                 className="fill-users-text-subtle text-[10px]"
               >
