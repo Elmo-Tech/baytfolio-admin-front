@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 
 import {
   initialContactInformation,
@@ -8,13 +9,16 @@ import type {
   ContactInformation,
   ContactInformationField,
 } from "../types/contact-information";
+import { loadCmsStorage, saveCmsStorage } from "../utils/cms-storage";
+
+const STORAGE_KEY = "baytfolio:cms:contact-information";
 
 export function useContactInformation() {
-  const [settings, setSettings] = useState<ContactInformation>(
-    initialContactInformation,
+  const [settings, setSettings] = useState<ContactInformation>(() =>
+    loadCmsStorage(STORAGE_KEY, initialContactInformation),
   );
-  const [savedSettings, setSavedSettings] = useState<ContactInformation>(
-    initialContactInformation,
+  const [savedSettings, setSavedSettings] = useState<ContactInformation>(() =>
+    loadCmsStorage(STORAGE_KEY, initialContactInformation),
   );
   const [isSaved, setIsSaved] = useState(false);
 
@@ -25,9 +29,15 @@ export function useContactInformation() {
 
   const handleSave = () => {
     const savedData = saveContactInformationMock(settings);
+    const persisted = saveCmsStorage(STORAGE_KEY, savedData);
+    if (!persisted) {
+      toast.error("تعذر حفظ بيانات التواصل في التخزين المحلي");
+      return;
+    }
     setSettings(savedData);
     setSavedSettings(savedData);
     setIsSaved(true);
+    toast.success("تم حفظ ونشر بيانات التواصل بنجاح");
   };
 
   const handleReset = () => {
