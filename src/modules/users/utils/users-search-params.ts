@@ -46,3 +46,27 @@ export const usersSearchParams = {
   page: parseAsPositiveInteger.withDefault(1),
   pageSize: parseAsPageSize.withDefault(20),
 };
+
+export function clampUsersPage(page: number, totalPages: number): number {
+  if (totalPages <= 0 || page < 1) {
+    return 1;
+  }
+
+  return Math.min(page, totalPages);
+}
+
+export function getCanonicalUsersSearch(
+  currentSearch: string,
+  safePage: number,
+): string {
+  const nextSearchParams = new URLSearchParams(currentSearch);
+
+  if (safePage === 1) {
+    nextSearchParams.delete("page");
+  } else {
+    nextSearchParams.set("page", String(safePage));
+  }
+
+  const serialized = nextSearchParams.toString();
+  return serialized ? `?${serialized}` : "";
+}

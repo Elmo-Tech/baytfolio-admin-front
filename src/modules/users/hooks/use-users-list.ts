@@ -2,12 +2,15 @@ import { useMemo } from "react";
 import { useQueryStates } from "nuqs";
 
 import { mockUsers } from "../api/users.mock";
-import { usersSearchParams } from "../utils/users-search-params";
+import {
+  clampUsersPage,
+  usersSearchParams,
+} from "../utils/users-search-params";
 import { exportUsersCsv } from "../utils/export-users-csv";
 
 export function useUsersList() {
   const [
-    { search, status, loginMethod, sortOrder, page: currentPage, pageSize },
+    { search, status, loginMethod, sortOrder, page, pageSize },
     setUsersSearchParams,
   ] = useQueryStates(usersSearchParams);
 
@@ -35,9 +38,10 @@ export function useUsersList() {
   }, [search, status, loginMethod, sortOrder]);
 
   const totalPages = Math.ceil(filteredUsers.length / pageSize);
+  const safePage = clampUsersPage(page, totalPages);
   const paginatedUsers = filteredUsers.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize,
+    (safePage - 1) * pageSize,
+    safePage * pageSize,
   );
 
   return {
@@ -45,7 +49,8 @@ export function useUsersList() {
     status,
     loginMethod,
     sortOrder,
-    currentPage,
+    rawPage: page,
+    currentPage: safePage,
     pageSize,
     totalPages,
     totalItems: filteredUsers.length,
@@ -61,7 +66,8 @@ export function useUsersList() {
       }),
     onSortOrderChange: (value: string) =>
       setUsersSearchParams({ sortOrder: value as typeof sortOrder, page: 1 }),
-    onPageChange: (page: number) => setUsersSearchParams({ page }),
+    onPageChange: (nextPage: number) =>
+      setUsersSearchParams({ page: nextPage }),
     onPageSizeChange: (size: number) =>
       setUsersSearchParams({ pageSize: size, page: 1 }),
     onReset: () =>

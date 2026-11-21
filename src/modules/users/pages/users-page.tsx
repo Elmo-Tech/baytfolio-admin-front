@@ -1,17 +1,21 @@
 import { Download } from "lucide-react";
+import { Navigate, useLocation } from "react-router";
 
 import UsersFilters from "../components/users-filters";
 import UsersPagination from "../components/users-pagination";
 import UsersStats from "../components/users-stats";
 import UsersTable from "../components/users-table";
 import { useUsersList } from "../hooks/use-users-list";
+import { getCanonicalUsersSearch } from "../utils/users-search-params";
 
 export default function UsersPage() {
+  const location = useLocation();
   const {
     search,
     status,
     loginMethod,
     sortOrder,
+    rawPage,
     currentPage,
     pageSize,
     totalPages,
@@ -26,6 +30,18 @@ export default function UsersPage() {
     onReset,
     onExportCsv,
   } = useUsersList();
+
+  if (rawPage !== currentPage) {
+    return (
+      <Navigate
+        to={{
+          pathname: location.pathname,
+          search: getCanonicalUsersSearch(location.search, currentPage),
+        }}
+        replace
+      />
+    );
+  }
 
   return (
     <div dir="rtl" className="space-y-6">
