@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { usersSearchParams } from "./users-search-params";
+import { usersSearchParams } from "../utils/users-search-params";
 
 describe("UsersPage URL state", () => {
   it("restores search, filters, sorting, pagination, and page size", () => {

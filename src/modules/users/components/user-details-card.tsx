@@ -1,18 +1,11 @@
 import { ShieldCheck, UserRound } from "lucide-react";
+
+import { LOGIN_METHOD_LABELS } from "../constants/user-labels";
 import type { User } from "../types/user";
+import { formatUserDate } from "../utils/format-user-date";
 
 interface UserDetailsCardProps {
   user: User;
-}
-
-const loginMethodLabels = {
-  phone_password: "Phone + Password",
-  google: "Google",
-  apple: "Apple",
-};
-
-function formatDate(date: string) {
-  return new Intl.DateTimeFormat("en-GB").format(new Date(date));
 }
 
 export default function UserDetailsCard({ user }: UserDetailsCardProps) {
@@ -22,12 +15,9 @@ export default function UserDetailsCard({ user }: UserDetailsCardProps) {
     { label: "البريد الإلكتروني", value: user.email },
     {
       label: "طريقة تسجيل الدخول",
-      value: loginMethodLabels[user.loginMethod],
+      value: LOGIN_METHOD_LABELS[user.loginMethod],
     },
-    {
-      label: "تاريخ إنشاء الحساب",
-      value: formatDate(user.createdAt),
-    },
+    { label: "تاريخ إنشاء الحساب", value: formatUserDate(user.createdAt) },
   ];
 
   return (
@@ -36,7 +26,6 @@ export default function UserDetailsCard({ user }: UserDetailsCardProps) {
         <div className="rounded-md bg-background p-1.5">
           <UserRound size={17} className="text-users-text-secondary" />
         </div>
-
         <h2 className="font-semibold text-users-text-primary">بيانات الحساب</h2>
       </div>
 
@@ -49,7 +38,6 @@ export default function UserDetailsCard({ user }: UserDetailsCardProps) {
             <span className="text-xs text-users-text-subtle">
               {field.label}
             </span>
-
             <span
               dir="auto"
               className="text-sm font-medium text-users-text-detail"

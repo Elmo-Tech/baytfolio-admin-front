@@ -1,21 +1,19 @@
-import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { Link, useParams } from "react-router";
-import { mockUsers } from "../api/users.mock";
-import UserDetailsCard from "../components/user-details-card";
-import UserAccountStatusCard from "../components/user-account-status-card";
+import { Link } from "react-router";
 
-const loginMethodLabels = {
-  phone_password: "Phone + Password",
-  google: "Google",
-  apple: "Apple",
-};
+import UserAccountStatusCard from "../components/user-account-status-card";
+import UserDetailsCard from "../components/user-details-card";
+import { useUserDetails } from "../hooks/use-user-details";
 
 export default function UserDetailsPage() {
-  const { userId } = useParams();
-  const [isBlocked, setIsBlocked] = useState(false);
-
-  const user = mockUsers.find((item) => item.id === userId);
+  const {
+    user,
+    isActive,
+    currentStatus,
+    statusLabel,
+    loginMethodLabel,
+    handleBlockUser,
+  } = useUserDetails();
 
   if (!user) {
     return (
@@ -26,7 +24,6 @@ export default function UserDetailsPage() {
         <h2 className="font-semibold text-users-text-primary">
           المستخدم غير موجود
         </h2>
-
         <Link
           to="/users"
           className="mt-4 inline-flex items-center gap-2 text-sm text-users-text-secondary hover:underline"
@@ -37,13 +34,6 @@ export default function UserDetailsPage() {
       </div>
     );
   }
-
-  const isActive = user.status === "active" && !isBlocked;
-  const currentStatus = isBlocked ? "suspended" : user.status;
-
-  const handleBlockUser = () => {
-    setIsBlocked(true);
-  };
 
   return (
     <div dir="rtl" className="space-y-7">
@@ -58,7 +48,6 @@ export default function UserDetailsPage() {
               <h1 className="text-xl font-bold text-users-text-primary">
                 {user.name}
               </h1>
-
               <span
                 className={`rounded-md px-2 py-1 text-xs font-medium ${
                   isActive
@@ -66,17 +55,10 @@ export default function UserDetailsPage() {
                     : "bg-users-status-error-bg text-users-status-error-fg"
                 }`}
               >
-                {isActive
-                  ? "نشط"
-                  : currentStatus === "suspended"
-                    ? "موقوف"
-                    : currentStatus === "deleted"
-                      ? "محذوف"
-                      : "في انتظار الحذف"}
+                {statusLabel}
               </span>
-
               <span className="rounded-md border border-border-subtle bg-background px-2 py-1 text-xs text-users-text-secondary">
-                {loginMethodLabels[user.loginMethod]}
+                {loginMethodLabel}
               </span>
             </div>
 
@@ -103,7 +85,6 @@ export default function UserDetailsPage() {
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <UserDetailsCard user={user} />
-
         <UserAccountStatusCard
           status={currentStatus}
           onBlock={handleBlockUser}
