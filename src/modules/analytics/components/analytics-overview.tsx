@@ -7,43 +7,49 @@ export default function AnalyticsOverview() {
 
   return (
     <section className="space-y-4">
-      <div className="flex items-center gap-2">
-        <span className="h-5 w-1 rounded-full bg-brand-gold" />
-        <h2 className="font-bold text-text-primary">ملخص الفترة</h2>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <span className="h-5 w-1 rounded-full bg-brand-gold" />
+          <h2 className="font-bold text-text-primary">ملخص الفترة</h2>
+        </div>
+
+        <p className="text-xs text-text-muted">بيانات شهر مايو المعتمدة</p>
       </div>
 
-      <p className="text-xs text-text-muted">بيانات شهر مايو المعتمدة</p>
-
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {stats.map((stat) => {
           const Icon = stat.iconComponent;
           return (
             <article
               key={stat.id}
-              className="min-w-0 rounded-lg border border-border-subtle bg-card p-4 shadow-sm"
+              className="flex min-h-[185px] min-w-0 flex-col justify-between rounded-lg border border-border-subtle bg-card p-4 shadow-sm"
             >
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-md bg-background text-text-secondary">
-                  <Icon size={17} strokeWidth={1.8} />
+              <div className="flex flex-row-reverse items-center justify-between gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-background text-text-secondary">
+                  <Icon size={21} strokeWidth={1.9} />
                 </div>
-                <span className="truncate text-xs text-text-muted">
+
+                <span className="text-sm font-medium text-text-secondary-strong">
                   {stat.label}
                 </span>
               </div>
 
-              <div className="mt-3 flex items-center justify-between gap-2">
-                <strong className="text-2xl font-bold tabular-nums text-text-primary">
+              <div className="flex items-baseline justify-start">
+                <strong className="text-[36px] font-bold leading-none tabular-nums text-text-primary">
                   {stat.value}
                 </strong>
-                <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-status-active-fg">
+              </div>
+
+              <div className="flex items-center justify-between gap-2 border-t border-border-divider pt-3">
+                <span className="truncate text-xs text-text-secondary">
+                  {stat.description}
+                </span>
+
+                <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-status-active-fg">
                   {stat.change !== "مستقر" && <TrendingUp size={13} />}
                   {stat.change}
                 </span>
               </div>
-
-              <p className="mt-2 truncate text-[11px] text-text-muted">
-                {stat.description}
-              </p>
             </article>
           );
         })}
