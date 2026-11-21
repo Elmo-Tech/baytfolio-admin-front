@@ -1,27 +1,13 @@
 import { CheckCircle2, Handshake, RefreshCw, Store } from "lucide-react";
 
-import type { LucideIcon } from "lucide-react";
-
-import type { ShowroomJoinRequest } from "../types/showroom-join-requests.types";
+import type { ShowroomJoinRequest } from "../../types/showroom-join-requests.types";
 
 type Props = {
   requests: ShowroomJoinRequest[];
 };
 
-type StatConfig = {
-  id: string;
-  title: string;
-  value: number;
-  description: string;
-  badge: string;
-  icon: LucideIcon;
-  iconColor: string;
-  badgeColor: string;
-  borderColor: string;
-};
-
 export default function ShowroomJoinRequestsStats({ requests }: Props) {
-  const stats: StatConfig[] = [
+  const stats = [
     {
       id: "new",
       title: "طلبات جديدة",
@@ -76,37 +62,29 @@ export default function ShowroomJoinRequestsStats({ requests }: Props) {
     >
       {stats.map((stat) => {
         const Icon = stat.icon;
-
         return (
           <article
             key={stat.id}
             className={`flex min-h-[112px] flex-col justify-between rounded-lg border ${stat.borderColor} bg-card p-3.5 transition-shadow duration-200 hover:shadow-md`}
           >
-            {/* Title Right - Icon Left */}
             <div className="flex items-center justify-between gap-3">
               <h3 className="text-xs font-medium text-text-secondary">
                 {stat.title}
               </h3>
-
               <Icon size={17} strokeWidth={2} className={stat.iconColor} />
             </div>
-
-            {/* Number Right - Badge Left */}
             <div className="mt-2 flex items-center justify-between gap-3">
               <p
                 className={`text-2xl font-bold tabular-nums ${stat.iconColor}`}
               >
                 {stat.value}
               </p>
-
               <span
                 className={`inline-flex items-center rounded-sm px-2 py-1 text-[10px] font-medium ${stat.badgeColor}`}
               >
                 {stat.badge}
               </span>
             </div>
-
-            {/* Description Right */}
             <p className="mt-2 text-right text-[11px] leading-5 text-text-muted">
               {stat.description}
             </p>

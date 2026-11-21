@@ -44,3 +44,30 @@ export type ShowroomJoinRequest = {
   rejectionReason?: string;
   legalInformation?: ShowroomJoinRequestLegalInformation;
 };
+
+export type OnboardingOwnerData = {
+  name: string;
+  email: string;
+  phone: string;
+};
+
+export type OnboardingContractData = {
+  startDate: string;
+  endDate: string;
+  baseValue: string;
+  roomsLimit: string;
+  packagesLimit: string;
+  verificationEnabled: boolean;
+  verificationDuration: "full" | "fixed";
+  verificationMonths: string;
+  specialTerms: string;
+  internalNotes: string;
+  legalName: string;
+  authorizedPerson: string;
+  legalRole: string;
+  registrationNumber: string;
+  legalAddress: string;
+};
+
+export type ContractStepLegalInfo = ShowroomJoinRequestLegalInformation;
+export type ContractStepValues = OnboardingContractData;
