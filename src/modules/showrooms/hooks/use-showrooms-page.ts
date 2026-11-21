@@ -6,52 +6,45 @@ import type { ShowroomsFiltersState } from "../components/showrooms-filters";
 import { showroomsSearchParams } from "../utils/showrooms-search-params";
 
 export function useShowroomsPage() {
-  const [
-    {
-      search,
-      activity,
-      showroomStatus,
-      contractStatus,
-      sort,
-      page: currentPage,
-      pageSize,
-    },
-    setShowroomsSearchParams,
-  ] = useQueryStates(showroomsSearchParams);
+  const [params, setParams] = useQueryStates(showroomsSearchParams);
+  const {
+    search,
+    activity,
+    showroomStatus,
+    contractStatus,
+    sort,
+    page: currentPage,
+    pageSize,
+  } = params;
 
   const filteredShowrooms = useMemo(() => {
-    const searchValue = search.trim().toLowerCase();
+    const query = search.trim().toLowerCase();
 
     return mockShowrooms
       .filter((showroom) => {
         const matchesSearch =
-          !searchValue ||
-          showroom.name.toLowerCase().includes(searchValue) ||
-          showroom.reference.toLowerCase().includes(searchValue) ||
-          showroom.managerName.toLowerCase().includes(searchValue) ||
-          showroom.managerPhone.toLowerCase().includes(searchValue);
-
-        const matchesActivity =
-          activity === "all" || showroom.activity === activity;
-        const matchesShowroomStatus =
-          showroomStatus === "all" || showroom.status === showroomStatus;
-        const matchesContractStatus =
-          contractStatus === "all" ||
-          showroom.contractStatus === contractStatus;
+          !query ||
+          [
+            showroom.name,
+            showroom.reference,
+            showroom.managerName,
+            showroom.managerPhone,
+          ].some((field) => field.toLowerCase().includes(query));
 
         return (
           matchesSearch &&
-          matchesActivity &&
-          matchesShowroomStatus &&
-          matchesContractStatus
+          (activity === "all" || showroom.activity === activity) &&
+          (showroomStatus === "all" || showroom.status === showroomStatus) &&
+          (contractStatus === "all" ||
+            showroom.contractStatus === contractStatus)
         );
       })
       .sort((a, b) => {
         if (sort === "name") return a.name.localeCompare(b.name, "ar");
-        const comparison = a.reference.localeCompare(b.reference, "en", {
+        const cmp = a.reference.localeCompare(b.reference, "en", {
           numeric: true,
         });
-        return sort === "latest" ? -comparison : comparison;
+        return sort === "latest" ? -cmp : cmp;
       });
   }, [search, activity, showroomStatus, contractStatus, sort]);
 
@@ -62,30 +55,6 @@ export function useShowroomsPage() {
     displayPage * pageSize,
   );
 
-  const handleFiltersChange = (filters: ShowroomsFiltersState) => {
-    setShowroomsSearchParams({ ...filters, page: 1 });
-  };
-
-  const handleReset = () => {
-    setShowroomsSearchParams({
-      search: "",
-      activity: "all",
-      showroomStatus: "all",
-      contractStatus: "all",
-      sort: "latest",
-      page: 1,
-      pageSize: 8,
-    });
-  };
-
-  const handlePageSizeChange = (size: number) => {
-    setShowroomsSearchParams({ pageSize: size as typeof pageSize, page: 1 });
-  };
-
-  const handlePageChange = (nextPage: number) => {
-    setShowroomsSearchParams({ page: nextPage });
-  };
-
   return {
     filters: { search, activity, showroomStatus, contractStatus, sort },
     displayPage,
@@ -93,9 +62,20 @@ export function useShowroomsPage() {
     totalItems: filteredShowrooms.length,
     pageSize,
     paginatedShowrooms,
-    handleFiltersChange,
-    handleReset,
-    handlePageSizeChange,
-    handlePageChange,
+    handleFiltersChange: (filters: ShowroomsFiltersState) =>
+      setParams({ ...filters, page: 1 }),
+    handleReset: () =>
+      setParams({
+        search: "",
+        activity: "all",
+        showroomStatus: "all",
+        contractStatus: "all",
+        sort: "latest",
+        page: 1,
+        pageSize: 8,
+      }),
+    handlePageSizeChange: (size: number) =>
+      setParams({ pageSize: size as typeof pageSize, page: 1 }),
+    handlePageChange: (nextPage: number) => setParams({ page: nextPage }),
   };
 }
