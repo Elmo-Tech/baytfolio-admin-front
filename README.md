@@ -4,7 +4,7 @@ BaytFolio Admin Frontend is an Arabic-first, right-to-left React application for
 
 It provides a responsive administrative interface for authentication, Dashboard, Analytics, Users Management, Showrooms and Factories Management, Showroom Join Requests, and CMS tools for customer-facing content.
 
-The project follows a modular, feature-based architecture built with React, TypeScript, Vite, and React Router. Feature data is currently based primarily on typed local mock data.
+The project follows a modular, feature-based architecture built with React, TypeScript, Vite, and React Router, with clear separation between UI components, custom hooks, and utility helpers. Feature data is currently based primarily on typed local mock data.
 
 ---
 
@@ -143,14 +143,14 @@ The current implementation uses typed mock user data.
 
 ### 6. Showrooms and Factories Management
 
-Provides listing and details interfaces for showrooms and factories.
+Provides listing and details interfaces for showrooms and factories, organized into focused UI components, page hooks, and utility helpers.
 
 - Showrooms and Factories listing.
 - Showroom and Factory details pages.
 - Typed mock data.
-- Activity and status filters.
-- Reference sorting.
-- URL-backed pagination.
+- Activity, showroom status, and contract status filters.
+- Reference and name sorting.
+- URL-backed pagination and configurable page sizes.
 - Statistics cards.
 - Verification badges.
 - Contract-status badges.
@@ -285,48 +285,41 @@ The project follows a modular, feature-based architecture.
 ```text
 src/
 ├── app/
-│   ├── app.tsx
-│   ├── router.tsx
 │   ├── components/
+│   ├── constants/
+│   ├── hooks/
 │   ├── layouts/
 │   ├── pages/
 │   ├── providers/
-│   └── routes/
-│
+│   ├── routes/
+│   ├── utils/
+│   ├── app.tsx
+│   └── router.tsx
 ├── assets/
-│
+│   └── index.ts
 ├── modules/
 │   ├── analytics/
 │   ├── auth/
 │   ├── cms/
 │   ├── dashboard/
 │   ├── showroom-join-requests/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── types/
 │   ├── showrooms/
 │   └── users/
-│
 ├── shared/
 │   ├── api/
 │   ├── components/
-│   │   ├── common/
-│   │   └── ui/
 │   ├── config/
 │   ├── constants/
 │   ├── hooks/
 │   ├── types/
 │   └── utils/
-│
 ├── test/
+│   └── setup.ts
 ├── index.css
 └── main.tsx
 ```
 
 The `@/*` alias resolves to `src/*`.
-
----
 
 ## Routing Structure
 
@@ -356,8 +349,6 @@ The application uses React Router for application navigation.
 
 Administrative route definitions are maintained in `src/app/routes/admin-routes.tsx`. Confirm registered paths in that file when routes change.
 
----
-
 ## State Management
 
 - React component state handles local UI interactions, form values, and modal visibility.
@@ -365,8 +356,6 @@ Administrative route definitions are maintained in `src/app/routes/admin-routes.
 - TanStack React Query is configured through the application providers for server-state integration.
 - Feature data currently comes from local mock files and component state.
 - Zustand is declared as a dependency but is not currently used for application state.
-
----
 
 ## Styling and Design Tokens
 
@@ -420,8 +409,6 @@ npm run build
 npm run preview
 ```
 
----
-
 ## Available NPM Scripts
 
 | Command                | Description                        |
@@ -436,8 +423,6 @@ npm run preview
 | `npm run format:check` | Check formatting with Prettier.    |
 | `npm run preview`      | Preview the production build.      |
 | `npm run prepare`      | Set up Husky.                      |
-
----
 
 ## Development and Validation
 
@@ -564,11 +549,13 @@ The project uses Vitest, JSDOM, and React Testing Library.
 
 Test files currently documented in the repository include:
 
-- `src/app/router.test.tsx`
-- `src/app/providers/app-providers.test.tsx`
-- `src/modules/auth/components/otp-verification-form.test.tsx`
-- `src/modules/auth/components/reset-password-form.test.tsx`
-- `src/modules/users/pages/users-page.test.tsx`
+```text
+src/app/router.test.tsx
+src/app/providers/app-providers.test.tsx
+src/modules/auth/components/otp-verification-form.test.tsx
+src/modules/auth/components/reset-password-form.test.tsx
+src/modules/users/pages/users-page.test.tsx
+```
 
 Testing coverage should be expanded for the Showroom Join Requests and Onboarding workflows, including navigation, validation, URL step state, and review data.
 
@@ -578,6 +565,8 @@ Testing coverage should be expanded for the Showroom Join Requests and Onboardin
 
 - Keep business-specific code inside its feature module.
 - Keep shared components inside `src/shared/components`.
+- Separate UI components, custom hooks (`hooks/`), and utility helpers (`utils/`) into their respective folders.
+- Break large files into focused, maintainable units.
 - Use typed data and avoid TypeScript `any`.
 - Avoid unnecessary `useEffect` usage.
 - Use design tokens from `src/index.css`.
@@ -590,5 +579,12 @@ Testing coverage should be expanded for the Showroom Join Requests and Onboardin
 
 ---
 
-**BaytFolio Admin Frontend**  
-Modular administration interface for the BaytFolio platform.
+## Project Summary
+
+**BaytFolio Admin Frontend**
+
+A modular administration interface for managing the BaytFolio platform, built with React, TypeScript, Vite, and Tailwind CSS v4.
+
+The project provides a comprehensive frontend foundation for platform administration, including Dashboard, Analytics, Users Management, Showrooms and Factories, Showroom Onboarding, and CMS modules.
+
+The frontend is structured to support future Laravel backend integration while maintaining a scalable, maintainable, and feature-based architecture.
