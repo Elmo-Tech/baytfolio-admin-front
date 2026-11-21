@@ -49,7 +49,12 @@ export default function PriorityItems() {
             <tbody className="divide-y divide-users-table-divider">
               {state.visibleItems.length > 0 ? (
                 state.visibleItems.map((item) => (
-                  <PriorityItemRow key={item.id} item={item} />
+                  <PriorityItemRow
+                    key={item.id}
+                    item={item}
+                    isCompleted={state.completedIds.includes(item.id)}
+                    onAction={state.onItemAction}
+                  />
                 ))
               ) : (
                 <tr>

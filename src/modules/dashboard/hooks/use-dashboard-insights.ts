@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 import {
@@ -5,16 +6,25 @@ import {
   expiringContractsMock,
   recentActivitiesMock,
 } from "../api/dashboard-insights.mock";
+import {
+  filterExpiringContracts,
+  scaleActiveShowrooms,
+} from "../utils/apply-dashboard-filters";
+import { useDashboardFilters } from "./use-dashboard-filters";
 
 export function useDashboardInsights() {
+  const navigate = useNavigate();
+  const { filters, scaleFactor } = useDashboardFilters();
+
   return {
-    activeShowrooms: activeShowroomsMock,
+    activeShowrooms: scaleActiveShowrooms(activeShowroomsMock, scaleFactor),
     recentActivities: recentActivitiesMock,
-    expiringContracts: expiringContractsMock,
-    onShowAllShowrooms: () =>
-      toast.info("صفحة المعارض الأكثر نشاطًا قيد التطوير"),
-    onShowAllActivities: () => toast.info("صفحة سجل العمليات قيد التطوير"),
-    onShowAllContracts: () =>
-      toast.info("صفحة الحسابات التجارية والعقود قيد التطوير"),
+    expiringContracts: filterExpiringContracts(
+      expiringContractsMock,
+      filters.period,
+    ),
+    onShowAllShowrooms: () => void navigate("/showrooms"),
+    onShowAllActivities: () => toast.info("سجل العمليات الكامل قيد التطوير"),
+    onShowAllContracts: () => void navigate("/showrooms"),
   };
 }

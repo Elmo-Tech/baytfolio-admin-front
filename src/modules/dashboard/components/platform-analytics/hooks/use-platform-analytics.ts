@@ -1,3 +1,5 @@
+import { useDashboardFilters } from "../../../hooks/use-dashboard-filters";
+import { scalePlatformAnalytics } from "../../../utils/apply-dashboard-filters";
 import { platformAnalyticsMock } from "../api/platform-analytics.mock";
 import {
   buildShowroomDonutSegments,
@@ -5,8 +7,9 @@ import {
 } from "../utils/platform-analytics-charts";
 
 export function usePlatformAnalytics() {
+  const { scaleFactor } = useDashboardFilters();
   const { contentGrowth, showroomStatus, contractStatus } =
-    platformAnalyticsMock;
+    scalePlatformAnalytics(platformAnalyticsMock, scaleFactor);
 
   return {
     contentGrowth: {

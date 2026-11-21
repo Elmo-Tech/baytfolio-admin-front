@@ -1,3 +1,5 @@
+import { Check } from "lucide-react";
+
 import { Button } from "@/shared/components/ui";
 import { PRIORITY_ACTION_CONFIG } from "../constants/priority-item-actions";
 import {
@@ -8,15 +10,22 @@ import type { PriorityItem } from "../types/priority-items.types";
 
 interface PriorityItemRowProps {
   item: PriorityItem;
+  isCompleted: boolean;
+  onAction: (item: PriorityItem) => void;
 }
 
-export default function PriorityItemRow({ item }: PriorityItemRowProps) {
+export default function PriorityItemRow({
+  item,
+  isCompleted,
+  onAction,
+}: PriorityItemRowProps) {
   const typeConfig = PRIORITY_TYPE_CONFIG[item.type];
   const TypeIcon = typeConfig.icon;
   const status = PRIORITY_STATUS_CONFIG[item.status];
   const action = PRIORITY_ACTION_CONFIG[item.action];
-  const ActionIcon = action.icon;
-  const isUrgent = item.status === "urgent-dispute-closed";
+  const ActionIcon = isCompleted ? Check : action.icon;
+  const isUrgent = item.status === "urgent-dispute-closed" && !isCompleted;
+  const urgentText = isUrgent ? "text-badge-error-fg" : "";
 
   return (
     <tr
@@ -35,9 +44,7 @@ export default function PriorityItemRow({ item }: PriorityItemRowProps) {
 
       <td className="px-5 py-4">
         <p
-          className={`text-sm font-semibold ${
-            isUrgent ? "text-badge-error-fg" : "text-brand-navy"
-          }`}
+          className={`text-sm font-semibold ${urgentText || "text-brand-navy"}`}
         >
           {item.item}
         </p>
@@ -49,11 +56,7 @@ export default function PriorityItemRow({ item }: PriorityItemRowProps) {
           <span className="text-sm text-users-text-detail">
             {item.organization}
           </span>
-          <span
-            className={`text-xs ${
-              isUrgent ? "text-badge-error-fg" : "text-text-muted"
-            }`}
-          >
+          <span className={`text-xs ${urgentText || "text-text-muted"}`}>
             {item.organizationDetail}
           </span>
         </div>
@@ -69,9 +72,7 @@ export default function PriorityItemRow({ item }: PriorityItemRowProps) {
       </td>
 
       <td
-        className={`whitespace-nowrap px-5 py-4 text-sm ${
-          isUrgent ? "text-badge-error-fg" : "text-users-text-muted"
-        }`}
+        className={`whitespace-nowrap px-5 py-4 text-sm ${urgentText || "text-users-text-muted"}`}
       >
         {item.updatedAt}
       </td>
@@ -81,10 +82,14 @@ export default function PriorityItemRow({ item }: PriorityItemRowProps) {
           type="button"
           variant="outline"
           size="sm"
-          className={`h-8 gap-1.5 whitespace-nowrap rounded-md px-3 text-xs shadow-none ${action.className}`}
+          disabled={isCompleted}
+          onClick={() => onAction(item)}
+          className={`h-8 gap-1.5 whitespace-nowrap rounded-md px-3 text-xs shadow-none ${
+            isCompleted ? "opacity-60" : action.className
+          }`}
         >
           <ActionIcon size={14} strokeWidth={1.8} aria-hidden="true" />
-          {action.label}
+          {isCompleted ? "تمت المراجعة" : action.label}
         </Button>
       </td>
     </tr>

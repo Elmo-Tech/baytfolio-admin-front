@@ -1,17 +1,24 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 import { priorityItemsMock } from "../api/priority-items.mock";
 import { PRIORITY_ITEMS_PAGE_SIZE } from "../constants/priority-items";
-import type { PriorityItemStatus } from "../types/priority-items.types";
+import type {
+  PriorityItem,
+  PriorityItemStatus,
+} from "../types/priority-items.types";
 import { filterPriorityItems } from "../utils/filter-priority-items";
 
 export function usePriorityItems() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<PriorityItemStatus | "all">(
     "all",
   );
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
 
   const filteredItems = filterPriorityItems(
     priorityItemsMock,
@@ -25,11 +32,31 @@ export function usePriorityItems() {
     safePage * PRIORITY_ITEMS_PAGE_SIZE,
   );
 
+  function handleItemAction(item: PriorityItem) {
+    if (item.action === "review-approve") {
+      void navigate("/showroom-join-requests");
+      return;
+    }
+    if (
+      item.action === "review-contract" ||
+      item.action === "inspect-showroom"
+    ) {
+      void navigate("/showrooms");
+      return;
+    }
+
+    setCompletedIds((prev) =>
+      prev.includes(item.id) ? prev : [...prev, item.id],
+    );
+    toast.success(`تم تسجيل مراجعة العنصر: ${item.item} (${item.detail})`);
+  }
+
   return {
     search,
     statusFilter,
     isFilterOpen,
     visibleItems,
+    completedIds,
     totalItems: filteredItems.length,
     safePage,
     totalPages,
@@ -53,5 +80,6 @@ export function usePriorityItems() {
     onPrevPage: () => setCurrentPage((page) => Math.max(page - 1, 1)),
     onNextPage: () =>
       setCurrentPage((page) => Math.min(page + 1, Math.max(totalPages, 1))),
+    onItemAction: handleItemAction,
   };
 }
