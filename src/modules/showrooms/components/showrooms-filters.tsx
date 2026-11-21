@@ -1,20 +1,13 @@
 import { RotateCcw, Search } from "lucide-react";
 
-import {
-  Button,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui";
+import { Button, Input } from "@/shared/components/ui";
 
 import type {
   ContractStatus,
   ShowroomActivity,
   ShowroomStatus,
 } from "../types/showroom";
+import ShowroomsFilterSelects from "./showrooms-filter-selects";
 
 export type ShowroomsFiltersState = {
   search: string;
@@ -57,70 +50,7 @@ export default function ShowroomsFilters({
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:flex xl:shrink-0">
-        <Select
-          dir="rtl"
-          value={filters.activity}
-          onValueChange={(value) => updateFilter("activity", value)}
-        >
-          <SelectTrigger className="h-9 w-full border-border-warm bg-users-surface-input text-xs xl:w-[130px]">
-            <SelectValue placeholder="نوع النشاط: الكل" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">نوع النشاط: الكل</SelectItem>
-            <SelectItem value="showroom">معرض</SelectItem>
-            <SelectItem value="factory">مصنع</SelectItem>
-            <SelectItem value="showroom_factory">معرض ومصنع</SelectItem>
-            <SelectItem value="studio_manufacturing">استوديو وتصنيع</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Select
-          dir="rtl"
-          value={filters.showroomStatus}
-          onValueChange={(value) => updateFilter("showroomStatus", value)}
-        >
-          <SelectTrigger className="h-9 w-full border-border-warm bg-users-surface-input text-xs xl:w-[145px]">
-            <SelectValue placeholder="حالة المعرض: الكل" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">حالة المعرض: الكل</SelectItem>
-            <SelectItem value="active">نشط</SelectItem>
-            <SelectItem value="suspended">موقوف</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Select
-          dir="rtl"
-          value={filters.contractStatus}
-          onValueChange={(value) => updateFilter("contractStatus", value)}
-        >
-          <SelectTrigger className="h-9 w-full border-border-warm bg-users-surface-input text-xs xl:w-[145px]">
-            <SelectValue placeholder="حالة العقد: الكل" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">حالة العقد: الكل</SelectItem>
-            <SelectItem value="active">ساري</SelectItem>
-            <SelectItem value="expiring">قارب على الانتهاء</SelectItem>
-            <SelectItem value="expired">منتهي</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Select
-          dir="rtl"
-          value={filters.sort}
-          onValueChange={(value) => updateFilter("sort", value)}
-        >
-          <SelectTrigger className="h-9 w-full border-border-warm bg-users-surface-input text-xs xl:w-[120px]">
-            <SelectValue placeholder="الترتيب: الأحدث" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="latest">الترتيب: الأحدث</SelectItem>
-            <SelectItem value="oldest">الأقدم</SelectItem>
-            <SelectItem value="name">الاسم</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      <ShowroomsFilterSelects filters={filters} onChange={updateFilter} />
 
       <Button
         type="button"
