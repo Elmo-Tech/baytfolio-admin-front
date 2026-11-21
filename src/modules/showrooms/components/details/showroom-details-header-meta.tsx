@@ -33,7 +33,7 @@ export default function ShowroomDetailsHeaderMeta({
           <span>
             المالك:{" "}
             <strong className="text-users-text-primary">
-              {showroom.managerName}
+              {showroom.owner.name}
             </strong>
           </span>
           <span>

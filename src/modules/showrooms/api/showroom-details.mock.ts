@@ -1,10 +1,14 @@
 import { mockShowrooms } from "./showrooms.mock";
 import type { ShowroomDetails } from "../types/showroom-details";
 
-const showroomDetails: Record<
-  string,
-  Partial<Omit<ShowroomDetails, keyof import("../types/showroom").Showroom>>
-> = {
+type ExtraShowroomDetails = Omit<
+  Partial<Omit<ShowroomDetails, keyof import("../types/showroom").Showroom>>,
+  "contract"
+> & {
+  contract?: Omit<ShowroomDetails["contract"], "endDate">;
+};
+
+const showroomDetails: Record<string, ExtraShowroomDetails> = {
   "1": {
     email: "a.mahmoud@example.com",
     description:
@@ -12,7 +16,6 @@ const showroomDetails: Record<
     contract: {
       number: "CNT-2026-0142",
       startDate: "2026-11-01",
-      endDate: "2027-10-31",
       basePrice: 30000,
       currency: "ر.س",
     },
@@ -48,12 +51,12 @@ export const getShowroomDetails = (
     email: details?.email ?? `manager${showroom.id}@example.com`,
     description:
       details?.description ?? "بيانات تجريبية خاصة بالمعرض أو المصنع.",
-    contract: details?.contract ?? {
-      number: `CNT-${showroom.reference}`,
-      startDate: "2026-11-01",
+    contract: {
+      number: details?.contract?.number ?? `CNT-${showroom.reference}`,
+      startDate: details?.contract?.startDate ?? "2026-11-01",
       endDate: showroom.contractEndDate,
-      basePrice: 30000,
-      currency: "ر.س",
+      basePrice: details?.contract?.basePrice ?? 30000,
+      currency: details?.contract?.currency ?? "ر.س",
     },
     promotion: details?.promotion ?? {
       status: "inactive",
