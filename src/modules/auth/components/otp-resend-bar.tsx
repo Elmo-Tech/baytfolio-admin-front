@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { Clock3 } from "lucide-react";
 
 type OtpResendBarProps = {
@@ -13,14 +14,15 @@ export default function OtpResendBar({
 }: OtpResendBarProps) {
   return (
     <div className="flex items-center justify-between text-sm leading-5">
-      <button
+      <Button
+        unstyled
         type="button"
         disabled={!canResend}
         onClick={onResend}
         className="cursor-pointer font-medium text-auth-text-muted transition-colors enabled:text-auth-link-hover enabled:hover:underline disabled:cursor-not-allowed disabled:opacity-70"
       >
         طلب رمز جديد
-      </button>
+      </Button>
       <span className="flex items-center gap-1.5 text-text-secondary">
         <Clock3 aria-hidden="true" className="size-3.5 text-auth-text-muted" />
         {canResend ? (

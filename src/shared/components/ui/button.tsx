@@ -1,3 +1,8 @@
+import {
+  buttonPresentations,
+  type ButtonPresentation,
+} from "./button-presentations";
+import type { ComponentProps } from "react";
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
@@ -39,17 +44,55 @@ const buttonVariants = cva(
   },
 );
 
-function Button({
-  className,
-  variant = "default",
-  size = "default",
-  ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+type ButtonProps = (
+  | (ButtonPrimitive.Props &
+      VariantProps<typeof buttonVariants> & { unstyled?: false })
+  | (ComponentProps<"button"> & {
+      unstyled: true;
+      variant?: never;
+      size?: never;
+    })
+) & { presentation?: ButtonPresentation };
+
+function Button(props: ButtonProps) {
+  // This compatibility branch preserves native submit defaults, browser focus
+  // and authored classes without Base UI event or style defaults.
+  if (props.unstyled) {
+    const { unstyled, presentation, className, ...nativeProps } = props;
+    return (
+      <button
+        data-slot={unstyled ? undefined : "button"}
+        className={
+          presentation
+            ? cn(buttonPresentations[presentation], className)
+            : className
+        }
+        {...nativeProps}
+      />
+    );
+  }
+  const {
+    className,
+    variant = "default",
+    size = "default",
+    unstyled,
+    presentation,
+    ...primitiveProps
+  } = props;
   return (
     <ButtonPrimitive
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
+      data-slot={unstyled ? undefined : "button"}
+      className={cn(
+        buttonVariants({
+          variant,
+          size,
+          className: presentation
+            ? buttonPresentations[presentation]
+            : undefined,
+        }),
+        className,
+      )}
+      {...primitiveProps}
     />
   );
 }

@@ -1,0 +1,104 @@
+{
+  "referenceCommit": "39e1a00995494df1cc36790249b3fe6c1095bde5",
+  "source": {
+    "digest": "b812bbf253e2d6707dfb1fbb44e009e2b1bb666ff95abc164a55ceca14237e0d",
+    "applicationDigest": "f04194f4f9d73d3a358afa79e20566ced0e2c52d9039d47f743af0fa1e99524e",
+    "manifest": "/private/tmp/baytfolio-acceptance/accepted-source.json",
+    "fileCount": 429,
+    "workingTree": "uncommitted",
+    "reviewedBeforeDigest": "30feb04afdd25d9337d3d37b9571864c5ec8a2a87e3eb5ace86061c1c314303d"
+  },
+  "checks": {
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "format": "PASS",
+    "tests": {
+      "result": "PASS",
+      "files": 12,
+      "tests": 29,
+      "command": "npm test"
+    },
+    "build": "PASS; existing chunk-size warning",
+    "lineLimit": {
+      "result": "PASS",
+      "maximum": 150,
+      "boundaryFixtureTypes": 10
+    },
+    "diffWhitespace": "PASS"
+  },
+  "requirements": {
+    "workingTreePreservation": "PASS",
+    "uiConsolidation": "PASS",
+    "logicSeparation": "PASS",
+    "routeNamesAndContracts": "PASS",
+    "tokens": "PASS",
+    "lineLimitCoverage": "PASS",
+    "currentScopedPreservation": "PASS",
+    "historicalCounts": "PASS",
+    "historicalCaptureSourceBinding": "BLOCKED",
+    "backendProductionReadiness": "BLOCKED; outside scope"
+  },
+  "corrections": {
+    "exactPresentationMigrations": 118,
+    "pureHookFunctionsMoved": 9,
+    "newFocusedHook": "useShowroomDetails",
+    "requestBrowserActions": "owned by existing detail hook",
+    "routeRenames": 0,
+    "lineChecker": "authored hooks/ignore config/.mts/.cts/.sh coverage"
+  },
+  "historicalMeasurements": {
+    "routePng": {
+      "exact": 155,
+      "total": 162
+    },
+    "interactionState": {
+      "exact": 65,
+      "total": 65
+    },
+    "hardwareInteractionPng": {
+      "exact": 56,
+      "total": 65
+    },
+    "softwareInteractionPng": {
+      "exact": 63,
+      "total": 65
+    },
+    "flaggedRepeatPng": {
+      "exact": 7,
+      "total": 7
+    },
+    "stabilizedRepeatPng": {
+      "exact": 2,
+      "total": 2
+    },
+    "captureSourceBinding": "No capture-time immutable source manifest; not current full-matrix proof",
+    "staleReport": "baytfolio-interaction-repeat/repeat-comparison.json; excluded",
+    "styleScopeCorrection": "historical #root collector excluded body portals"
+  },
+  "currentBrowser": {
+    "cases": 33,
+    "completePrimaryPairs": 31,
+    "incompletePrimaryCases": [0, 21],
+    "exactFollowupPairs": 2,
+    "exactStateAndCapturedStyles": 33,
+    "initialExactPngAmongCompleteCases": 31,
+    "rasterRepeat": "case 7 exact; case 13 alternate original rasters cross-match exactly",
+    "pixelTolerance": 0,
+    "productionStabilizationChanges": false
+  },
+  "sourceProof": {
+    "rootTokenValuesExactlyPreserved": 145,
+    "themeMappingsExactlyPreserved": 157,
+    "darkAndBaseCss": "byte-identical to baseline suffix",
+    "publicRoutesAndNavigation": "unchanged",
+    "lockfile": "exact pre-review SHA preserved"
+  },
+  "evidenceDirectory": "/private/tmp/baytfolio-acceptance",
+  "report": "docs/refactor/acceptance-review.md",
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "dependenciesUpgraded": false
+  }
+}

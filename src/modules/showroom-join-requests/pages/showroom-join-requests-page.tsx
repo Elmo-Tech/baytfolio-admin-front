@@ -34,7 +34,7 @@ export default function ShowroomJoinRequestsPage() {
             type="button"
             variant="outline"
             onClick={state.handleRefresh}
-            className="h-10 gap-2 rounded-lg border-border-subtle bg-background px-4 text-xs font-normal shadow-none"
+            presentation="request-toolbar-action"
           >
             <RefreshCw size={15} />
             تحديث البيانات
@@ -44,7 +44,7 @@ export default function ShowroomJoinRequestsPage() {
             type="button"
             variant="outline"
             onClick={state.handleExportCsv}
-            className="h-10 gap-2 rounded-lg border-border-subtle bg-background px-4 text-xs font-normal shadow-none"
+            presentation="request-toolbar-action"
           >
             <Download size={15} />
             تصدير CSV

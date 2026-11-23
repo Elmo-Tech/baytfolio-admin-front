@@ -1,0 +1,14 @@
+@theme inline {
+  --color-surface-white: var(--surface-white);
+  --color-help-category-background: var(--help-category-background);
+  --color-help-category-foreground: var(--help-category-foreground);
+  --color-help-reactivate-background: var(--help-reactivate-background);
+  --color-help-reactivate-foreground: var(--help-reactivate-foreground);
+}
+:root {
+  --surface-white: #fff;
+  --help-category-background: oklch(97% 0.014 254.604);
+  --help-category-foreground: oklch(48.8% 0.243 264.376);
+  --help-reactivate-background: oklch(97.9% 0.021 166.113);
+  --help-reactivate-foreground: oklch(50.8% 0.118 165.612);
+}

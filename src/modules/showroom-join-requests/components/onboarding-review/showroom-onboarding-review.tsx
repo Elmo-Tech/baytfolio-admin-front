@@ -1,4 +1,4 @@
-import { useOnboardingReview } from "../../hooks/use-onboarding-review";
+import { getOnboardingReview } from "../../utils/onboarding-review-view";
 import type {
   OnboardingContractData,
   OnboardingOwnerData,
@@ -32,7 +32,7 @@ export default function ShowroomOnboardingReview({
   onCreate,
   isCreating = false,
 }: Props) {
-  const { summary, ...formatted } = useOnboardingReview(request, contract);
+  const { summary, ...formatted } = getOnboardingReview(request, contract);
 
   return (
     <section className="rounded-xl border border-border-subtle bg-card p-5 sm:p-7">

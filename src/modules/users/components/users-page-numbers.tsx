@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/shared/components/ui";
-import type { PageItem } from "../hooks/use-users-pagination";
+import type { PageItem } from "../utils/users-pagination-view";
 
 interface UsersPageNumbersProps {
   currentPage: number;
@@ -27,7 +27,7 @@ export default function UsersPageNumbers({
         disabled={isFirstPage}
         onClick={() => onPageChange(currentPage - 1)}
         aria-label="الصفحة السابقة"
-        className="size-8 rounded-md border-border bg-background text-muted-foreground shadow-none hover:bg-muted"
+        presentation="pagination-arrow"
       >
         <ChevronRight size={16} />
       </Button>
@@ -66,7 +66,7 @@ export default function UsersPageNumbers({
         disabled={isLastPage}
         onClick={() => onPageChange(currentPage + 1)}
         aria-label="الصفحة التالية"
-        className="size-8 rounded-md border-border bg-background text-muted-foreground shadow-none hover:bg-muted"
+        presentation="pagination-arrow"
       >
         <ChevronLeft size={16} />
       </Button>

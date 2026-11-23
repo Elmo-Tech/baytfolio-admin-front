@@ -18,7 +18,7 @@ export const PRIORITY_ACTION_CONFIG: Record<
     label: "مراجعة واعتماد",
     icon: ClipboardCheck,
     className:
-      "border-brand-navy bg-brand-navy !text-white hover:bg-brand-navy/90 hover:!text-white",
+      "border-brand-navy bg-brand-navy !text-surface-white hover:bg-brand-navy/90 hover:!text-surface-white",
   },
   "inspect-room": {
     label: "فحص الغرفة",
@@ -30,7 +30,7 @@ export const PRIORITY_ACTION_CONFIG: Record<
     label: "معالجة البلاغ",
     icon: Gavel,
     className:
-      "border-badge-error-fg bg-badge-error-fg !text-white hover:bg-badge-error-fg/90 hover:!text-white",
+      "border-badge-error-fg bg-badge-error-fg !text-surface-white hover:bg-badge-error-fg/90 hover:!text-surface-white",
   },
   "schedule-publish": {
     label: "جدولة النشر",

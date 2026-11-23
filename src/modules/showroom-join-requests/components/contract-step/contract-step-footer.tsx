@@ -40,7 +40,7 @@ export default function ContractStepFooter({
             type="button"
             disabled={!canContinue}
             onClick={onNext}
-            className="gap-2 bg-brand-navy text-white hover:bg-brand-navy/90"
+            presentation="onboarding-primary"
           >
             التالي: المراجعة والإنشاء
             <ArrowLeft size={16} />

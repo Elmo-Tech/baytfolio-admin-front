@@ -29,8 +29,6 @@ export default function ShowroomJoinRequestDetailsPage() {
     rejectionEvent,
   } = state;
   const ActivityIcon = activityConfig.icon;
-  const copyRef = () =>
-    navigator.clipboard?.writeText(request.reference).catch(() => {});
 
   return (
     <main dir="rtl" className="space-y-4 pb-8">
@@ -48,8 +46,8 @@ export default function ShowroomJoinRequestDetailsPage() {
         reference={request.reference}
         activityLabel={activityConfig.label}
         ActivityIcon={ActivityIcon}
-        onCopyReference={copyRef}
-        onPrint={() => window.print()}
+        onCopyReference={state.copyReference}
+        onPrint={state.printRequest}
       />
       <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1.65fr)_minmax(280px,0.85fr)]">
         <div className="min-w-0 space-y-4">

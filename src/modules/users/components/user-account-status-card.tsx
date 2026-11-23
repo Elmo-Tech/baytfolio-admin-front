@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { Ban, ShieldCheck } from "lucide-react";
 
 import { USER_STATUS_CONFIG } from "../constants/user-labels";
@@ -38,14 +39,15 @@ export default function UserAccountStatusCard({
 
       <div className="mt-auto border-t border-users-panel-divider pt-5">
         {status === "active" && (
-          <button
+          <Button
+            unstyled
             type="button"
             onClick={onBlock}
             className="flex h-9 cursor-pointer items-center gap-2 rounded-md border border-users-action-border px-3 text-xs font-medium text-users-action-fg transition hover:bg-users-action-hover"
           >
             <Ban size={14} />
             حظر المستخدم
-          </button>
+          </Button>
         )}
       </div>
     </section>

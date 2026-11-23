@@ -1,7 +1,7 @@
-import { useCommercialOverview } from "../hooks/use-commercial-overview";
+import { getCommercialOverview } from "../utils/commercial-overview-view";
 
 export default function CommercialOverview() {
-  const stats = useCommercialOverview();
+  const stats = getCommercialOverview();
 
   return (
     <section className="space-y-4">

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useQueryStates } from "nuqs";
-import { toast } from "sonner";
+import { toast } from "@/shared/lib/toast";
 
 import { helpCenterQuestions } from "../api/help-center.mock";
 import { helpCenterSearchParams } from "../pages/help-center-search-params";

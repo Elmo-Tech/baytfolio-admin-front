@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b",
+    "check:lines": "node scripts/check-source-limits.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -1,3 +1,4 @@
+import { Textarea } from "@/shared/components/ui/textarea";
 import { Input, Label } from "@/shared/components/ui";
 import QuestionLanguageSwitcher from "./question-language-switcher";
 
@@ -59,7 +60,7 @@ export default function QuestionTextFields(props: Props) {
           {isArabic && <span className="text-destructive"> *</span>}
         </Label>
 
-        <textarea
+        <Textarea
           id="help-answer"
           dir={isArabic ? "rtl" : "ltr"}
           rows={4}

@@ -47,10 +47,7 @@ export default function WizardStepOwner({ form, onSubmit, onPrevious }: Props) {
           <ArrowRight size={16} />
           السابق — بيانات المعرض
         </Button>
-        <Button
-          type="submit"
-          className="gap-2 bg-brand-navy text-white hover:bg-brand-navy/90"
-        >
+        <Button type="submit" presentation="onboarding-primary">
           التالي — العقد والحدود
           <ArrowLeft size={16} />
         </Button>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
+import { toast } from "@/shared/lib/toast";
 
 import { priorityItemsMock } from "../api/priority-items.mock";
 import { PRIORITY_ITEMS_PAGE_SIZE } from "../constants/priority-items";

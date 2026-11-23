@@ -1,3 +1,11 @@
+import { Button } from "@/shared/components/ui/button";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+} from "@/shared/components/ui/table";
 import ExpiringContractRow, {
   type ExpiringContractRowData,
 } from "./expiring-contract-row";
@@ -21,36 +29,35 @@ export default function ExpiringContractsTable({
           </p>
         </div>
 
-        <button
+        <Button
+          unstyled
           type="button"
           className="shrink-0 cursor-pointer text-sm font-medium text-text-primary transition-colors hover:text-text-secondary"
         >
           عرض الكل
-        </button>
+        </Button>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[480px] text-right">
-          <thead className="bg-background text-text-secondary">
-            <tr>
-              <th className="px-5 py-4 text-base font-semibold">
+        <Table className="w-full min-w-[480px] text-right">
+          <TableHeader className="bg-background text-text-secondary">
+            <TableRow>
+              <TableHead presentation="analytics-leading">
                 المعرض ورقم العقد
-              </th>
-              <th className="px-3 py-4 text-center text-base font-semibold">
-                الاستحقاق
-              </th>
-              <th className="px-4 py-4 text-center text-base font-semibold">
+              </TableHead>
+              <TableHead presentation="analytics">الاستحقاق</TableHead>
+              <TableHead className="px-4 py-4 text-center text-base font-semibold">
                 الحالة
-              </th>
-            </tr>
-          </thead>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
 
-          <tbody>
+          <TableBody>
             {contracts.map((contract) => (
               <ExpiringContractRow key={contract.id} contract={contract} />
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </article>
   );

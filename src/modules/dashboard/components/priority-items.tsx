@@ -1,3 +1,11 @@
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/shared/components/ui/table";
 import { usePriorityItems } from "../hooks/use-priority-items";
 import PriorityItemRow from "./priority-item-row";
 import PriorityItemsPagination from "./priority-items-pagination";
@@ -34,19 +42,19 @@ export default function PriorityItems() {
         />
 
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[980px] text-right">
-            <thead className="bg-users-table-header text-xs text-users-text-muted">
-              <tr>
-                <th className="px-5 py-4 font-medium">النوع</th>
-                <th className="px-5 py-4 font-medium">العنصر / التفاصيل</th>
-                <th className="px-5 py-4 font-medium">الجهة / المعرض</th>
-                <th className="px-5 py-4 font-medium">الحالة</th>
-                <th className="px-5 py-4 font-medium">آخر تحديث</th>
-                <th className="px-5 py-4 text-center font-medium">الإجراء</th>
-              </tr>
-            </thead>
+          <Table className="w-full min-w-[980px] text-right">
+            <TableHeader className="bg-users-table-header text-xs text-users-text-muted">
+              <TableRow>
+                <TableHead presentation="standard">النوع</TableHead>
+                <TableHead presentation="standard">العنصر / التفاصيل</TableHead>
+                <TableHead presentation="standard">الجهة / المعرض</TableHead>
+                <TableHead presentation="standard">الحالة</TableHead>
+                <TableHead presentation="standard">آخر تحديث</TableHead>
+                <TableHead presentation="center">الإجراء</TableHead>
+              </TableRow>
+            </TableHeader>
 
-            <tbody className="divide-y divide-users-table-divider">
+            <TableBody className="divide-y divide-users-table-divider">
               {state.visibleItems.length > 0 ? (
                 state.visibleItems.map((item) => (
                   <PriorityItemRow
@@ -57,17 +65,14 @@ export default function PriorityItems() {
                   />
                 ))
               ) : (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="px-5 py-12 text-center text-sm text-users-text-subtle"
-                  >
+                <TableRow>
+                  <TableCell colSpan={6} presentation="empty">
                     لا توجد نتائج مطابقة للبحث أو التصفية
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               )}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
 
         <PriorityItemsPagination

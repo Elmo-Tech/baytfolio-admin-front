@@ -1,3 +1,4 @@
+import { getPageNumbers } from "@/shared/utils/pagination";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import {
@@ -29,37 +30,6 @@ export default function HelpCenterPagination({
   const startItem = totalItems === 0 ? 0 : (currentPage - 1) * pageSize + 1;
 
   const endItem = Math.min(currentPage * pageSize, totalItems);
-
-  const getPageNumbers = () => {
-    if (totalPages <= 5) {
-      return Array.from({ length: totalPages }, (_, index) => index + 1);
-    }
-
-    if (currentPage <= 3) {
-      return [1, 2, 3, 4, "...", totalPages];
-    }
-
-    if (currentPage >= totalPages - 2) {
-      return [
-        1,
-        "...",
-        totalPages - 3,
-        totalPages - 2,
-        totalPages - 1,
-        totalPages,
-      ];
-    }
-
-    return [
-      1,
-      "...",
-      currentPage - 1,
-      currentPage,
-      currentPage + 1,
-      "...",
-      totalPages,
-    ];
-  };
 
   return (
     <div dir="rtl">
@@ -111,12 +81,12 @@ export default function HelpCenterPagination({
               disabled={currentPage <= 1}
               onClick={() => onPageChange(currentPage - 1)}
               aria-label="الصفحة السابقة"
-              className="size-8 rounded-md border-border bg-background text-muted-foreground shadow-none hover:bg-muted"
+              presentation="pagination-arrow"
             >
               <ChevronRight size={16} />
             </Button>
 
-            {getPageNumbers().map((page, index) =>
+            {getPageNumbers(currentPage, totalPages).map((page, index) =>
               page === "..." ? (
                 <span
                   key={`ellipsis-${index}`}
@@ -152,7 +122,7 @@ export default function HelpCenterPagination({
               disabled={currentPage >= totalPages || totalPages === 0}
               onClick={() => onPageChange(currentPage + 1)}
               aria-label="الصفحة التالية"
-              className="size-8 rounded-md border-border bg-background text-muted-foreground shadow-none hover:bg-muted"
+              presentation="pagination-arrow"
             >
               <ChevronLeft size={16} />
             </Button>

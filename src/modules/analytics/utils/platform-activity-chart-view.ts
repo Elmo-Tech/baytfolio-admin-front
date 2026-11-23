@@ -1,7 +1,7 @@
 import { activityData } from "../api/analytics.mock";
 import { buildActivityWeekGroups } from "../utils/platform-activity-chart";
 
-export function usePlatformActivityChart() {
+export function getPlatformActivityChart() {
   return {
     weekGroups: buildActivityWeekGroups(activityData),
   };

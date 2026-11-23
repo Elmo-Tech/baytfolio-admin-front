@@ -54,7 +54,7 @@ export default function RequestDetailsHeader({
           type="button"
           variant="outline"
           onClick={onCopyReference}
-          className="h-12 gap-2 border-transparent bg-muted text-sm hover:bg-users-surface-row-hover"
+          presentation="request-header-action"
         >
           <Copy size={18} />
           نسخ المعرف
@@ -63,7 +63,7 @@ export default function RequestDetailsHeader({
           type="button"
           variant="outline"
           onClick={onPrint}
-          className="h-12 gap-2 border-transparent bg-muted text-sm hover:bg-users-surface-row-hover"
+          presentation="request-header-action"
         >
           <Printer size={18} />
           طباعة الملخص

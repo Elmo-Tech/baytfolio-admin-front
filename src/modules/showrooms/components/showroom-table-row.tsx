@@ -1,3 +1,5 @@
+import { Button } from "@/shared/components/ui/button";
+import { TableRow, TableCell } from "@/shared/components/ui/table";
 import { Eye } from "lucide-react";
 
 import type { Showroom } from "../types/showroom";
@@ -16,32 +18,32 @@ export default function ShowroomTableRow({
   onSelect,
 }: ShowroomTableRowProps) {
   return (
-    <tr
+    <TableRow
       onClick={() => onSelect(showroom.id)}
       className="transition-colors hover:bg-users-surface-row-hover"
     >
       <ShowroomTableRowIdentity showroom={showroom} />
 
-      <td className="whitespace-nowrap px-5 py-4 text-sm text-users-text-secondary">
+      <TableCell presentation="secondary">
         {activityLabels[showroom.activity]}
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <ShowroomStatusBadge status={showroom.status} />
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <ContractStatusBadge status={showroom.contractStatus} />
-      </td>
+      </TableCell>
 
-      <td className="whitespace-nowrap px-5 py-4 text-sm text-users-text-secondary">
+      <TableCell presentation="secondary">
         <span className="font-semibold text-users-text-primary">
           {showroom.rooms.used}
         </span>
         <span className="text-users-text-muted"> / {showroom.rooms.total}</span>
-      </td>
+      </TableCell>
 
-      <td className="whitespace-nowrap px-5 py-4 text-sm text-users-text-secondary">
+      <TableCell presentation="secondary">
         <span className="font-semibold text-users-text-primary">
           {showroom.packages.used}
         </span>
@@ -49,17 +51,18 @@ export default function ShowroomTableRow({
           {" "}
           / {showroom.packages.total}
         </span>
-      </td>
+      </TableCell>
 
-      <td
+      <TableCell
         dir="ltr"
         className="whitespace-nowrap px-5 py-4 text-right text-sm text-users-text-secondary"
       >
         {formatDate(showroom.contractEndDate)}
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4 text-center">
-        <button
+      <TableCell presentation="center">
+        <Button
+          unstyled
           type="button"
           title="عرض التفاصيل"
           aria-label={`عرض تفاصيل ${showroom.name}`}
@@ -70,8 +73,8 @@ export default function ShowroomTableRow({
           className="inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-users-text-muted transition-colors hover:bg-users-stat-neutral-bg hover:text-users-text-primary"
         >
           <Eye size={18} />
-        </button>
-      </td>
-    </tr>
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 }

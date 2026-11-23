@@ -72,7 +72,7 @@ export default function WizardStepShowroom({
           <Button
             type="button"
             onClick={onNext}
-            className="gap-2 bg-brand-navy text-white hover:bg-brand-navy/90"
+            presentation="onboarding-primary"
           >
             التالي — حساب المالك
             <ArrowLeft size={16} />

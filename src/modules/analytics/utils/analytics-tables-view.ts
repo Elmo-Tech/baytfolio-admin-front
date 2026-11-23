@@ -1,6 +1,6 @@
 import { activeShowrooms, expiringContracts } from "../api/analytics.mock";
 
-export function useAnalyticsTables() {
+export function getAnalyticsTables() {
   const formattedContracts = expiringContracts.map((contract) => {
     const isExpired = contract.status === "بانتظار التجديد";
 

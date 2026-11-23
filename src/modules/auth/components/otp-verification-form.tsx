@@ -1,5 +1,5 @@
 import { AlertCircle } from "lucide-react";
-import { Link } from "react-router";
+import { AuthReturnLink } from "./auth-return-link";
 
 import OtpDigitInputs from "@/modules/auth/components/otp-digit-inputs";
 import OtpResendBar from "@/modules/auth/components/otp-resend-bar";
@@ -64,7 +64,7 @@ export default function OtpVerificationForm() {
         loadingLabel="جارٍ التحقق..."
         loading={requestState === "loading"}
         size="lg"
-        className="h-10 w-full rounded-md bg-auth-navy text-base text-primary-foreground shadow-sm hover:bg-auth-navy-hover focus-visible:border-auth-focus focus-visible:ring-auth-focus/40"
+        presentation="auth-submit"
         icon={<ArrowIcon className="size-4" />}
       />
 
@@ -78,13 +78,10 @@ export default function OtpVerificationForm() {
         </span>
       </div>
 
-      <Link
-        to="/login"
-        className="mx-auto flex w-fit items-center gap-1.5 text-sm font-medium text-auth-link transition-colors hover:text-auth-navy hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-auth-focus/40"
-      >
+      <AuthReturnLink>
         <ArrowIcon className="size-4" />
         <span>العودة لتسجيل الدخول</span>
-      </Link>
+      </AuthReturnLink>
     </form>
   );
 }

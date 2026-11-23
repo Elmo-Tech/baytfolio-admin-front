@@ -7,7 +7,7 @@ import {
 } from "../utils/onboarding-review.utils";
 import type { ShowroomJoinRequest } from "../types/showroom-join-requests.types";
 
-export function useOnboardingReview(
+export function getOnboardingReview(
   request: ShowroomJoinRequest,
   contract: OnboardingContractData,
 ) {

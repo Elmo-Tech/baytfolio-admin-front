@@ -1,3 +1,4 @@
+import { Input } from "@/shared/components/ui/input";
 import type { ClipboardEvent, KeyboardEvent, RefObject } from "react";
 
 type OtpDigitInputsProps = {
@@ -18,7 +19,8 @@ export default function OtpDigitInputs({
   return (
     <div dir="ltr" className="flex justify-center gap-1.5 sm:gap-2">
       {digits.map((digit, index) => (
-        <input
+        <Input
+          unstyled
           key={index}
           ref={(element) => {
             inputRefs.current[index] = element;

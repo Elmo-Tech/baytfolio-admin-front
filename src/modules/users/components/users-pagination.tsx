@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/shared/components/ui";
 import { PAGE_SIZE_OPTIONS } from "../constants/user-pagination";
-import { useUsersPagination } from "../hooks/use-users-pagination";
+import { getUsersPagination } from "../utils/users-pagination-view";
 import UsersPageNumbers from "./users-page-numbers";
 
 interface UsersPaginationProps {
@@ -21,7 +21,7 @@ interface UsersPaginationProps {
 
 export default function UsersPagination(props: UsersPaginationProps) {
   const { currentPage, pageSize, onPageChange, onPageSizeChange } = props;
-  const pagination = useUsersPagination(props);
+  const pagination = getUsersPagination(props);
 
   return (
     <div dir="rtl" className="space-y-3">

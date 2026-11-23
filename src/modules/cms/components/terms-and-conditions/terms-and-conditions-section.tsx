@@ -1,3 +1,5 @@
+import { Textarea } from "@/shared/components/ui/textarea";
+import { Label } from "@/shared/components/ui/label";
 import type {
   TermsSection,
   TermsLanguage,
@@ -62,14 +64,15 @@ export default function TermsAndConditionsSection({
       <p className="text-xs leading-6 text-users-text-muted">{description}</p>
 
       <div className="space-y-2">
-        <label
+        <Label
+          unstyled
           htmlFor={`terms-content-${section.id}`}
-          className="block text-xs font-medium text-users-text-primary"
+          presentation="content-label"
         >
           {fields.contentLabel}
-        </label>
+        </Label>
 
-        <textarea
+        <Textarea
           id={`terms-content-${section.id}`}
           dir={isArabic ? "rtl" : "ltr"}
           value={content}
@@ -77,7 +80,7 @@ export default function TermsAndConditionsSection({
             onChange(section.id, fields.content, event.target.value)
           }
           rows={section.id === 1 ? 4 : 5}
-          className="min-h-28 w-full resize-y rounded-md border border-transparent bg-users-table-header px-3 py-3 text-sm leading-7 text-users-text-secondary outline-none transition focus:border-users-panel-divider focus:ring-2 focus:ring-users-panel-divider/30"
+          presentation="content-editor"
         />
       </div>
 

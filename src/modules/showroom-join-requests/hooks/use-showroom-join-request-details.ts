@@ -80,6 +80,13 @@ export function useShowroomJoinRequestDetails(requestId?: string) {
     historyEvents,
     rejectionEvent: historyEvents.find((e) => e.status === "rejected"),
     selectedStatusEvent: historyEvents.find((e) => e.status === selectedStatus),
+    copyReference: () => {
+      if (request)
+        return navigator.clipboard
+          ?.writeText(request.reference)
+          .catch(() => {});
+    },
+    printRequest: () => window.print(),
     goBack: () => navigate("/showroom-join-requests"),
     goToSetup: () =>
       request && navigate(`/showroom-join-requests/${request.id}/setup`),

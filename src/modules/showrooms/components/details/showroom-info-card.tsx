@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import type { ShowroomDetails } from "../../types/showroom-details";
 import ShowroomDetailField from "./showroom-detail-field";
 
@@ -28,12 +29,13 @@ export default function ShowroomInfoCard({ showroom }: ShowroomInfoCardProps) {
           </p>
         </div>
 
-        <button
+        <Button
+          unstyled
           type="button"
           className="cursor-pointer rounded-lg border border-border-warm bg-users-stat-neutral-bg px-4 py-2.5 text-sm font-semibold text-users-text-primary transition-colors hover:bg-users-surface"
         >
           تعديل بيانات المعرض
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -15,10 +15,7 @@ export default function WizardOwnerFields({ register, errors }: Props) {
   return (
     <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
       <div className="space-y-2">
-        <Label
-          htmlFor="name"
-          className="text-xs font-medium text-text-secondary"
-        >
+        <Label htmlFor="name" presentation="owner-label">
           الاسم الكامل
         </Label>
         <div className="relative">
@@ -30,7 +27,7 @@ export default function WizardOwnerFields({ register, errors }: Props) {
             id="name"
             {...register("name")}
             placeholder="أدخل الاسم الكامل"
-            className="h-11 border-border-subtle bg-background pr-10 text-sm shadow-none"
+            presentation="owner-field"
           />
         </div>
         {errors.name && (
@@ -39,10 +36,7 @@ export default function WizardOwnerFields({ register, errors }: Props) {
       </div>
 
       <div className="space-y-2">
-        <Label
-          htmlFor="email"
-          className="text-xs font-medium text-text-secondary"
-        >
+        <Label htmlFor="email" presentation="owner-label">
           البريد الإلكتروني
         </Label>
         <div className="relative">
@@ -55,7 +49,7 @@ export default function WizardOwnerFields({ register, errors }: Props) {
             dir="ltr"
             {...register("email")}
             placeholder="example@email.com"
-            className="h-11 border-border-subtle bg-background pr-10 text-sm shadow-none"
+            presentation="owner-field"
           />
         </div>
         {errors.email && (
@@ -64,10 +58,7 @@ export default function WizardOwnerFields({ register, errors }: Props) {
       </div>
 
       <div className="space-y-2">
-        <Label
-          htmlFor="phone"
-          className="text-xs font-medium text-text-secondary"
-        >
+        <Label htmlFor="phone" presentation="owner-label">
           رقم الهاتف
         </Label>
         <div className="relative">
@@ -80,7 +71,7 @@ export default function WizardOwnerFields({ register, errors }: Props) {
             dir="ltr"
             {...register("phone")}
             placeholder="أدخل رقم الهاتف"
-            className="h-11 border-border-subtle bg-background pr-10 text-sm shadow-none"
+            presentation="owner-field"
           />
         </div>
         {errors.phone && (

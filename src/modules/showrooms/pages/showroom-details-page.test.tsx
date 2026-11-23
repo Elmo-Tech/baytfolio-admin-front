@@ -1,5 +1,5 @@
-import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import { Link, MemoryRouter, Route, Routes } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import { getShowroomDetails } from "../api/showroom-details.mock";
@@ -32,5 +32,28 @@ describe("ShowroomDetailsPage consistency", () => {
     expect(
       within(ownerBadge!).queryByText("أحمد محمد"),
     ).not.toBeInTheDocument();
+  });
+  it("retains the selected tab when only the showroom route parameter changes", () => {
+    render(
+      <MemoryRouter initialEntries={["/showrooms/1"]}>
+        <Link to="/showrooms/2">Next showroom</Link>
+        <Routes>
+          <Route
+            path="/showrooms/:showroomId"
+            element={<ShowroomDetailsPage />}
+          />
+        </Routes>
+      </MemoryRouter>,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "المحتوى" }));
+    expect(screen.getByRole("button", { name: "المحتوى" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    fireEvent.click(screen.getByRole("link", { name: "Next showroom" }));
+    expect(screen.getByRole("button", { name: "المحتوى" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
   });
 });

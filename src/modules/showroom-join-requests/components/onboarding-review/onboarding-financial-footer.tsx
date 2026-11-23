@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { ArrowRight, FileText, Rocket, ShieldCheck } from "lucide-react";
 
 interface Props {
@@ -14,7 +15,8 @@ export default function OnboardingFinancialFooter({
   return (
     <>
       <div className="mt-7 flex flex-col-reverse justify-between gap-3 border-t border-border-subtle pt-6 sm:flex-row sm:items-center">
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={onBack}
           disabled={isCreating}
@@ -22,27 +24,29 @@ export default function OnboardingFinancialFooter({
         >
           <ArrowRight size={16} />
           السابق — العقد والحدود
-        </button>
+        </Button>
 
         <div className="flex flex-col-reverse gap-2 sm:flex-row">
-          <button
+          <Button
+            unstyled
             type="button"
             disabled
             className="inline-flex items-center justify-center gap-2 rounded-md border border-border-subtle bg-background px-5 py-3 text-sm font-medium text-text-muted opacity-70"
           >
             <FileText size={16} />
             معاينة العقد
-          </button>
+          </Button>
 
-          <button
+          <Button
+            unstyled
             type="button"
             onClick={onCreate}
             disabled={isCreating}
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-navy px-5 py-3 text-sm font-semibold text-white"
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-navy px-5 py-3 text-sm font-semibold text-surface-white"
           >
             <Rocket size={16} />
             {isCreating ? "جاري التجهيز..." : "إنشاء المعرض"}
-          </button>
+          </Button>
         </div>
       </div>
 

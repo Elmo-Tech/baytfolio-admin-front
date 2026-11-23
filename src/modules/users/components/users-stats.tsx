@@ -1,8 +1,8 @@
 import { StatCard } from "@/shared/components/ui";
-import { useUsersStats } from "../hooks/use-users-stats";
+import { getUsersStats } from "../utils/users-stats-view";
 
 export default function UsersStats() {
-  const statsItems = useUsersStats();
+  const statsItems = getUsersStats();
 
   return (
     <section

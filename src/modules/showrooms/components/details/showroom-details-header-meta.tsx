@@ -14,7 +14,7 @@ export default function ShowroomDetailsHeaderMeta({
 }: ShowroomDetailsHeaderMetaProps) {
   return (
     <div className="flex w-full min-w-0 items-start justify-end gap-4 sm:gap-5 min-[1501px]:col-start-2 min-[1501px]:row-start-1">
-      <div className="flex size-16 shrink-0 items-center justify-center rounded-xl bg-users-text-primary text-xl font-bold text-white sm:size-20 sm:text-2xl">
+      <div className="flex size-16 shrink-0 items-center justify-center rounded-xl bg-users-text-primary text-xl font-bold text-surface-white sm:size-20 sm:text-2xl">
         {initials}
       </div>
 

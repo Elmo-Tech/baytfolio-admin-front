@@ -1,3 +1,4 @@
+import { Label } from "@/shared/components/ui/label";
 import { Filter, Search } from "lucide-react";
 
 import {
@@ -62,12 +63,13 @@ export default function PriorityItemsToolbar({
 
       {isFilterOpen && (
         <div className="flex flex-col gap-2 border-b border-users-panel-divider bg-users-table-header p-4 sm:flex-row sm:items-center">
-          <label
+          <Label
+            unstyled
             htmlFor="priority-status-filter"
             className="text-sm text-users-text-secondary"
           >
             الحالة
-          </label>
+          </Label>
           <Select dir="rtl" value={statusFilter} onValueChange={onStatusChange}>
             <SelectTrigger
               id="priority-status-filter"

@@ -1,3 +1,4 @@
+import { TableRow, TableCell } from "@/shared/components/ui/table";
 export interface ExpiringContractRowData {
   id: string;
   name: string;
@@ -16,15 +17,15 @@ export default function ExpiringContractRow({
   contract,
 }: ExpiringContractRowProps) {
   return (
-    <tr className="border-t border-border-divider transition-colors hover:bg-background/50">
-      <td className="px-5 py-5">
+    <TableRow className="border-t border-border-divider transition-colors hover:bg-background/50">
+      <TableCell presentation="analytics-leading">
         <p className="text-base font-semibold text-text-primary">
           {contract.name}
         </p>
         <p className="mt-1.5 text-sm text-text-muted">{contract.id}</p>
-      </td>
+      </TableCell>
 
-      <td className="px-3 py-5 text-center">
+      <TableCell presentation="analytics-center">
         <p className="text-base font-medium tabular-nums text-text-primary">
           {contract.expiry}
         </p>
@@ -36,9 +37,9 @@ export default function ExpiringContractRow({
         >
           {contract.remaining}
         </p>
-      </td>
+      </TableCell>
 
-      <td className="px-4 py-5 text-center">
+      <TableCell className="px-4 py-5 text-center">
         <span
           className={[
             "inline-flex items-center whitespace-nowrap rounded-md border px-3 py-1.5 text-sm font-semibold",
@@ -47,7 +48,7 @@ export default function ExpiringContractRow({
         >
           {contract.status}
         </span>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 }

@@ -1,4 +1,4 @@
-import { createPortal } from "react-dom";
+import { DialogSurface } from "@/shared/components/ui/dialog-surface";
 import { X } from "lucide-react";
 import { Button } from "@/shared/components/ui";
 
@@ -20,43 +20,39 @@ export default function AddQuestionModal({
 }: Props) {
   const form = useAddQuestionForm(question, onSubmit);
 
-  return createPortal(
-    <div
-      className="fixed inset-0 z-[9999] grid place-items-center bg-black/50 p-4"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
+  return (
+    <DialogSurface
+      presentation="question"
+      overlayProps={{
+        onMouseDown: (event) => {
+          if (event.target === event.currentTarget) onClose();
+        },
+      }}
+      surfaceProps={{
+        dir: "rtl",
+        role: "dialog",
+        "aria-modal": true,
+        "aria-labelledby": "question-modal-title",
       }}
     >
-      <section
-        dir="rtl"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="question-modal-title"
-        className="flex max-h-[90dvh] w-full max-w-[690px] flex-col overflow-hidden rounded-xl border bg-users-surface shadow-2xl"
+      <header className="flex items-center justify-between border-b px-5 py-5">
+        <h2 id="question-modal-title" className="text-lg font-semibold">
+          {question ? "تعديل السؤال" : "إضافة سؤال جديد"}
+        </h2>
+
+        <Button variant="ghost" size="icon" onClick={onClose}>
+          <X size={19} />
+        </Button>
+      </header>
+
+      <form
+        onSubmit={form.handleSubmit}
+        className="flex min-h-0 flex-1 flex-col"
       >
-        <header className="flex items-center justify-between border-b px-5 py-5">
-          <h2 id="question-modal-title" className="text-lg font-semibold">
-            {question ? "تعديل السؤال" : "إضافة سؤال جديد"}
-          </h2>
+        <QuestionFormFields {...form} />
 
-          <Button variant="ghost" size="icon" onClick={onClose}>
-            <X size={19} />
-          </Button>
-        </header>
-
-        <form
-          onSubmit={form.handleSubmit}
-          className="flex min-h-0 flex-1 flex-col"
-        >
-          <QuestionFormFields {...form} />
-
-          <QuestionModalFooter
-            isEditing={Boolean(question)}
-            onClose={onClose}
-          />
-        </form>
-      </section>
-    </div>,
-    document.body,
+        <QuestionModalFooter isEditing={Boolean(question)} onClose={onClose} />
+      </form>
+    </DialogSurface>
   );
 }

@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { ArrowRight, Clock3, FileText } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -42,14 +43,15 @@ export default function ShowroomDetailsHeader({
       className="rounded-2xl border border-users-panel-border bg-users-surface px-5 py-6 shadow-sm sm:px-7 sm:py-7 xl:px-9"
     >
       <div className="flex flex-col items-start gap-6 min-[1501px]:grid min-[1501px]:grid-cols-[auto_minmax(0,1fr)_auto] min-[1501px]:items-start min-[1501px]:gap-6">
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={() => navigate("/showrooms")}
           className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-xl border border-users-panel-border px-4 py-3 text-sm font-medium text-users-text-primary transition-colors hover:bg-users-stat-neutral-bg min-[1501px]:col-start-1 min-[1501px]:row-start-1"
         >
           <ArrowRight size={18} />
           العودة للمعارض
-        </button>
+        </Button>
 
         <ShowroomDetailsHeaderMeta
           showroom={showroom}
@@ -58,20 +60,14 @@ export default function ShowroomDetailsHeader({
         />
 
         <div className="flex shrink-0 flex-wrap justify-start gap-2.5 min-[1501px]:col-start-3 min-[1501px]:row-start-1 min-[1501px]:justify-self-start">
-          <button
-            type="button"
-            className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-users-panel-border px-4 py-3 text-sm font-medium text-users-text-primary transition-colors hover:bg-users-stat-neutral-bg"
-          >
+          <Button unstyled type="button" presentation="showroom-header-action">
             <Clock3 size={18} />
             عرض سجل النشاط
-          </button>
-          <button
-            type="button"
-            className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-users-panel-border px-4 py-3 text-sm font-medium text-users-text-primary transition-colors hover:bg-users-stat-neutral-bg"
-          >
+          </Button>
+          <Button unstyled type="button" presentation="showroom-header-action">
             <FileText size={18} />
             فتح طلب الانضمام
-          </button>
+          </Button>
         </div>
       </div>
 

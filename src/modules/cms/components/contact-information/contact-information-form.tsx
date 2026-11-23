@@ -82,7 +82,7 @@ export default function ContactInformationForm({
             type="button"
             onClick={onSave}
             disabled={!isValid}
-            className="h-10 gap-2 bg-brand-navy px-5 text-white hover:bg-brand-navy/90"
+            className="h-10 gap-2 bg-brand-navy px-5 text-surface-white hover:bg-brand-navy/90"
           >
             <Save size={17} />
             {isSaved ? "تم الحفظ" : "حفظ التغييرات"}

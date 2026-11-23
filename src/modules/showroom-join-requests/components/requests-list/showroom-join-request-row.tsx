@@ -1,3 +1,4 @@
+import { TableRow, TableCell } from "@/shared/components/ui/table";
 import { MoreVertical } from "lucide-react";
 
 import { Badge, Button } from "@/shared/components/ui";
@@ -23,19 +24,19 @@ export default function ShowroomJoinRequestRow({
   const ActivityIcon = activity.icon;
 
   return (
-    <tr className="transition-colors hover:bg-users-surface-row-hover">
-      <td className="whitespace-nowrap px-4 py-4">
+    <TableRow className="transition-colors hover:bg-users-surface-row-hover">
+      <TableCell presentation="request">
         <span className="font-semibold text-text-primary" dir="ltr">
           #{request.reference}
         </span>
-      </td>
-      <td className="px-4 py-4">
+      </TableCell>
+      <TableCell presentation="request-details">
         <p className="max-w-[230px] font-semibold text-text-primary">
           {request.showroomName}
         </p>
         <p className="mt-1 text-xs text-text-muted">{request.location}</p>
-      </td>
-      <td className="whitespace-nowrap px-4 py-4">
+      </TableCell>
+      <TableCell presentation="request">
         <Badge
           variant="secondary"
           className="gap-1.5 border-transparent bg-muted text-xs font-normal text-text-secondary"
@@ -43,22 +44,22 @@ export default function ShowroomJoinRequestRow({
           <ActivityIcon size={13} />
           {activity.label}
         </Badge>
-      </td>
-      <td className="whitespace-nowrap px-4 py-4 text-sm text-text-primary">
+      </TableCell>
+      <TableCell className="whitespace-nowrap px-4 py-4 text-sm text-text-primary">
         {request.contactPerson}
-      </td>
-      <td className="px-4 py-4">
+      </TableCell>
+      <TableCell presentation="request-details">
         <p className="whitespace-nowrap text-sm text-text-primary" dir="ltr">
           {request.phone}
         </p>
         <p className="mt-1 whitespace-nowrap text-xs text-text-muted" dir="ltr">
           {request.email}
         </p>
-      </td>
-      <td className="whitespace-nowrap px-4 py-4 text-sm text-text-secondary">
+      </TableCell>
+      <TableCell className="whitespace-nowrap px-4 py-4 text-sm text-text-secondary">
         {formatJoinRequestDate(request.submittedAt)}
-      </td>
-      <td className="whitespace-nowrap px-4 py-4">
+      </TableCell>
+      <TableCell presentation="request">
         <Badge
           variant="outline"
           className={`gap-1.5 text-xs font-medium ${status.className}`}
@@ -66,8 +67,8 @@ export default function ShowroomJoinRequestRow({
           <span className="size-1.5 rounded-full bg-current" />
           {status.label}
         </Badge>
-      </td>
-      <td className="whitespace-nowrap px-4 py-4">
+      </TableCell>
+      <TableCell presentation="request">
         <div className="flex items-center gap-2">
           <Button
             type="button"
@@ -87,7 +88,7 @@ export default function ShowroomJoinRequestRow({
             <MoreVertical size={17} />
           </Button>
         </div>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 }

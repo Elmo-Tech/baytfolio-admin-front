@@ -1,3 +1,5 @@
+import { PopoverPanel } from "@/shared/components/ui/popover-panel";
+import { Button } from "@/shared/components/ui/button";
 import type { RefCallback } from "react";
 import { Bell } from "lucide-react";
 
@@ -23,7 +25,8 @@ export default function AdminHeaderActions({
   return (
     <div className="flex shrink-0 items-center gap-2 sm:gap-4 lg:gap-6">
       <div ref={notificationsRef} className="relative">
-        <button
+        <Button
+          unstyled
           type="button"
           aria-label="الإشعارات"
           aria-expanded={isNotificationsOpen}
@@ -33,18 +36,15 @@ export default function AdminHeaderActions({
         >
           <Bell size={18} strokeWidth={1.8} />
           <span className="absolute right-2 top-2 size-2 rounded-full bg-notification-unread ring-2 ring-card" />
-        </button>
+        </Button>
 
         {isNotificationsOpen && (
-          <div
-            dir="rtl"
-            className="absolute left-0 top-12 z-50 w-64 rounded-lg border border-border-divider bg-card p-4 shadow-lg sm:w-72"
-          >
+          <PopoverPanel dir="rtl" presentation="notifications">
             <h3 className="mb-2 font-semibold text-text-primary">الإشعارات</h3>
             <p className="text-sm text-text-muted">
               سيتم عرض إشعارات النظام هنا عند ربطها.
             </p>
-          </div>
+          </PopoverPanel>
         )}
       </div>
 
@@ -52,7 +52,8 @@ export default function AdminHeaderActions({
         ref={profileMenuRef}
         className="relative border-r border-border-divider pr-2 sm:pr-4 lg:pr-5"
       >
-        <button
+        <Button
+          unstyled
           type="button"
           aria-label="قائمة حساب المدير"
           aria-expanded={isProfileMenuOpen}
@@ -71,21 +72,19 @@ export default function AdminHeaderActions({
           <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-navy text-sm font-bold text-brand-gold sm:size-11">
             م
           </div>
-        </button>
+        </Button>
 
         {isProfileMenuOpen && (
-          <div
-            dir="ltr"
-            className="absolute left-0 top-14 z-50 w-40 rounded-lg border border-border-divider bg-card p-2 shadow-lg"
-          >
-            <button
+          <PopoverPanel dir="ltr" presentation="profile-menu">
+            <Button
+              unstyled
               type="button"
               onClick={onCloseProfileMenu}
               className="w-full rounded-md px-3 py-2 text-left text-sm font-medium text-logout transition-colors hover:bg-logout-hover"
             >
               Log out
-            </button>
-          </div>
+            </Button>
+          </PopoverPanel>
         )}
       </div>
     </div>

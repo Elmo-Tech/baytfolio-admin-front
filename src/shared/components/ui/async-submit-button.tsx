@@ -3,7 +3,7 @@ import * as React from "react";
 import { Button } from "@/shared/components/ui/button";
 
 type AsyncSubmitButtonProps = Omit<
-  React.ComponentProps<typeof Button>,
+  Extract<React.ComponentProps<typeof Button>, { unstyled?: false }>,
   "children" | "disabled" | "type"
 > & {
   label: string;

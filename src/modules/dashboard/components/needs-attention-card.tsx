@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, type LucideIcon } from "lucide-react";
 
 interface NeedsAttentionCardProps {
@@ -59,14 +60,15 @@ export default function NeedsAttentionCard({
       <div className="mt-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-t border-users-panel-divider pt-5">
         <span className={`text-sm ${secondaryClass}`}>{secondary}</span>
 
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={() => onAction(action)}
           className={`inline-flex cursor-pointer items-center gap-1 text-sm font-semibold transition-colors hover:opacity-75 ${classes.action}`}
         >
           {action}
           <ArrowLeft size={14} strokeWidth={1.8} aria-hidden="true" />
-        </button>
+        </Button>
       </div>
     </article>
   );

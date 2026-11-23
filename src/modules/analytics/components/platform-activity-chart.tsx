@@ -2,11 +2,11 @@ import {
   ACTIVITY_CHART_LAYOUT,
   ACTIVITY_CHART_SERIES,
 } from "../constants/platform-activity-chart";
-import { usePlatformActivityChart } from "../hooks/use-platform-activity-chart";
+import { getPlatformActivityChart } from "../utils/platform-activity-chart-view";
 import { getActivityTickY } from "../utils/platform-activity-chart";
 
 export default function PlatformActivityChart() {
-  const { weekGroups } = usePlatformActivityChart();
+  const { weekGroups } = getPlatformActivityChart();
   const { width, height, leftOffset, ticks } = ACTIVITY_CHART_LAYOUT;
 
   return (

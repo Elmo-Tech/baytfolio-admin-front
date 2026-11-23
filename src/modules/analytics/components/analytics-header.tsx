@@ -1,3 +1,5 @@
+import { Input } from "@/shared/components/ui/input";
+import { Button } from "@/shared/components/ui/button";
 import { CalendarDays, RefreshCw } from "lucide-react";
 
 import { ANALYTICS_PERIODS } from "../constants/analytics-overview";
@@ -21,7 +23,8 @@ export default function AnalyticsHeader() {
       <div className="flex w-full flex-wrap items-center gap-2 rounded-lg border border-border-subtle bg-card p-2 xl:w-fit xl:flex-nowrap">
         <div className="flex flex-wrap items-center gap-1">
           {ANALYTICS_PERIODS.map((item) => (
-            <button
+            <Button
+              unstyled
               key={item.value}
               type="button"
               onClick={() => header.onPeriodChange(item.value)}
@@ -34,34 +37,37 @@ export default function AnalyticsHeader() {
               ].join(" ")}
             >
               {item.label}
-            </button>
+            </Button>
           ))}
         </div>
 
         {header.period === "custom" && (
           <div dir="ltr" className="flex min-w-0 items-center gap-2">
-            <input
+            <Input
+              unstyled
               aria-label="تاريخ البداية"
               type="date"
               value={header.startDate}
               onChange={(event) => header.onStartDateChange(event.target.value)}
-              className="h-9 w-[128px] rounded-md border border-border-subtle bg-background px-2 text-xs text-text-primary"
+              presentation="analytics-date"
             />
             <span className="text-text-muted">—</span>
-            <input
+            <Input
+              unstyled
               aria-label="تاريخ النهاية"
               type="date"
               value={header.endDate}
               min={header.startDate}
               onChange={(event) => header.onEndDateChange(event.target.value)}
-              className="h-9 w-[128px] rounded-md border border-border-subtle bg-background px-2 text-xs text-text-primary"
+              presentation="analytics-date"
             />
           </div>
         )}
 
         <CalendarDays size={16} className="shrink-0 text-text-muted" />
 
-        <button
+        <Button
+          unstyled
           type="button"
           aria-label="تحديث البيانات"
           onClick={header.onRefresh}
@@ -73,7 +79,7 @@ export default function AnalyticsHeader() {
               header.refreshed ? "rotate-180 transition-transform" : ""
             }
           />
-        </button>
+        </Button>
       </div>
     </header>
   );

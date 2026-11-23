@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import type { ShowroomDetails } from "../../types/showroom-details";
 
 interface ShowroomContentCardProps {
@@ -17,13 +18,14 @@ export default function ShowroomContentCard({
       <div className="mb-5 flex items-center justify-between gap-3 border-b border-users-table-divider pb-4">
         <h2 className="text-lg font-bold text-users-text-primary">المحتوى</h2>
 
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={onNavigate}
           className="cursor-pointer text-sm font-semibold text-users-text-primary underline decoration-1 underline-offset-4 transition-colors hover:text-users-text-secondary"
         >
           عرض المحتوى
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:gap-4">

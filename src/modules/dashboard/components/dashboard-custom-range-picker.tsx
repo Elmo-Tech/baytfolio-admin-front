@@ -1,3 +1,6 @@
+import { Label } from "@/shared/components/ui/label";
+import { Input } from "@/shared/components/ui/input";
+import { Button } from "@/shared/components/ui/button";
 interface DashboardCustomRangePickerProps {
   startDate: string;
   endDate: string;
@@ -23,47 +26,52 @@ export default function DashboardCustomRangePicker({
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
         <div className="flex flex-1 flex-col gap-2">
-          <label
+          <Label
+            unstyled
             htmlFor="dashboard-start-date"
-            className="text-xs font-medium text-text-muted"
+            presentation="date-range"
           >
             من تاريخ
-          </label>
-          <input
+          </Label>
+          <Input
+            unstyled
             id="dashboard-start-date"
             type="date"
             value={startDate}
             max={endDate || undefined}
             onChange={(event) => onStartDateChange(event.target.value)}
-            className="h-10 rounded-md border border-border-subtle bg-background px-3 text-sm text-text-primary outline-none focus:border-primary"
+            presentation="date-range"
           />
         </div>
 
         <div className="flex flex-1 flex-col gap-2">
-          <label
+          <Label
+            unstyled
             htmlFor="dashboard-end-date"
-            className="text-xs font-medium text-text-muted"
+            presentation="date-range"
           >
             إلى تاريخ
-          </label>
-          <input
+          </Label>
+          <Input
+            unstyled
             id="dashboard-end-date"
             type="date"
             value={endDate}
             min={startDate || undefined}
             onChange={(event) => onEndDateChange(event.target.value)}
-            className="h-10 rounded-md border border-border-subtle bg-background px-3 text-sm text-text-primary outline-none focus:border-primary"
+            presentation="date-range"
           />
         </div>
 
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={onApply}
           disabled={!startDate || !endDate || isInvalidRange}
           className="h-10 cursor-pointer rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
         >
           تطبيق
-        </button>
+        </Button>
       </div>
 
       {isInvalidRange && (

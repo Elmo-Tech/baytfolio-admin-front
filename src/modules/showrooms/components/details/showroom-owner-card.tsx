@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { KeyRound } from "lucide-react";
 
 import type { ShowroomDetails } from "../../types/showroom-details";
@@ -41,13 +42,14 @@ export default function ShowroomOwnerCard({
           التاجر.
         </p>
 
-        <button
+        <Button
+          unstyled
           type="button"
           className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl border border-users-panel-border bg-users-surface px-4 py-3 text-sm font-semibold text-users-text-primary shadow-sm transition-colors hover:bg-users-stat-neutral-bg"
         >
           <KeyRound size={17} />
           إعادة إرسال رابط إعداد كلمة المرور
-        </button>
+        </Button>
       </div>
     </section>
   );

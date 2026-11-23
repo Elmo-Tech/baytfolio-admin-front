@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { CheckCircle2, Pencil, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -33,14 +34,15 @@ export function ReviewSectionCard({
           </div>
         </div>
         {onEdit && (
-          <button
+          <Button
+            unstyled
             type="button"
             onClick={onEdit}
             className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium text-brand-navy transition-colors hover:bg-muted"
           >
             <Pencil size={13} />
             تعديل
-          </button>
+          </Button>
         )}
       </div>
       {children}

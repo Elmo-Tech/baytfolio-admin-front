@@ -1,3 +1,4 @@
+import { Label } from "@/shared/components/ui/label";
 import { CalendarDays, ShieldCheck } from "lucide-react";
 
 import type { TermsLanguage } from "../../types/terms-and-conditions";
@@ -42,12 +43,13 @@ export default function TermsAndConditionsLastUpdated({
       </div>
 
       <div className="space-y-2 sm:min-w-56">
-        <label
+        <Label
+          unstyled
           htmlFor="terms-last-updated"
           className="block text-xs text-users-text-muted"
         >
           {isArabic ? "تاريخ النفاذ المعتمد" : "Effective Date"}
-        </label>
+        </Label>
 
         <div className="flex items-center gap-2 rounded-md bg-users-table-header px-3 py-3">
           <CalendarDays size={15} className="text-users-text-muted" />

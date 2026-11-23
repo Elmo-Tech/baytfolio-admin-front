@@ -1,3 +1,4 @@
+import { TableCell } from "@/shared/components/ui/table";
 import { BadgeCheck } from "lucide-react";
 
 import type { Showroom } from "../types/showroom";
@@ -14,7 +15,7 @@ export default function ShowroomTableRowIdentity({
 
   return (
     <>
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <div className="flex min-w-0 items-center gap-3">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-border-warm bg-users-stat-neutral-bg text-sm font-semibold text-users-stat-neutral-fg">
             {getShowroomInitials(showroom.name)}
@@ -39,9 +40,9 @@ export default function ShowroomTableRowIdentity({
             </p>
           </div>
         </div>
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <div className="space-y-1">
           <p className="whitespace-nowrap text-sm font-medium text-users-text-primary">
             {showroom.managerName}
@@ -50,7 +51,7 @@ export default function ShowroomTableRowIdentity({
             {showroom.managerPhone}
           </p>
         </div>
-      </td>
+      </TableCell>
     </>
   );
 }

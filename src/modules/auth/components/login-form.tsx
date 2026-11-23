@@ -1,3 +1,4 @@
+import { Label } from "@/shared/components/ui/label";
 import { Link } from "react-router";
 import { Mail } from "lucide-react";
 
@@ -67,14 +68,18 @@ export default function LoginForm() {
           هل نسيت كلمة المرور؟
         </Link>
 
-        <label className="flex cursor-pointer items-center gap-2 text-auth-text-secondary">
-          <input
+        <Label
+          unstyled
+          className="flex cursor-pointer items-center gap-2 text-auth-text-secondary"
+        >
+          <Input
+            unstyled
             type="checkbox"
             className="size-4 rounded border-auth-checkbox-border accent-auth-checkbox-accent"
             {...register("rememberDevice")}
           />
           <span>تذكرني على هذا الجهاز</span>
-        </label>
+        </Label>
       </div>
 
       <AsyncSubmitButton

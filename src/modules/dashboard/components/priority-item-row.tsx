@@ -1,3 +1,4 @@
+import { TableRow, TableCell } from "@/shared/components/ui/table";
 import { Check } from "lucide-react";
 
 import { Button } from "@/shared/components/ui";
@@ -28,30 +29,30 @@ export default function PriorityItemRow({
   const urgentText = isUrgent ? "text-badge-error-fg" : "";
 
   return (
-    <tr
+    <TableRow
       className={`transition-colors hover:bg-users-surface-row-hover ${
         isUrgent ? "bg-badge-error-bg/20" : ""
       }`}
     >
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <span
           className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium ${typeConfig.className}`}
         >
           <TypeIcon size={14} strokeWidth={1.8} aria-hidden="true" />
           {typeConfig.label}
         </span>
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <p
           className={`text-sm font-semibold ${urgentText || "text-brand-navy"}`}
         >
           {item.item}
         </p>
         <p className="mt-1 text-xs text-text-muted">{item.detail}</p>
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <div className="flex flex-col gap-1 text-right">
           <span className="text-sm text-users-text-detail">
             {item.organization}
@@ -60,24 +61,24 @@ export default function PriorityItemRow({
             {item.organizationDetail}
           </span>
         </div>
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4">
+      <TableCell presentation="standard">
         <span
           className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1 text-xs font-medium ${status.className}`}
         >
           <span className={`size-1.5 rounded-full ${status.dotClass}`} />
           {status.label}
         </span>
-      </td>
+      </TableCell>
 
-      <td
+      <TableCell
         className={`whitespace-nowrap px-5 py-4 text-sm ${urgentText || "text-users-text-muted"}`}
       >
         {item.updatedAt}
-      </td>
+      </TableCell>
 
-      <td className="px-5 py-4 text-center">
+      <TableCell presentation="center">
         <Button
           type="button"
           variant="outline"
@@ -91,7 +92,7 @@ export default function PriorityItemRow({
           <ActionIcon size={14} strokeWidth={1.8} aria-hidden="true" />
           {isCompleted ? "تمت المراجعة" : action.label}
         </Button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 }

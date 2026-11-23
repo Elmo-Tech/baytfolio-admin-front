@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import type { ReactNode } from "react";
 
 interface DashboardInsightCardProps {
@@ -32,13 +33,14 @@ export default function DashboardInsightCard({
         </div>
 
         {action && (
-          <button
+          <Button
+            unstyled
             type="button"
             onClick={onAction}
             className="shrink-0 cursor-pointer text-sm font-semibold text-brand-navy transition-colors hover:text-brand-gold-strong"
           >
             {action}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -46,13 +48,14 @@ export default function DashboardInsightCard({
 
       <div className="flex items-center justify-between gap-3 border-t border-border-divider pt-4 text-sm">
         <span className="text-text-muted">{footerLabel}</span>
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={onFooterAction}
           className="shrink-0 cursor-pointer font-semibold text-brand-navy transition-colors hover:text-brand-gold-strong"
         >
           {footerAction}
-        </button>
+        </Button>
       </div>
     </article>
   );

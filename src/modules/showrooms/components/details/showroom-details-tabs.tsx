@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import type { ShowroomDetails } from "../../types/showroom-details";
 
 export type ShowroomDetailsTab = "overview" | "content" | "contract";
@@ -29,7 +30,8 @@ export default function ShowroomDetailsTabs({
           const isActive = activeTab === tab.id;
 
           return (
-            <button
+            <Button
+              unstyled
               key={tab.id}
               type="button"
               aria-current={isActive ? "page" : undefined}
@@ -41,7 +43,7 @@ export default function ShowroomDetailsTabs({
               }`}
             >
               {tab.label}
-            </button>
+            </Button>
           );
         })}
       </nav>

@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { FileText } from "lucide-react";
 import type { ShowroomDetails } from "../../types/showroom-details";
 
@@ -58,14 +59,15 @@ export default function ShowroomContractCard({
           </span>
         </div>
 
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={onNavigate}
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-users-panel-border bg-users-stat-neutral-bg px-4 py-3.5 text-sm font-semibold text-users-text-primary transition-colors hover:bg-users-surface-row-hover"
         >
           <FileText size={18} />
           عرض تفاصيل العقد
-        </button>
+        </Button>
       </div>
     </section>
   );

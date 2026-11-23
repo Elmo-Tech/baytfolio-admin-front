@@ -1,3 +1,6 @@
+import { Textarea } from "@/shared/components/ui/textarea";
+import { Label } from "@/shared/components/ui/label";
+import { Input } from "@/shared/components/ui/input";
 import { FileText } from "lucide-react";
 
 import type { PrivacyPolicy } from "../../types/privacy-policy";
@@ -37,14 +40,16 @@ export default function PrivacyPolicySection({
       </div>
 
       <div className="space-y-2">
-        <label
+        <Label
+          unstyled
           htmlFor={`privacy-title-${section.id}`}
-          className="block text-xs font-medium text-users-text-primary"
+          presentation="content-label"
         >
           {fields.titleLabel}
-        </label>
+        </Label>
 
-        <input
+        <Input
+          unstyled
           id={`privacy-title-${section.id}`}
           dir={isArabic ? "rtl" : "ltr"}
           value={section[fields.title]}
@@ -56,14 +61,15 @@ export default function PrivacyPolicySection({
       </div>
 
       <div className="space-y-2">
-        <label
+        <Label
+          unstyled
           htmlFor={`privacy-content-${section.id}`}
-          className="block text-xs font-medium text-users-text-primary"
+          presentation="content-label"
         >
           {fields.contentLabel}
-        </label>
+        </Label>
 
-        <textarea
+        <Textarea
           id={`privacy-content-${section.id}`}
           dir={isArabic ? "rtl" : "ltr"}
           value={section[fields.content]}
@@ -71,7 +77,7 @@ export default function PrivacyPolicySection({
             onChange(section.id, fields.content, event.target.value)
           }
           rows={section.id === 1 ? 4 : 5}
-          className="min-h-28 w-full resize-y rounded-md border border-transparent bg-users-table-header px-3 py-3 text-sm leading-7 text-users-text-secondary outline-none transition focus:border-users-panel-divider focus:ring-2 focus:ring-users-panel-divider/30"
+          presentation="content-editor"
         />
       </div>
     </section>

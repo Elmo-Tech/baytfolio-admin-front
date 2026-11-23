@@ -28,7 +28,7 @@ export default function QuestionMetadataFields({
         <Label>موضوع السؤال *</Label>
 
         <Select dir="rtl" value={category} onValueChange={setCategory}>
-          <SelectTrigger className="h-11 w-full">
+          <SelectTrigger presentation="form">
             <SelectValue placeholder="اختر التصنيف" />
           </SelectTrigger>
 
@@ -50,7 +50,7 @@ export default function QuestionMetadataFields({
           value={status}
           onValueChange={(value) => setStatus(value as "active" | "draft")}
         >
-          <SelectTrigger className="h-11 w-full">
+          <SelectTrigger presentation="form">
             <SelectValue />
           </SelectTrigger>
 

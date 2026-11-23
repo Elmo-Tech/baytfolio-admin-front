@@ -1,7 +1,7 @@
 import { commercialStats } from "../api/analytics.mock";
 import { COMMERCIAL_STAT_CONFIG } from "../constants/commercial-overview";
 
-export function useCommercialOverview() {
+export function getCommercialOverview() {
   return commercialStats.map((stat) => {
     const config = COMMERCIAL_STAT_CONFIG[stat.id];
     const isExpiring = stat.id === "expiring";

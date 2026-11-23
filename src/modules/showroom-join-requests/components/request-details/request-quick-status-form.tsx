@@ -1,3 +1,4 @@
+import { Textarea } from "@/shared/components/ui/textarea";
 import { RefreshCw } from "lucide-react";
 
 import {
@@ -50,7 +51,7 @@ export default function RequestQuickStatusForm({
           ))}
         </SelectContent>
       </Select>
-      <textarea
+      <Textarea
         value={internalNote}
         onChange={(e) => onInternalNoteChange(e.target.value)}
         rows={3}

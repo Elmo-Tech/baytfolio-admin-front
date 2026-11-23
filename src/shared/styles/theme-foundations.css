@@ -1,0 +1,100 @@
+@theme inline {
+  --font-sans: var(--font-inter), var(--font-noto-sans-arabic);
+  --font-heading: var(--font-inter), var(--font-noto-sans-arabic);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-status-active-bg: var(--status-active-bg);
+  --color-status-active-fg: var(--status-active-fg);
+  --color-status-suspended-bg: var(--status-suspended-bg);
+  --color-status-suspended-fg: var(--status-suspended-fg);
+  --color-status-pending-bg: var(--status-pending-bg);
+  --color-status-pending-fg: var(--status-pending-fg);
+  --color-status-deleted-bg: var(--status-deleted-bg);
+  --color-status-deleted-fg: var(--status-deleted-fg);
+
+  --color-light-sand: var(--light-sand);
+  --color-accent-sand: var(--accent-sand);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-strong: var(--brand-gold-strong);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-divider: var(--border-divider);
+  --color-border-warm: var(--border-warm);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary-strong: var(--text-secondary-strong);
+  --color-text-muted: var(--text-muted);
+  --color-text-muted-icon: var(--text-muted-icon);
+  --color-surface-admin: var(--surface-admin);
+  --color-badge-warning-bg: var(--badge-warning-bg);
+  --color-badge-warning-fg: var(--badge-warning-fg);
+  --color-badge-info-bg: var(--badge-info-bg);
+  --color-badge-info-fg: var(--badge-info-fg);
+  --color-badge-error-bg: var(--badge-error-bg);
+  --color-badge-error-fg: var(--badge-error-fg);
+  --color-notification-unread: var(--notification-unread);
+  --color-logout: var(--logout);
+  --color-logout-hover: var(--logout-hover);
+  --color-overlay: var(--overlay);
+  --color-text-secondary: var(--text-secondary);
+  --color-dashboard-text-secondary: var(--dashboard-text-secondary);
+  --text-dashboard-label: 0.9375rem;
+  --text-dashboard-label--line-height: 1.5rem;
+
+  --text-dashboard-value: 1.75rem;
+  --text-dashboard-value--line-height: 2rem;
+
+  --text-dashboard-description: 0.9375rem;
+  --text-dashboard-description--line-height: 1.25rem;
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-card: var(--card-shadow);
+  --shadow-floating: var(--floating-shadow);
+  --shadow-auth-card: var(--auth-card-shadow);
+}

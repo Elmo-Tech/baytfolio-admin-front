@@ -28,6 +28,9 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
+      - name: Check source line limits
+        run: npm run check:lines
+
       - name: Lint
         run: npm run lint
 

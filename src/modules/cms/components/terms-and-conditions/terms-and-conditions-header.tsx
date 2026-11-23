@@ -1,3 +1,4 @@
+import { ContentLanguageButton } from "@/shared/components/content-language-button";
 import { ArrowRight, FileText } from "lucide-react";
 import { Link } from "react-router";
 
@@ -68,29 +69,19 @@ export default function TermsAndConditionsHeader({
           dir="ltr"
           className="inline-flex w-fit items-center gap-1 rounded-md border border-users-panel-divider bg-users-table-header p-1"
         >
-          <button
-            type="button"
+          <ContentLanguageButton
+            active={language === "en"}
             onClick={() => setLanguage("en")}
-            className={`rounded px-4 py-2 text-xs font-medium transition ${
-              language === "en"
-                ? "bg-users-brand-navy text-primary-foreground"
-                : "text-users-text-secondary hover:bg-users-surface"
-            }`}
           >
             English
-          </button>
+          </ContentLanguageButton>
 
-          <button
-            type="button"
+          <ContentLanguageButton
+            active={language === "ar"}
             onClick={() => setLanguage("ar")}
-            className={`rounded px-4 py-2 text-xs font-medium transition ${
-              language === "ar"
-                ? "bg-users-brand-navy text-primary-foreground"
-                : "text-users-text-secondary hover:bg-users-surface"
-            }`}
           >
             العربية
-          </button>
+          </ContentLanguageButton>
         </div>
       </div>
 

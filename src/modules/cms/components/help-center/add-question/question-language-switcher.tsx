@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 interface Props {
   language: "ar" | "en";
   onChange: (language: "ar" | "en") => void;
@@ -12,7 +13,8 @@ export default function QuestionLanguageSwitcher({
   return (
     <div className="flex flex-col gap-3 border-b border-users-panel-divider pb-3 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-1 rounded-md border border-users-panel-divider bg-users-surface-input p-1">
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={() => onChange("ar")}
           aria-pressed={isArabic}
@@ -23,9 +25,10 @@ export default function QuestionLanguageSwitcher({
           }`}
         >
           العربية (الافتراضي) <span className="text-destructive">*</span>
-        </button>
+        </Button>
 
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={() => onChange("en")}
           aria-pressed={!isArabic}
@@ -36,7 +39,7 @@ export default function QuestionLanguageSwitcher({
           }`}
         >
           English
-        </button>
+        </Button>
       </div>
 
       <p className="text-xs text-users-text-muted">

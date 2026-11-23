@@ -1,10 +1,10 @@
 import { Info } from "lucide-react";
 
 import CMSOverviewGrid from "../components/overview/cms-overview-grid";
-import { useCMSOverview } from "../hooks/use-cms-overview";
+import { getCmsOverview } from "../utils/cms-overview-view";
 
 export default function CMSPage() {
-  const overview = useCMSOverview();
+  const overview = getCmsOverview();
 
   return (
     <div dir="rtl" className="space-y-5">

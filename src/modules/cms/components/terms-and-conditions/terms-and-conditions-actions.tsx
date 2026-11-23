@@ -23,11 +23,7 @@ export default function TermsAndConditionsActions({
     <footer className="fixed bottom-0 left-0 right-0 z-30 border-t border-users-panel-divider bg-users-surface/95 px-4 py-3 backdrop-blur sm:px-8 xl:right-[280px]">
       <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <Button
-            type="button"
-            onClick={onSave}
-            className="h-10 gap-2 bg-users-brand-navy px-5 text-primary-foreground hover:opacity-90"
-          >
+          <Button type="button" onClick={onSave} presentation="content-publish">
             <Save size={16} />
             {isArabic ? "حفظ التغييرات" : "Save Changes"}
           </Button>
@@ -36,7 +32,7 @@ export default function TermsAndConditionsActions({
             type="button"
             variant="ghost"
             onClick={onReset}
-            className="h-10 gap-2 text-users-text-secondary"
+            presentation="content-reset"
           >
             <RotateCcw size={15} />
             {isArabic ? "إلغاء" : "Cancel"}

@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Outlet } from "react-router";
 
@@ -26,7 +27,8 @@ export default function AdminLayout() {
             <AdminHeader />
           </div>
 
-          <button
+          <Button
+            unstyled
             type="button"
             aria-label={isSidebarOpen ? "إغلاق القائمة" : "فتح القائمة"}
             aria-expanded={isSidebarOpen}
@@ -34,7 +36,7 @@ export default function AdminLayout() {
             className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-text-secondary-strong transition hover:bg-background"
           >
             {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          </Button>
         </div>
 
         <div className="hidden min-[1226px]:block">

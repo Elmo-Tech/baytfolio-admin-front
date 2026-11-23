@@ -1,3 +1,4 @@
+import { TableRow, TableCell } from "@/shared/components/ui/table";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router";
 
@@ -19,8 +20,8 @@ export default function ActiveShowroomRow({
   isFirst,
 }: ActiveShowroomRowProps) {
   return (
-    <tr className="border-t border-border-divider transition-colors hover:bg-background/50">
-      <td className="px-5 py-5">
+    <TableRow className="border-t border-border-divider transition-colors hover:bg-background/50">
+      <TableCell presentation="analytics-leading">
         <div className="flex items-center gap-3">
           <span
             className={[
@@ -36,19 +37,15 @@ export default function ActiveShowroomRow({
             {showroom.name}
           </p>
         </div>
-      </td>
+      </TableCell>
 
-      <td className="px-3 py-5 text-center text-base tabular-nums text-text-secondary">
-        {showroom.rooms}
-      </td>
-      <td className="px-3 py-5 text-center text-base tabular-nums text-text-secondary">
-        {showroom.packages}
-      </td>
-      <td className="px-3 py-5 text-center text-base font-bold tabular-nums text-text-primary">
+      <TableCell presentation="analytics-number">{showroom.rooms}</TableCell>
+      <TableCell presentation="analytics-number">{showroom.packages}</TableCell>
+      <TableCell className="px-3 py-5 text-center text-base font-bold tabular-nums text-text-primary">
         {showroom.total}
-      </td>
+      </TableCell>
 
-      <td className="px-3 py-5 text-center">
+      <TableCell presentation="analytics-center">
         <Link
           to={`/showrooms/${showroom.id}`}
           aria-label={`فتح معرض ${showroom.name}`}
@@ -57,7 +54,7 @@ export default function ActiveShowroomRow({
           <span>فتح المعرض</span>
           <ArrowLeft size={16} className="shrink-0 text-text-muted" />
         </Link>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 }

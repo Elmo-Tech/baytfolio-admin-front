@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
 import { DASHBOARD_PERIODS } from "../constants/dashboard-periods";
@@ -23,7 +24,8 @@ export default function DashboardHeader() {
             {DASHBOARD_PERIODS.map((period) => {
               const isActive = header.period === period.value;
               return (
-                <button
+                <Button
+                  unstyled
                   key={period.value}
                   type="button"
                   onClick={() => header.onPeriodChange(period.value)}
@@ -35,12 +37,13 @@ export default function DashboardHeader() {
                   }`}
                 >
                   {period.label}
-                </button>
+                </Button>
               );
             })}
           </div>
 
-          <button
+          <Button
+            unstyled
             type="button"
             onClick={header.onRefresh}
             disabled={header.isRefreshing}
@@ -61,7 +64,7 @@ export default function DashboardHeader() {
             >
               {header.lastUpdated}
             </span>
-          </button>
+          </Button>
         </div>
       </div>
 

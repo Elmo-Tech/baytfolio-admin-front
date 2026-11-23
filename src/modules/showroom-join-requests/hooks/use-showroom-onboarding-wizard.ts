@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { parseAsStringEnum, useQueryState } from "nuqs";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
+import { toast } from "@/shared/lib/toast";
 
 import { mockShowroomJoinRequests } from "../api/showroom-join-requests.mock";
 import { INITIAL_ONBOARDING_CONTRACT_DATA } from "../constants/showroom-onboarding-wizard.constants";

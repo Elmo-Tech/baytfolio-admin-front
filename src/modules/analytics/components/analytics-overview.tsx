@@ -1,9 +1,9 @@
 import { TrendingUp } from "lucide-react";
 
-import { useAnalyticsOverview } from "../hooks/use-analytics-overview";
+import { getAnalyticsOverview } from "../utils/analytics-overview-view";
 
 export default function AnalyticsOverview() {
-  const stats = useAnalyticsOverview();
+  const stats = getAnalyticsOverview();
 
   return (
     <section className="space-y-4">

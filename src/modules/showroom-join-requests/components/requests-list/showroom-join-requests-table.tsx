@@ -1,3 +1,10 @@
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+} from "@/shared/components/ui/table";
 import { Store } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -29,21 +36,21 @@ export default function ShowroomJoinRequestsTable({ requests }: Props) {
   return (
     <div className="overflow-hidden rounded-lg border border-border-subtle bg-card">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[1050px] border-collapse text-right">
-          <thead className="bg-muted/50">
-            <tr className="text-xs text-text-secondary">
+        <Table className="w-full min-w-[1050px] border-collapse text-right">
+          <TableHeader className="bg-muted/50">
+            <TableRow className="text-xs text-text-secondary">
               {JOIN_REQUEST_TABLE_HEADINGS.map((heading) => (
-                <th
+                <TableHead
                   key={heading}
                   className="whitespace-nowrap px-4 py-4 font-medium"
                 >
                   {heading}
-                </th>
+                </TableHead>
               ))}
-            </tr>
-          </thead>
+            </TableRow>
+          </TableHeader>
 
-          <tbody className="divide-y divide-border-subtle">
+          <TableBody className="divide-y divide-border-subtle">
             {requests.map((request) => (
               <ShowroomJoinRequestRow
                 key={request.id}
@@ -51,8 +58,8 @@ export default function ShowroomJoinRequestsTable({ requests }: Props) {
                 onOpen={(id) => navigate(`/showroom-join-requests/${id}`)}
               />
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

@@ -47,7 +47,7 @@ export default function UsersFilters({
           value={search}
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="ابحث بالاسم أو البريد الإلكتروني أو رقم الهاتف..."
-          className="h-11 w-full rounded-md border-users-panel-divider bg-users-surface-input pr-10 pl-4 text-sm text-users-text-primary focus-visible:border-brand-navy focus-visible:ring-0"
+          presentation="table-search"
         />
       </div>
 
@@ -76,7 +76,7 @@ export default function UsersFilters({
           variant="outline"
           size="lg"
           onClick={onReset}
-          className="h-11 min-w-[105px] shrink-0 cursor-pointer gap-2 rounded-md border-users-panel-divider px-4 text-sm text-users-text-secondary shadow-none transition hover:bg-background"
+          presentation="filter-reset"
         >
           <RotateCcw size={17} />
           إعادة ضبط

@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import { toast } from "@/shared/lib/toast";
 
 import { needsAttentionMock } from "../api/needs-attention.mock";
 import {
@@ -7,7 +7,7 @@ import {
   NEEDS_ATTENTION_TONE_CLASSES,
 } from "../constants/needs-attention";
 
-export function useNeedsAttention() {
+export function getNeedsAttention() {
   const items = needsAttentionMock.map((item) => ({
     ...item,
     iconComponent: NEEDS_ATTENTION_ICONS[item.icon],

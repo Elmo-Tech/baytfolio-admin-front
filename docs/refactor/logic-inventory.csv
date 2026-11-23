@@ -1,0 +1,176 @@
+path,classification,rendering_boundary,logic_imports
+src/modules/analytics/components/active-showroom-row.tsx,already separated,"rendering, props and event forwarding",
+src/modules/analytics/components/active-showrooms-table.tsx,already separated,"rendering, props and event forwarding",
+src/modules/analytics/components/analytics-header.tsx,already separated,named domain hooks/utilities,../hooks/use-analytics-header
+src/modules/analytics/components/analytics-overview.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/analytics-overview-view
+src/modules/analytics/components/analytics-tables.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/analytics-tables-view
+src/modules/analytics/components/commercial-overview.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/commercial-overview-view
+src/modules/analytics/components/expiring-contract-row.tsx,already separated,"rendering, props and event forwarding",
+src/modules/analytics/components/expiring-contracts-table.tsx,already separated,"rendering, props and event forwarding",
+src/modules/analytics/components/platform-activity-chart.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/platform-activity-chart-view; ../utils/platform-activity-chart
+src/modules/analytics/pages/analytics-page.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/components/auth-brand.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/components/auth-card.tsx,already separated,named domain hooks/utilities,@/shared/utils/cn
+src/modules/auth/components/auth-layout.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/components/auth-return-link.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/components/forgot-password-form.tsx,already separated,named domain hooks/utilities,@/modules/auth/hooks/use-forgot-password-form
+src/modules/auth/components/login-form.tsx,already separated,named domain hooks/utilities,@/modules/auth/hooks/use-login-form
+src/modules/auth/components/otp-digit-inputs.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/components/otp-resend-bar.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/components/otp-verification-form.tsx,already separated,named domain hooks/utilities,@/modules/auth/hooks/use-otp-verification-form
+src/modules/auth/components/reset-password-form.tsx,already separated,named domain hooks/utilities,@/modules/auth/hooks/use-reset-password-form
+src/modules/auth/pages/forgot-password-page.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/pages/login-page.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/pages/reset-password-page.tsx,already separated,"rendering, props and event forwarding",
+src/modules/auth/pages/verify-otp-page.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-field.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-form.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-notices.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-preview-footer.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-preview-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-preview-hero.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-preview-hours.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-preview-item.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-information-preview.tsx,already separated,named domain hooks/utilities,./utils/contact-information.utils
+src/modules/cms/components/contact-information/contact-information-stats.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-settings-stat-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-settings-stats-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/contact-information/contact-settings-stats.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/add-question/add-question-modal.tsx,already separated,named domain hooks/utilities,../../../hooks/use-add-question-form
+src/modules/cms/components/help-center/add-question/question-form-fields.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/add-question/question-language-switcher.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/add-question/question-metadata-fields.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/add-question/question-modal-footer.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/add-question/question-text-fields.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/add-question-modal.tsx,extracted in original refactor,named domain hooks/utilities,../../hooks/use-standalone-question-form
+src/modules/cms/components/help-center/help-center-filters.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/help-center-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/help-center-pagination.tsx,extracted in original refactor,named domain hooks/utilities,@/shared/utils/pagination
+src/modules/cms/components/help-center/help-center-question-row.tsx,extracted in original refactor,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/help-center-table.tsx,extracted in original refactor,"rendering, props and event forwarding",
+src/modules/cms/components/help-center/standalone-question-language.tsx,extracted in original refactor,named domain hooks/utilities,../../hooks/use-standalone-question-form
+src/modules/cms/components/help-center/standalone-question-metadata.tsx,extracted in original refactor,named domain hooks/utilities,../../hooks/use-standalone-question-form
+src/modules/cms/components/help-center/standalone-question-text-fields.tsx,extracted in original refactor,named domain hooks/utilities,../../hooks/use-standalone-question-form
+src/modules/cms/components/overview/cms-general-cards.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/overview/cms-legal-cards.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/overview/cms-legal-details.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/overview/cms-overview-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/overview/cms-overview-grid.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/privacy-policy/privacy-policy-actions.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/privacy-policy/privacy-policy-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/privacy-policy/privacy-policy-last-updated.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/privacy-policy/privacy-policy-section.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/terms-and-conditions/terms-and-conditions-actions.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/terms-and-conditions/terms-and-conditions-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/terms-and-conditions/terms-and-conditions-last-updated.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/components/terms-and-conditions/terms-and-conditions-section.tsx,already separated,"rendering, props and event forwarding",
+src/modules/cms/pages/cms-page.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/cms-overview-view
+src/modules/cms/pages/contact-information-page.tsx,already separated,named domain hooks/utilities,../hooks/use-contact-information
+src/modules/cms/pages/help-center-page.tsx,extracted in original refactor,named domain hooks/utilities,../hooks/use-help-question-dialog; ../hooks/use-help-center
+src/modules/cms/pages/privacy-policy-page.tsx,already separated,named domain hooks/utilities,../hooks/use-privacy-policy
+src/modules/cms/pages/terms-and-conditions-page.tsx,already separated,named domain hooks/utilities,../hooks/use-terms-and-conditions
+src/modules/dashboard/components/dashboard-custom-range-picker.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/dashboard-header.tsx,already separated,named domain hooks/utilities,../hooks/use-dashboard-header
+src/modules/dashboard/components/dashboard-insight-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/dashboard-insights.tsx,already separated,named domain hooks/utilities,../hooks/use-dashboard-insights
+src/modules/dashboard/components/dashboard-stats.tsx,already separated,named domain hooks/utilities,../hooks/use-dashboard-stats
+src/modules/dashboard/components/expiring-contracts-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/needs-attention-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/needs-attention.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/needs-attention-view
+src/modules/dashboard/components/platform-analytics/components/analytics-card.tsx,already separated,named domain hooks/utilities,@/shared/utils/cn
+src/modules/dashboard/components/platform-analytics/components/content-growth-card.tsx,already separated,named domain hooks/utilities,../hooks/use-platform-analytics; ../utils/platform-analytics-charts
+src/modules/dashboard/components/platform-analytics/components/contract-status-card.tsx,already separated,named domain hooks/utilities,../hooks/use-platform-analytics
+src/modules/dashboard/components/platform-analytics/components/showroom-status-card.tsx,already separated,named domain hooks/utilities,../hooks/use-platform-analytics
+src/modules/dashboard/components/priority-item-row.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/priority-items-pagination.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/priority-items-toolbar.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/priority-items.tsx,already separated,named domain hooks/utilities,../hooks/use-priority-items
+src/modules/dashboard/components/recent-activity-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/components/top-active-showrooms-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/dashboard/pages/dashboard-page.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/contract-dates-section.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/contract-financial-summary-card.tsx,already separated,named domain hooks/utilities,../../utils/contract-step.utils
+src/modules/showroom-join-requests/components/contract-step/contract-form-fields.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/contract-legal-terms-section.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/contract-limits-section.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/contract-step-footer.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/contract-verification-cost-card.tsx,already separated,named domain hooks/utilities,../../utils/contract-step.utils
+src/modules/showroom-join-requests/components/contract-step/contract-verification-options.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/contract-verification-toggle.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/contract-step/showroom-contract-step.tsx,already separated,named domain hooks/utilities,../../hooks/use-contract-step
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-contract-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-financial-footer.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-financial-summary.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-legal-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-limits-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-owner-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-review-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-review-primitives.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-review-sections.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-showroom-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/onboarding-verification-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-review/showroom-onboarding-review.tsx,corrected in acceptance review,named domain hooks/utilities,../../utils/onboarding-review-view
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-audit-footer.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-owner-fields.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-owner-role-field.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-showroom-fields.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-showroom-readonly-item.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-step-owner.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-step-showroom.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/onboarding-wizard/wizard-stepper.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/request-details/request-contact-channels-card.tsx,already separated,named domain hooks/utilities,../../utils/showroom-join-request-details.utils
+src/modules/showroom-join-requests/components/request-details/request-decision-banner.tsx,already separated,named domain hooks/utilities,../../utils/showroom-join-request-details.utils
+src/modules/showroom-join-requests/components/request-details/request-details-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/request-details/request-details-primitives.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/request-details/request-details-state-view.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/request-details/request-details-top-bar.tsx,already separated,named domain hooks/utilities,../../utils/showroom-join-request-details.utils
+src/modules/showroom-join-requests/components/request-details/request-history-card.tsx,already separated,named domain hooks/utilities,../../utils/showroom-join-request-details.utils
+src/modules/showroom-join-requests/components/request-details/request-info-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/request-details/request-quick-status-form.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/request-details/request-workflow-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/request-details/request-workflow-steps.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/requests-list/join-request-filter-select.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/requests-list/showroom-join-request-row.tsx,already separated,named domain hooks/utilities,../../utils/showroom-join-requests-format.utils
+src/modules/showroom-join-requests/components/requests-list/showroom-join-requests-filter-selects.tsx,already separated,named domain hooks/utilities,../../hooks/use-join-request-filter-options
+src/modules/showroom-join-requests/components/requests-list/showroom-join-requests-filters.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/requests-list/showroom-join-requests-pagination.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/requests-list/showroom-join-requests-stats.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/components/requests-list/showroom-join-requests-table.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showroom-join-requests/pages/showroom-join-request-details-page.tsx,corrected in acceptance review,named domain hooks/utilities,../hooks/use-showroom-join-request-details
+src/modules/showroom-join-requests/pages/showroom-join-requests-page.tsx,already separated,named domain hooks/utilities,../hooks/use-showroom-join-requests-page
+src/modules/showroom-join-requests/pages/showroom-onboarding-wizard-page.tsx,already separated,named domain hooks/utilities,../hooks/use-showroom-onboarding-wizard
+src/modules/showrooms/components/contract-status-badge.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-content-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-contract-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-detail-field.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-details-header-meta.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-details-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-details-not-found.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-details-tabs.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-info-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-owner-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/details/showroom-promotion-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/showroom-status-badge.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/showroom-table-row-identity.tsx,already separated,named domain hooks/utilities,../utils/showrooms-table.utils
+src/modules/showrooms/components/showroom-table-row.tsx,already separated,named domain hooks/utilities,../utils/showrooms-table.utils
+src/modules/showrooms/components/showrooms-filter-selects.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/showrooms-filters.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/showrooms-header.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/showrooms-pagination-controls.tsx,already separated,named domain hooks/utilities,../utils/showrooms-pagination.utils
+src/modules/showrooms/components/showrooms-pagination.tsx,already separated,named domain hooks/utilities,../utils/showrooms-search-params
+src/modules/showrooms/components/showrooms-stats.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/components/showrooms-table.tsx,already separated,"rendering, props and event forwarding",
+src/modules/showrooms/pages/showroom-details-page.tsx,corrected in acceptance review,named domain hooks/utilities,../hooks/use-showroom-details
+src/modules/showrooms/pages/showrooms-page.tsx,already separated,named domain hooks/utilities,../hooks/use-showrooms-page
+src/modules/users/components/user-account-status-card.tsx,already separated,"rendering, props and event forwarding",
+src/modules/users/components/user-details-card.tsx,already separated,named domain hooks/utilities,../utils/format-user-date
+src/modules/users/components/user-filter-select.tsx,already separated,"rendering, props and event forwarding",
+src/modules/users/components/users-filters.tsx,already separated,"rendering, props and event forwarding",
+src/modules/users/components/users-page-numbers.tsx,already separated,named domain hooks/utilities,../utils/users-pagination-view
+src/modules/users/components/users-pagination.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/users-pagination-view
+src/modules/users/components/users-stats.tsx,corrected in acceptance review,named domain hooks/utilities,../utils/users-stats-view
+src/modules/users/components/users-table-row.tsx,already separated,named domain hooks/utilities,../hooks/use-users-table
+src/modules/users/components/users-table.tsx,already separated,named domain hooks/utilities,../hooks/use-users-table
+src/modules/users/pages/user-details-page.tsx,already separated,named domain hooks/utilities,../hooks/use-user-details
+src/modules/users/pages/users-page.tsx,already separated,named domain hooks/utilities,../hooks/use-users-list; ../utils/users-search-params

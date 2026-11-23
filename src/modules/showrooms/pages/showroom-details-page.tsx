@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useParams } from "react-router";
 
-import { getShowroomDetails } from "../api/showroom-details.mock";
+import { useShowroomDetails } from "../hooks/use-showroom-details";
 import {
   ShowroomDetailsHeader,
   ShowroomInfoCard,
@@ -10,14 +9,11 @@ import {
   ShowroomPromotionCard,
   ShowroomOwnerCard,
 } from "../components/details";
-import type { ShowroomDetailsTab } from "../components/details/showroom-details-header";
 import ShowroomDetailsNotFound from "../components/details/showroom-details-not-found";
 
 export default function ShowroomDetailsPage() {
   const { showroomId } = useParams<{ showroomId: string }>();
-  const [activeTab, setActiveTab] = useState<ShowroomDetailsTab>("overview");
-
-  const showroom = showroomId ? getShowroomDetails(showroomId) : undefined;
+  const { showroom, activeTab, setActiveTab } = useShowroomDetails(showroomId);
 
   if (!showroom) {
     return <ShowroomDetailsNotFound />;

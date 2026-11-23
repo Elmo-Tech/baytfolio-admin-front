@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { Download } from "lucide-react";
 import { Navigate, useLocation } from "react-router";
 
@@ -55,7 +56,8 @@ export default function UsersPage() {
           </p>
         </div>
 
-        <button
+        <Button
+          unstyled
           type="button"
           onClick={onExportCsv}
           disabled={totalItems === 0}
@@ -63,7 +65,7 @@ export default function UsersPage() {
         >
           <Download size={17} />
           تصدير القائمة (CSV)
-        </button>
+        </Button>
       </div>
 
       <UsersStats />

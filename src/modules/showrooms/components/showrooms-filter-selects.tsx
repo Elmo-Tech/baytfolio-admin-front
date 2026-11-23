@@ -41,7 +41,7 @@ export default function ShowroomsFilterSelects({
         value={filters.showroomStatus}
         onValueChange={(value) => onChange("showroomStatus", value)}
       >
-        <SelectTrigger className="h-9 w-full border-border-warm bg-users-surface-input text-xs xl:w-[145px]">
+        <SelectTrigger presentation="compact-filter">
           <SelectValue placeholder="حالة المعرض: الكل" />
         </SelectTrigger>
         <SelectContent>
@@ -56,7 +56,7 @@ export default function ShowroomsFilterSelects({
         value={filters.contractStatus}
         onValueChange={(value) => onChange("contractStatus", value)}
       >
-        <SelectTrigger className="h-9 w-full border-border-warm bg-users-surface-input text-xs xl:w-[145px]">
+        <SelectTrigger presentation="compact-filter">
           <SelectValue placeholder="حالة العقد: الكل" />
         </SelectTrigger>
         <SelectContent>

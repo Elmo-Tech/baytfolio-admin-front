@@ -1,9 +1,9 @@
-import { useAnalyticsTables } from "../hooks/use-analytics-tables";
+import { getAnalyticsTables } from "../utils/analytics-tables-view";
 import ActiveShowroomsTable from "./active-showrooms-table";
 import ExpiringContractsTable from "./expiring-contracts-table";
 
 export default function AnalyticsTables() {
-  const { activeShowrooms, expiringContracts } = useAnalyticsTables();
+  const { activeShowrooms, expiringContracts } = getAnalyticsTables();
 
   return (
     <section

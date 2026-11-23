@@ -1,8 +1,8 @@
-import { useNeedsAttention } from "../hooks/use-needs-attention";
+import { getNeedsAttention } from "../utils/needs-attention-view";
 import NeedsAttentionCard from "./needs-attention-card";
 
 export default function NeedsAttention() {
-  const { items, onAction } = useNeedsAttention();
+  const { items, onAction } = getNeedsAttention();
 
   return (
     <section aria-labelledby="needs-attention-heading" className="space-y-4">

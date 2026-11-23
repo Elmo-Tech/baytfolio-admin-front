@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { AlertTriangle } from "lucide-react";
 
 import type { ExpiringContract } from "../types/dashboard-insights.types";
@@ -50,7 +51,8 @@ export default function ExpiringContractsCard({
                 </p>
               </div>
 
-              <button
+              <Button
+                unstyled
                 type="button"
                 onClick={onShowAll}
                 className={`max-w-24 shrink-0 cursor-pointer rounded-md border px-2 py-2 text-xs font-semibold transition-colors ${
@@ -60,7 +62,7 @@ export default function ExpiringContractsCard({
                 }`}
               >
                 {needsAttention ? "قارب على الانتهاء" : "متابعة التجديد"}
-              </button>
+              </Button>
             </div>
           );
         })}

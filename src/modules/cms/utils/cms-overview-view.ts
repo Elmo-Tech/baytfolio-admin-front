@@ -1,5 +1,5 @@
 import { cmsOverviewMock } from "../api/cms.mock";
 
-export function useCMSOverview() {
+export function getCmsOverview() {
   return cmsOverviewMock;
 }

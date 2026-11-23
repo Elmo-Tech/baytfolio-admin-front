@@ -1,0 +1,86 @@
+:root {
+  --font-inter: "Inter Variable";
+  --font-noto-sans-arabic: "Noto Sans Arabic";
+
+  --background: #f7f3ed;
+  --foreground: #1c2a34;
+
+  --card: #ffffff;
+  --card-foreground: #1c2a34;
+  --popover: #ffffff;
+  --popover-foreground: #1c2a34;
+
+  --primary: #102030;
+  --primary-foreground: #ffffff;
+  --secondary: #16364c;
+  --secondary-foreground: #ffffff;
+  --accent: #c79a53;
+  --accent-foreground: #102030;
+
+  --muted: #eef0ef;
+  --muted-foreground: #6b6258;
+
+  --destructive: #c55252;
+  --destructive-foreground: #ffffff;
+  --success: #2f7d62;
+  --warning: #c9802c;
+  --info: #3e6e8c;
+  --status-active-bg: #e8f5ef;
+  --status-active-fg: #16845d;
+  --status-suspended-bg: #fff0f0;
+  --status-suspended-fg: #e5484d;
+  --status-pending-bg: #fff4e5;
+  --status-pending-fg: #d97706;
+  --status-deleted-bg: #f1f1f1;
+  --status-deleted-fg: #777777;
+
+  --light-sand: #d7c0a2;
+  --accent-sand: #c8b090;
+  --brand-navy: #102233;
+  --brand-gold: #eab66e;
+  --brand-gold-strong: #bd853d;
+  --border-subtle: #e9e1d7;
+  --border-divider: #eee8e0;
+  --border-warm: #e9dfd1;
+  --text-primary: #1d2935;
+  --text-secondary-strong: #46515d;
+  --text-muted: #aa9985;
+  --text-muted-icon: #b09e89;
+  --surface-admin: #f8f6f2;
+  --badge-warning-bg: #fff0d9;
+  --badge-warning-fg: #d97706;
+  --badge-info-bg: #e0edff;
+  --badge-info-fg: #2563eb;
+  --badge-error-bg: #ffe5e5;
+  --badge-error-fg: #dc2626;
+  --notification-unread: #ef4444;
+  --logout: #dc2626;
+  --logout-hover: #fef2f2;
+  --overlay: #000000;
+  --text-secondary: #37434b;
+  --dashboard-text-secondary: #4b5563;
+  --border: #e6ded4;
+  --input: #ffffff;
+  --ring: #102030;
+
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+
+  --radius: 0.625rem;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1c2a34;
+  --sidebar-primary: #102030;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef0ef;
+  --sidebar-accent-foreground: #1c2a34;
+  --sidebar-border: #e6ded4;
+  --sidebar-ring: #102030;
+
+  --card-shadow: 0 8px 28px rgba(16, 32, 48, 0.08);
+  --floating-shadow: 0 16px 48px rgba(16, 32, 48, 0.14);
+  --auth-card-shadow: 0 20px 55px rgba(42, 35, 25, 0.12);
+}

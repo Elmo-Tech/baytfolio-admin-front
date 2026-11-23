@@ -1,3 +1,10 @@
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+} from "@/shared/components/ui/table";
 import ActiveShowroomRow, {
   type ActiveShowroomRowData,
 } from "./active-showroom-row";
@@ -26,28 +33,20 @@ export default function ActiveShowroomsTable({
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[560px] text-right">
-          <thead className="bg-background text-text-secondary">
-            <tr>
-              <th className="px-5 py-4 text-base font-semibold">
+        <Table className="w-full min-w-[560px] text-right">
+          <TableHeader className="bg-background text-text-secondary">
+            <TableRow>
+              <TableHead presentation="analytics-leading">
                 المعرض / المصنع
-              </th>
-              <th className="px-3 py-4 text-center text-base font-semibold">
-                غرف منشورة
-              </th>
-              <th className="px-3 py-4 text-center text-base font-semibold">
-                باقات
-              </th>
-              <th className="px-3 py-4 text-center text-base font-semibold">
-                إجمالي المحتوى
-              </th>
-              <th className="px-3 py-4 text-center text-base font-semibold">
-                الإجراء
-              </th>
-            </tr>
-          </thead>
+              </TableHead>
+              <TableHead presentation="analytics">غرف منشورة</TableHead>
+              <TableHead presentation="analytics">باقات</TableHead>
+              <TableHead presentation="analytics">إجمالي المحتوى</TableHead>
+              <TableHead presentation="analytics">الإجراء</TableHead>
+            </TableRow>
+          </TableHeader>
 
-          <tbody>
+          <TableBody>
             {showrooms.map((showroom, index) => (
               <ActiveShowroomRow
                 key={showroom.id}
@@ -55,8 +54,8 @@ export default function ActiveShowroomsTable({
                 isFirst={index === 0}
               />
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </article>
   );

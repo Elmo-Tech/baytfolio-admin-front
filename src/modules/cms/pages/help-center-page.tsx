@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import type { HelpCenterQuestion } from "../types/help-center";
+import { useHelpQuestionDialog } from "../hooks/use-help-question-dialog";
 import { useHelpCenter } from "../hooks/use-help-center";
 
 import HelpCenterHeader from "../components/help-center/help-center-header";
@@ -14,21 +13,13 @@ export default function HelpCenterPage() {
   const navigate = useNavigate();
   const data = useHelpCenter();
 
-  const [selectedQuestion, setSelectedQuestion] =
-    useState<HelpCenterQuestion | null>(null);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedQuestion(null);
-  };
+  const dialog = useHelpQuestionDialog(data.handleSaveQuestion);
 
   return (
     <div dir="rtl" className="space-y-6">
       <HelpCenterHeader
         onBack={() => navigate("/cms")}
-        onAdd={() => setIsModalOpen(true)}
+        onAdd={dialog.openModal}
       />
 
       <HelpCenterFilters
@@ -59,10 +50,7 @@ export default function HelpCenterPage() {
         questions={data.questions}
         currentPage={data.displayPage}
         pageSize={data.pageSize}
-        onEdit={(question) => {
-          setSelectedQuestion(question);
-          setIsModalOpen(true);
-        }}
+        onEdit={dialog.editQuestion}
         onToggleStatus={data.handleToggleQuestionStatus}
       />
 
@@ -77,15 +65,12 @@ export default function HelpCenterPage() {
         }
       />
 
-      {isModalOpen && (
+      {dialog.isModalOpen && (
         <AddQuestionModal
-          key={selectedQuestion?.id ?? "new-question"}
-          question={selectedQuestion ?? undefined}
-          onClose={closeModal}
-          onSubmit={(formData) => {
-            data.handleSaveQuestion(formData, selectedQuestion);
-            closeModal();
-          }}
+          key={dialog.selectedQuestion?.id ?? "new-question"}
+          question={dialog.selectedQuestion ?? undefined}
+          onClose={dialog.closeModal}
+          onSubmit={dialog.saveQuestion}
         />
       )}
     </div>

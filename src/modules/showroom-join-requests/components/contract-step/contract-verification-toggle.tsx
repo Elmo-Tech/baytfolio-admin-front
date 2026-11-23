@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { BadgeCheck } from "lucide-react";
 
 import type { ContractStepValues } from "../../types/showroom-join-requests.types";
@@ -38,7 +39,8 @@ export default function ContractVerificationToggle({
               تفعيل شارة التوثيق لزيادة موثوقية المعرض أمام العملاء.
             </p>
           </div>
-          <button
+          <Button
+            unstyled
             type="button"
             role="switch"
             aria-checked={values.verificationEnabled}
@@ -53,11 +55,11 @@ export default function ContractVerificationToggle({
             }`}
           >
             <span
-              className={`absolute top-1 size-5 rounded-full bg-white transition-all ${
+              className={`absolute top-1 size-5 rounded-full bg-surface-white transition-all ${
                 values.verificationEnabled ? "right-1" : "right-6"
               }`}
             />
-          </button>
+          </Button>
         </div>
 
         {values.verificationEnabled && (

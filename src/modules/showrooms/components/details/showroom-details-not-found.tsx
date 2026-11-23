@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import { ArrowRight, Building2 } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -21,14 +22,15 @@ export default function ShowroomDetailsNotFound() {
         لم نتمكن من العثور على بيانات المعرض المطلوب.
       </p>
 
-      <button
+      <Button
+        unstyled
         type="button"
         onClick={() => navigate("/showrooms")}
         className="mt-5 inline-flex items-center gap-2 rounded-lg border border-users-panel-border px-4 py-2 text-sm font-medium text-users-text-primary hover:bg-users-stat-neutral-bg"
       >
         <ArrowRight size={16} />
         العودة إلى المعارض
-      </button>
+      </Button>
     </div>
   );
 }
