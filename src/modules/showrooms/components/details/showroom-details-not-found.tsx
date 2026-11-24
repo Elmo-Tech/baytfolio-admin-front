@@ -25,7 +25,7 @@ export default function ShowroomDetailsNotFound() {
       <Button
         unstyled
         type="button"
-        onClick={() => navigate("/showrooms")}
+        onClick={() => navigate("/admin/showrooms")}
         className="mt-5 inline-flex items-center gap-2 rounded-lg border border-users-panel-border px-4 py-2 text-sm font-medium text-users-text-primary hover:bg-users-stat-neutral-bg"
       >
         <ArrowRight size={16} />

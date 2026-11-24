@@ -87,8 +87,8 @@ export function useShowroomJoinRequestDetails(requestId?: string) {
           .catch(() => {});
     },
     printRequest: () => window.print(),
-    goBack: () => navigate("/showroom-join-requests"),
+    goBack: () => navigate("/admin/showroom-join-requests"),
     goToSetup: () =>
-      request && navigate(`/showroom-join-requests/${request.id}/setup`),
+      request && navigate(`/admin/showroom-join-requests/${request.id}/setup`),
   };
 }

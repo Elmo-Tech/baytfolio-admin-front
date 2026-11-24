@@ -23,7 +23,7 @@ export default function CMSLegalCards({
         badge="الحالة: منشور"
         action={
           <Link
-            to="/cms/privacy-policy"
+            to="/admin/cms/privacy-policy"
             className="inline-flex min-h-10 items-center gap-2 rounded-md bg-brand-navy px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-secondary"
           >
             <FilePenLine size={16} />
@@ -41,7 +41,7 @@ export default function CMSLegalCards({
         badge="الحالة: منشور"
         action={
           <Link
-            to="/cms/terms-and-conditions"
+            to="/admin/cms/terms-and-conditions"
             className="inline-flex min-h-10 items-center gap-2 rounded-md bg-brand-navy px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-secondary"
           >
             <FilePenLine size={16} />

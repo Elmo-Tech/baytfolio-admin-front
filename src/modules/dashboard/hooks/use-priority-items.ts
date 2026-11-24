@@ -34,14 +34,14 @@ export function usePriorityItems() {
 
   function handleItemAction(item: PriorityItem) {
     if (item.action === "review-approve") {
-      void navigate("/showroom-join-requests");
+      void navigate("/admin/showroom-join-requests");
       return;
     }
     if (
       item.action === "review-contract" ||
       item.action === "inspect-showroom"
     ) {
-      void navigate("/showrooms");
+      void navigate("/admin/showrooms");
       return;
     }
 

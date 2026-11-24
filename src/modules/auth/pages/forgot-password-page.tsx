@@ -4,7 +4,7 @@ import AuthLayout from "@/modules/auth/components/auth-layout";
 import { authShieldUser } from "@/assets";
 import { Headset, ShieldCheck } from "lucide-react";
 
-export default function ForgotPasswordPage() {
+export const ForgotPasswordPage = () => {
   return (
     <AuthLayout>
       <div className="w-full max-w-2xl">
@@ -72,4 +72,4 @@ export default function ForgotPasswordPage() {
       </div>
     </AuthLayout>
   );
-}
+};

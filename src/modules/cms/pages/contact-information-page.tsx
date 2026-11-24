@@ -11,7 +11,7 @@ import ContactInformationPreview from "../components/contact-information/contact
 import ContactInformationStats from "../components/contact-information/contact-information-stats";
 import { useContactInformation } from "../hooks/use-contact-information";
 
-export default function ContactInformationPage() {
+export const ContactInformationPage = () => {
   const contact = useContactInformation();
 
   return (
@@ -70,4 +70,4 @@ export default function ContactInformationPage() {
       <ContactSecurityNotice />
     </div>
   );
-}
+};

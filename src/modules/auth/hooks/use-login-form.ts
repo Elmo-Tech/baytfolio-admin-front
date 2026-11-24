@@ -22,7 +22,7 @@ export function useLoginForm() {
 
   function onSubmit(values: LoginFormValues) {
     toast.success(`تم تسجيل الدخول بنجاح (${values.email})`);
-    navigate("/dashboard");
+    navigate("/admin");
   }
 
   return {

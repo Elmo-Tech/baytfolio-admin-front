@@ -8,7 +8,7 @@ import ShowroomJoinRequestsStats from "../components/requests-list/showroom-join
 import ShowroomJoinRequestsTable from "../components/requests-list/showroom-join-requests-table";
 import { useShowroomJoinRequestsPage } from "../hooks/use-showroom-join-requests-page";
 import { mockShowroomJoinRequests } from "../api/showroom-join-requests.mock";
-export default function ShowroomJoinRequestsPage() {
+export const ShowroomJoinRequestsPage = () => {
   const state = useShowroomJoinRequestsPage();
 
   return (
@@ -91,4 +91,4 @@ export default function ShowroomJoinRequestsPage() {
       />
     </main>
   );
-}
+};

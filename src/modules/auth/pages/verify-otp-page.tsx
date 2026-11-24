@@ -5,7 +5,7 @@ import AuthCard from "@/modules/auth/components/auth-card";
 import AuthLayout from "@/modules/auth/components/auth-layout";
 import { authShieldUser } from "@/assets";
 
-export default function VerifyOtpPage() {
+export const VerifyOtpPage = () => {
   return (
     <AuthLayout>
       <div className="w-full max-w-2xl">
@@ -70,4 +70,4 @@ export default function VerifyOtpPage() {
       </div>
     </AuthLayout>
   );
-}
+};

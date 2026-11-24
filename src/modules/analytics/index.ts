@@ -1,1 +1,1 @@
-export { default as AnalyticsPage } from "./pages/analytics-page";
+export { AnalyticsPage } from "./pages/analytics-page";

@@ -21,7 +21,7 @@ export default function TermsAndConditionsHeader({
     <section className="rounded-xl border border-users-panel-border bg-users-surface p-4 sm:p-5">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <Link
-          to="/cms"
+          to="/admin/cms"
           className="inline-flex items-center gap-2 text-sm text-users-text-secondary transition hover:text-users-text-primary"
         >
           <ArrowRight size={17} />

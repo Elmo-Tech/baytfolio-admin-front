@@ -4,7 +4,7 @@ import PlatformActivityChart from "../components/platform-activity-chart";
 import CommercialOverview from "../components/commercial-overview";
 import AnalyticsTables from "../components/analytics-tables";
 
-export default function AnalyticsPage() {
+export const AnalyticsPage = () => {
   return (
     <main dir="rtl" className="space-y-6 pb-8">
       <AnalyticsHeader />
@@ -14,4 +14,4 @@ export default function AnalyticsPage() {
       <AnalyticsTables />
     </main>
   );
-}
+};

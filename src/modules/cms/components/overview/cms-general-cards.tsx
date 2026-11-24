@@ -22,7 +22,7 @@ export default function CMSGeneralCards({
         badge={`${helpCenter.publishedQuestions} سؤالًا منشورًا`}
         action={
           <Link
-            to="/cms/help-center"
+            to="/admin/cms/help-center"
             className="inline-flex min-h-10 items-center gap-2 rounded-md bg-brand-navy px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-secondary"
           >
             إدارة المحتوى
@@ -55,7 +55,7 @@ export default function CMSGeneralCards({
         badge="قنوات الاتصال المباشرة"
         action={
           <Link
-            to="/cms/contact-information"
+            to="/admin/cms/contact-information"
             className="inline-flex min-h-10 items-center gap-2 rounded-md bg-brand-navy px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-secondary"
           >
             <FilePenLine size={16} />

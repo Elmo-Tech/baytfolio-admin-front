@@ -9,7 +9,7 @@ import RequestInfoCard from "../components/request-details/request-info-card";
 import RequestWorkflowCard from "../components/request-details/request-workflow-card";
 import { useShowroomJoinRequestDetails } from "../hooks/use-showroom-join-request-details";
 
-export default function ShowroomJoinRequestDetailsPage() {
+export const ShowroomJoinRequestDetailsPage = () => {
   const { requestId } = useParams();
   const state = useShowroomJoinRequestDetails(requestId);
 
@@ -79,4 +79,4 @@ export default function ShowroomJoinRequestDetailsPage() {
       </div>
     </main>
   );
-}
+};
