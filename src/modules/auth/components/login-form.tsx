@@ -62,7 +62,7 @@ export default function LoginForm() {
 
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 text-sm">
         <Link
-          to="/forgot-password"
+          to="/admin/forgot-password"
           className="font-medium text-auth-link transition-colors hover:text-auth-link-hover hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-auth-focus/40"
         >
           هل نسيت كلمة المرور؟

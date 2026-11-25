@@ -92,8 +92,8 @@ export function useShowroomOnboardingWizard(requestId?: string) {
       toast.info("حفظ المسودة سيتم تفعيله عند ربط Backend."),
     handleCreate: () =>
       toast.info("إنشاء المعرض الفعلي يحتاج إلى ربط Backend API."),
-    goToRequests: () => navigate("/showroom-join-requests"),
+    goToRequests: () => navigate("/admin/showroom-join-requests"),
     goToRequestDetails: (id: string) =>
-      navigate(`/showroom-join-requests/${id}`),
+      navigate(`/admin/showroom-join-requests/${id}`),
   };
 }

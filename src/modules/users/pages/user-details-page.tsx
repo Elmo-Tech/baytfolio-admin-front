@@ -25,7 +25,7 @@ export default function UserDetailsPage() {
           المستخدم غير موجود
         </h2>
         <Link
-          to="/users"
+          to="/admin/users"
           className="mt-4 inline-flex items-center gap-2 text-sm text-users-text-secondary hover:underline"
         >
           <ArrowRight size={16} />
@@ -75,7 +75,7 @@ export default function UserDetailsPage() {
         </div>
 
         <Link
-          to="/users"
+          to="/admin/users"
           className="inline-flex h-9 flex-row-reverse items-center gap-2 self-start rounded-md border border-border-subtle bg-card px-3 text-sm text-users-text-detail transition hover:bg-background"
         >
           العودة إلى المستخدمين

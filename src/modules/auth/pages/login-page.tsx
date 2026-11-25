@@ -3,7 +3,7 @@ import AuthCard from "@/modules/auth/components/auth-card";
 import AuthLayout from "@/modules/auth/components/auth-layout";
 import { authShieldUser, baytfolioIcon } from "@/assets";
 
-export default function LoginPage() {
+export const LoginPage = () => {
   return (
     <AuthLayout>
       <AuthCard className="max-w-2xl">
@@ -52,4 +52,4 @@ export default function LoginPage() {
       </AuthCard>
     </AuthLayout>
   );
-}
+};

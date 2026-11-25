@@ -9,7 +9,7 @@ import HelpCenterTable from "../components/help-center/help-center-table";
 import HelpCenterPagination from "../components/help-center/help-center-pagination";
 import AddQuestionModal from "../components/help-center/add-question/add-question-modal";
 
-export default function HelpCenterPage() {
+export const HelpCenterPage = () => {
   const navigate = useNavigate();
   const data = useHelpCenter();
 
@@ -18,7 +18,7 @@ export default function HelpCenterPage() {
   return (
     <div dir="rtl" className="space-y-6">
       <HelpCenterHeader
-        onBack={() => navigate("/cms")}
+        onBack={() => navigate("/admin/cms")}
         onAdd={dialog.openModal}
       />
 
@@ -75,4 +75,4 @@ export default function HelpCenterPage() {
       )}
     </div>
   );
-}
+};

@@ -12,7 +12,7 @@ import WizardStepShowroom from "../components/onboarding-wizard/wizard-step-show
 import WizardStepper from "../components/onboarding-wizard/wizard-stepper";
 import { useShowroomOnboardingWizard } from "../hooks/use-showroom-onboarding-wizard";
 
-export default function ShowroomOnboardingWizardPage() {
+export const ShowroomOnboardingWizardPage = () => {
   const { requestId } = useParams<{ requestId: string }>();
   const w = useShowroomOnboardingWizard(requestId);
 
@@ -91,4 +91,4 @@ export default function ShowroomOnboardingWizardPage() {
       <WizardAuditFooter />
     </main>
   );
-}
+};

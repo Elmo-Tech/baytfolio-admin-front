@@ -5,7 +5,7 @@ import PrivacyPolicySection from "../components/privacy-policy/privacy-policy-se
 import PrivacyPolicyLastUpdated from "../components/privacy-policy/privacy-policy-last-updated";
 import PrivacyPolicyActions from "../components/privacy-policy/privacy-policy-actions";
 
-export default function PrivacyPolicyPage() {
+export const PrivacyPolicyPage = () => {
   const {
     policy,
     language,
@@ -46,4 +46,4 @@ export default function PrivacyPolicyPage() {
       />
     </div>
   );
-}
+};

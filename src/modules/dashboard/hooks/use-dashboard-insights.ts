@@ -23,8 +23,8 @@ export function useDashboardInsights() {
       expiringContractsMock,
       filters.period,
     ),
-    onShowAllShowrooms: () => void navigate("/showrooms"),
+    onShowAllShowrooms: () => void navigate("/admin/showrooms"),
     onShowAllActivities: () => toast.info("سجل العمليات الكامل قيد التطوير"),
-    onShowAllContracts: () => void navigate("/showrooms"),
+    onShowAllContracts: () => void navigate("/admin/showrooms"),
   };
 }

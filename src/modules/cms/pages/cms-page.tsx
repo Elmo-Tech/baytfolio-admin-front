@@ -3,7 +3,7 @@ import { Info } from "lucide-react";
 import CMSOverviewGrid from "../components/overview/cms-overview-grid";
 import { getCmsOverview } from "../utils/cms-overview-view";
 
-export default function CMSPage() {
+export const CMSPage = () => {
   const overview = getCmsOverview();
 
   return (
@@ -48,4 +48,4 @@ export default function CMSPage() {
       </section>
     </div>
   );
-}
+};

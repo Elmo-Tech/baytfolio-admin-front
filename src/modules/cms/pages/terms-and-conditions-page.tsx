@@ -5,7 +5,7 @@ import TermsAndConditionsSection from "../components/terms-and-conditions/terms-
 import TermsAndConditionsLastUpdated from "../components/terms-and-conditions/terms-and-conditions-last-updated";
 import TermsAndConditionsActions from "../components/terms-and-conditions/terms-and-conditions-actions";
 
-export default function TermsAndConditionsPage() {
+export const TermsAndConditionsPage = () => {
   const {
     terms,
     language,
@@ -48,4 +48,4 @@ export default function TermsAndConditionsPage() {
       />
     </div>
   );
-}
+};

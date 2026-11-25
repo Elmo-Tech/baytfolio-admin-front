@@ -1,20 +1,18 @@
-import type { ReactNode } from "react";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "@/shared/components/ui/sonner";
-import { queryClient } from "@/shared/config/query-client";
+import { DirectionProvider } from "@/shared/components/ui";
+import { QueryProvider } from "./query-provider";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
+import { Toaster } from "sonner";
 
-type AppProvidersProps = {
-  children: ReactNode;
-};
-
-export function AppProviders({ children }: AppProvidersProps) {
+export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-      <Toaster richColors position="top-right" />
+    <DirectionProvider dir="rtl">
+      <QueryProvider>
+        <NuqsAdapter>
+          <Toaster dir="rtl" position={"top-center"} />
 
-      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
-    </QueryClientProvider>
+          {children}
+        </NuqsAdapter>
+      </QueryProvider>
+    </DirectionProvider>
   );
 }
