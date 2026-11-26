@@ -1,30 +1,24 @@
 import type { ReactNode } from "react";
-import AuthBrand from "@/modules/auth/components/auth-brand";
+import { AuthBrand } from "./auth-brand";
 
-type AuthLayoutProps = {
+interface AuthLayoutProps {
   children: ReactNode;
-};
+}
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export const AuthLayout = ({ children }: AuthLayoutProps) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div
-      dir="rtl"
-      className="flex min-h-screen flex-col bg-background text-auth-page-text"
-    >
+    <div className="flex min-h-screen flex-col bg-background text-auth-page-text">
       <header className="flex w-full items-center justify-between gap-4 px-4 py-5 sm:px-10">
         <AuthBrand />
 
-        <div
-          dir="rtl"
-          className="flex shrink-0 items-center gap-2 rounded-full border border-auth-success-border bg-auth-success-bg px-3 py-1.5 text-base font-medium text-auth-success-fg"
-        >
+        <div className="flex shrink-0 items-center gap-2 rounded-full border border-auth-success-border bg-auth-success-bg px-3 py-1.5 text-base font-medium text-auth-success-fg">
           <span
             aria-hidden="true"
             className="size-1.5 shrink-0 rounded-full bg-auth-success-indicator"
           />
-          <span>نظام معتمد داخليًا</span>
+          <span className="text-sm">نظام معتمد داخليًا</span>
         </div>
       </header>
 
@@ -41,4 +35,4 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       </footer>
     </div>
   );
-}
+};

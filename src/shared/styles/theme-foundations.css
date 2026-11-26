@@ -98,3 +98,8 @@
   --shadow-floating: var(--floating-shadow);
   --shadow-auth-card: var(--auth-card-shadow);
 }
+@layer utilities {
+  .base-transition {
+    transition: all ease 0.3s;
+  }
+}

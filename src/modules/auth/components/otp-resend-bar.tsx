@@ -1,17 +1,17 @@
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui";
 import { Clock3 } from "lucide-react";
 
-type OtpResendBarProps = {
+interface OtpResendBarProps {
   canResend: boolean;
   formattedCountdown: string;
   onResend: () => void;
-};
+}
 
-export default function OtpResendBar({
+export const OtpResendBar = ({
   canResend,
   formattedCountdown,
   onResend,
-}: OtpResendBarProps) {
+}: OtpResendBarProps) => {
   return (
     <div className="flex items-center justify-between text-sm leading-5">
       <Button
@@ -38,4 +38,4 @@ export default function OtpResendBar({
       </span>
     </div>
   );
-}
+};

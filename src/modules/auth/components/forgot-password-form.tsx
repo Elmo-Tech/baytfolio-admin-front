@@ -1,77 +1,54 @@
-import { ArrowRight, Info, Mail } from "lucide-react";
 import { AuthReturnLink } from "./auth-return-link";
+import { EmailField } from "../atoms/email-field";
+import { BtnV2 } from "@/shared/components/common";
 
-import { useForgotPasswordForm } from "@/modules/auth/hooks/use-forgot-password-form";
-import { AsyncSubmitButton } from "@/shared/components/ui/async-submit-button";
-import { Field, FieldError, FieldLabel } from "@/shared/components/ui/field";
-import { FormAlert } from "@/shared/components/ui/form-alert";
-import { Input } from "@/shared/components/ui/input";
-import ArrowIcon from "@/shared/components/ui/arrow-icon";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router";
+import { useQueryStates } from "nuqs";
+import {
+  forgotPasswordSchema,
+  type ForgotPasswordFormValues,
+} from "../schemas/forgot-password.schema";
+import { getAuthPath } from "../utils/auth-paths";
+import { loginSearchParams } from "../utils/login-search-params";
 
-export default function ForgotPasswordForm() {
-  const {
-    form: {
-      register,
-      formState: { errors },
-    },
-    requestState,
-    resetRequestState,
-    onSubmit,
-  } = useForgotPasswordForm();
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+export const ForgotPasswordForm = () => {
+  const navigate = useNavigate();
+  const [params] = useQueryStates(loginSearchParams);
+
+  const form = useForm<ForgotPasswordFormValues>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: { email: "" },
+  });
+
+  const onSubmit = () => {
+    navigate(getAuthPath("/admin/forgot-password/otp", params.role));
+  };
 
   return (
-    <form onSubmit={onSubmit} dir="rtl" className="mt-7 space-y-5">
-      <Field className="gap-2">
-        <FieldLabel className="text-auth-text-label" htmlFor="recovery-email">
-          البريد الإلكتروني
-        </FieldLabel>
-
-        <div className="relative">
-          <Mail
-            aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-auth-text-muted"
-          />
-          <Input
-            id="recovery-email"
-            type="email"
-            autoComplete="email"
-            dir="ltr"
-            placeholder="admin@baytfolio.com"
-            className="h-10 border-auth-border-input bg-auth-surface pl-10 pr-3 text-left text-auth-text-label placeholder:text-auth-text-placeholder focus-visible:border-auth-focus focus-visible:ring-auth-focus/20"
-            {...register("email", { onChange: resetRequestState })}
-            aria-invalid={!!errors.email}
-          />
-        </div>
-
-        <p className="flex items-center gap-1.5 text-sm leading-5 text-text-secondary">
-          <Info
-            aria-hidden="true"
-            className="size-4 shrink-0 text-auth-text-muted"
-          />
-          <span>يجب أن يكون البريد مسجلاً ضمن صلاحيات الإدارة المعتمدة.</span>
-        </p>
-        <FieldError errors={[errors.email]} />
-      </Field>
-
-      {requestState === "error" && (
-        <FormAlert variant="error">
-          خدمة استعادة كلمة المرور غير متاحة حاليًا. لم يتم إرسال أي بريد
-          إلكتروني.
-        </FormAlert>
-      )}
-
-      <AsyncSubmitButton
-        label="إرسال رابط الاستعادة"
-        loadingLabel="جارٍ التحقق..."
-        loading={requestState === "loading"}
-        size="lg"
-        presentation="auth-submit"
-        icon={<ArrowRight aria-hidden="true" className="size-4" />}
+    <form onSubmit={form.handleSubmit(onSubmit)} className="mt-7 space-y-5">
+      <EmailField
+        control={form.control}
+        name="email"
+        description="يجب أن يكون البريد مسجلاً ضمن صلاحيات الإدارة المعتمدة."
       />
 
+      <BtnV2
+        type="submit"
+        size="lg"
+        className="h-10 w-full rounded-md bg-auth-navy text-base text-primary-foreground shadow-sm hover:bg-auth-navy-hover focus-visible:border-auth-focus focus-visible:ring-auth-focus/40"
+      >
+        <span>{"إرسال رابط الاستعادة"}</span>
+
+        <ArrowLeft aria-hidden="true" className="size-4" />
+      </BtnV2>
+
       <AuthReturnLink>
-        <ArrowIcon className="size-4" /> <span>العودة لتسجيل الدخول</span>
+        <ArrowRight className="size-4" /> <span>العودة لتسجيل الدخول</span>
       </AuthReturnLink>
     </form>
   );
-}
+};

@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/lib/utils";
 
-type AuthCardProps = {
+interface AuthCardProps {
   children: ReactNode;
   className?: string;
-};
+}
 
-export default function AuthCard({ children, className }: AuthCardProps) {
+export const AuthCard = ({ children, className }: AuthCardProps) => {
   return (
     <section
       className={cn(
@@ -22,4 +22,4 @@ export default function AuthCard({ children, className }: AuthCardProps) {
       <div className="p-6 pt-8 sm:p-9 sm:pt-11">{children}</div>
     </section>
   );
-}
+};
