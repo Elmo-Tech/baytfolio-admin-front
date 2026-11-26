@@ -17,24 +17,19 @@ import {
 } from "@/modules/showroom-join-requests";
 import { ShowroomDetailsPage, ShowroomsPage } from "@/modules/showrooms";
 import { UserDetailsPage, UsersPage } from "@/modules/users";
-import {
-  LoginPage,
-  ForgotPasswordPage,
-  VerifyOtpPage,
-  ResetPasswordPage,
-} from "@/modules/auth";
+import { CategoriesAndTagsPage } from "@/modules/categories-and-tags";
 
 export const adminRoutes = [
   {
     path: "admin",
     children: [
       // Dahsboard Pages
-      { index: true, loader: () => redirect("/admin/overview") },
+      { index: true, loader: () => redirect("/admin/dahsboard") },
       {
         Component: AdminLayout,
 
         children: [
-          { path: "overview", Component: DashboardPage },
+          { path: "dahsboard", Component: DashboardPage },
           {
             path: "users",
             children: [
@@ -48,6 +43,10 @@ export const adminRoutes = [
               { index: true, Component: ShowroomsPage },
               { path: ":showroomId", Component: ShowroomDetailsPage },
             ],
+          },
+          {
+            path: "categories-and-tags",
+            Component: CategoriesAndTagsPage,
           },
           {
             path: "cms",
@@ -82,20 +81,6 @@ export const adminRoutes = [
               },
             ],
           },
-        ],
-      },
-
-      // Auth Pages
-      {
-        path: "login",
-        Component: LoginPage,
-      },
-      {
-        path: "forgot-password",
-        children: [
-          { index: true, Component: ForgotPasswordPage },
-          { path: "otp", Component: VerifyOtpPage },
-          { path: "reset", Component: ResetPasswordPage },
         ],
       },
     ],

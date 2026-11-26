@@ -22,7 +22,7 @@ import type {
 export const sidebarLinks: SidebarLinks[] = [
   {
     title: "لوحة التحكم",
-    items: [{ label: "نظرة عامة", to: "/admin/overview", icon: Grid2X2 }],
+    items: [{ label: "نظرة عامة", to: "/admin/dashbaord", icon: Grid2X2 }],
   },
   {
     title: "العمليات",
@@ -41,7 +41,11 @@ export const sidebarLinks: SidebarLinks[] = [
   {
     title: "إدارة المحتوى",
     items: [
-      { label: "التصنيفات والخصائص", to: "/admin/categories", icon: Shapes },
+      {
+        label: "التصنيفات والخصائص",
+        to: "/admin/categories-and-tags",
+        icon: Shapes,
+      },
       {
         label: "التقييمات والبلاغات",
         to: "/admin/reviews-reports",

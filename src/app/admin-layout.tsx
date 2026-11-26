@@ -4,7 +4,7 @@ import { AdminHeader, AdminSidebar } from "@/shared/components/layouts";
 
 export const AdminLayout = () => {
   return (
-    <div className="flex xl:h-dvh xl:overflow-hidden">
+    <div className="flex xl:fixed xl:inset-0 xl:overflow-hidden">
       <AdminSidebar />
 
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
