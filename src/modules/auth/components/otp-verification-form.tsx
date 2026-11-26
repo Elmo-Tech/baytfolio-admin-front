@@ -1,43 +1,67 @@
-import { AlertCircle } from "lucide-react";
 import { AuthReturnLink } from "./auth-return-link";
-
-import OtpDigitInputs from "@/modules/auth/components/otp-digit-inputs";
-import OtpResendBar from "@/modules/auth/components/otp-resend-bar";
-import { useOtpVerificationForm } from "@/modules/auth/hooks/use-otp-verification-form";
+import { OtpResendBar } from "../components/otp-resend-bar";
+import { BtnV2 } from "@/shared/components/common";
 import ArrowIcon from "@/shared/components/ui/arrow-icon";
-import { AsyncSubmitButton } from "@/shared/components/ui/async-submit-button";
-import { FieldError } from "@/shared/components/ui/field";
-import { FormAlert } from "@/shared/components/ui/form-alert";
+import {
+  FieldError,
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/shared/components/ui";
+import { AlertCircle } from "lucide-react";
 
-export default function OtpVerificationForm() {
+import { useOtpVerificationForm } from "../hooks/use-otp-verification-form";
+import { Controller } from "react-hook-form";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+
+const OTP_LENGTH = 6;
+
+export const OtpVerificationForm = () => {
   const {
-    digits,
-    inputRefs,
+    form,
     canResend,
     formattedCountdown,
-    requestState,
-    resendError,
-    errors,
-    handleDigitChange,
-    handleKeyDown,
-    handlePaste,
     handleResend,
+    handleCodeChange,
     onSubmit,
   } = useOtpVerificationForm();
 
   return (
-    <form onSubmit={onSubmit} dir="rtl" className="mt-7 space-y-5">
+    <form onSubmit={onSubmit} id="verify-otp-form" className="mt-7 space-y-5">
       <div>
-        <OtpDigitInputs
-          digits={digits}
-          inputRefs={inputRefs}
-          onDigitChange={handleDigitChange}
-          onKeyDown={handleKeyDown}
-          onPaste={handlePaste}
-        />
-        <FieldError
-          className="mt-2 text-center text-sm leading-5"
-          errors={[errors.code]}
+        <Controller
+          control={form.control}
+          name="code"
+          render={({ field, fieldState }) => (
+            <>
+              <InputOTP
+                {...field}
+                maxLength={OTP_LENGTH}
+                pattern={REGEXP_ONLY_DIGITS}
+                onChange={(value) => {
+                  field.onChange(value);
+                  handleCodeChange();
+                }}
+                aria-invalid={fieldState.invalid}
+                containerClassName="justify-center"
+              >
+                <InputOTPGroup className="rounded-md gap-2">
+                  {Array.from({ length: OTP_LENGTH }, (_, index) => (
+                    <InputOTPSlot
+                      key={index}
+                      index={index}
+                      className="size-9 min-[430px]:size-11 xs:size-12 rounded-lg sm:rounded-xl border text-xl font-inter font-bold"
+                    />
+                  ))}
+                </InputOTPGroup>
+              </InputOTP>
+
+              <FieldError
+                className="mt-2 text-center text-sm leading-5"
+                errors={[fieldState.error]}
+              />
+            </>
+          )}
         />
       </div>
 
@@ -47,26 +71,9 @@ export default function OtpVerificationForm() {
         onResend={handleResend}
       />
 
-      {resendError && (
-        <FormAlert variant="error" className="text-center">
-          خدمة إعادة إرسال الرمز غير متاحة حاليًا. لم يتم إرسال رمز جديد.
-        </FormAlert>
-      )}
-
-      {requestState === "error" && (
-        <FormAlert variant="error" className="text-center">
-          خدمة التحقق بخطوتين غير متاحة حاليًا. لم يتم التحقق من الرمز.
-        </FormAlert>
-      )}
-
-      <AsyncSubmitButton
-        label="تأكيد"
-        loadingLabel="جارٍ التحقق..."
-        loading={requestState === "loading"}
-        size="lg"
-        presentation="auth-submit"
-        icon={<ArrowIcon className="size-4" />}
-      />
+      <BtnV2 type="submit" form="verify-otp-form" className="w-full">
+        تأكيد <ArrowIcon className="size-4" />
+      </BtnV2>
 
       <div className="rounded-md bg-auth-notice-bg px-3 py-2 text-center text-sm leading-5 text-text-secondary">
         <span className="inline-flex items-center gap-1">
@@ -84,4 +91,4 @@ export default function OtpVerificationForm() {
       </AuthReturnLink>
     </form>
   );
-}
+};

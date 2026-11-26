@@ -1,8 +1,10 @@
 import { z } from "zod";
 
+import { emailSchema, passwordSchema } from "./auth.schema";
+
 export const loginSchema = z.object({
-  email: z.email("أدخل بريدًا إلكترونيًا صحيحًا"),
-  password: z.string().min(1, "كلمة المرور مطلوبة"),
+  email: emailSchema,
+  password: passwordSchema,
   rememberDevice: z.boolean(),
 });
 

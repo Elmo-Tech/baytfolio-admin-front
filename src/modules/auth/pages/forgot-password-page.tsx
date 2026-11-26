@@ -1,32 +1,24 @@
-import ForgotPasswordForm from "@/modules/auth/components/forgot-password-form";
-import AuthCard from "@/modules/auth/components/auth-card";
-import AuthLayout from "@/modules/auth/components/auth-layout";
-import { authShieldUser } from "@/assets";
-import { Headset, ShieldCheck } from "lucide-react";
+import { ForgotPasswordForm } from "../components/forgot-password-form";
+import { AuthCard } from "../components/auth-card";
+import { AuthLayout } from "../components/auth-layout";
+import { Headset, ShieldCheck, ShieldUser } from "lucide-react";
 
 export const ForgotPasswordPage = () => {
   return (
     <AuthLayout>
       <div className="w-full max-w-2xl">
         <AuthCard className="max-w-none">
-          <div dir="ltr" className="mb-5 flex justify-start">
-            <div
-              dir="rtl"
-              className="flex items-center gap-1.5 rounded-md bg-auth-soft-bg px-2.5 py-1.5"
-            >
-              <img
-                src={authShieldUser}
-                alt=""
-                aria-hidden="true"
-                className="h-4 w-4 shrink-0 object-contain"
-              />
-              <span className="whitespace-nowrap text-sm text-text-secondary">
+          <div className="mb-5 flex justify-start">
+            <div className="flex items-center gap-1.5 rounded-md bg-auth-soft-bg px-2.5 py-1.5 text-text-secondary">
+              <ShieldUser className="size-4" />
+
+              <span className="whitespace-nowrap text-sm">
                 بوابة الإدارة المركزية
               </span>
             </div>
           </div>
 
-          <div dir="rtl" className="text-right">
+          <div>
             <h1 className="text-[26px] font-bold text-auth-navy">
               نسيت كلمة المرور؟
             </h1>
@@ -38,10 +30,7 @@ export const ForgotPasswordPage = () => {
 
           <ForgotPasswordForm />
 
-          <div
-            dir="rtl"
-            className="-mx-6 mt-8 flex items-center justify-between gap-4 border-t border-auth-border bg-auth-surface px-6 py-3 text-sm text-text-secondary sm:-mx-9 sm:px-9"
-          >
+          <div className="-mx-6 mt-8 flex items-center justify-between gap-4 border-t border-auth-border bg-auth-surface px-6 py-3 text-sm text-text-secondary sm:-mx-9 sm:px-9">
             <span className="flex items-center gap-1.5">
               <ShieldCheck aria-hidden="true" className="size-3.5 shrink-0" />
               استرداد معتمد عبر تشفير عالي الكفاءة

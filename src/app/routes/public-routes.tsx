@@ -19,10 +19,10 @@ export const publicRoutes = [
     path: "forgot-password",
     children: [
       { index: true, Component: ForgotPasswordPage },
-      { path: "otp", Component: VerifyOtpPage },
-      { path: "reset", Component: ResetPasswordPage },
+      { path: "verify-otp", Component: VerifyOtpPage },
     ],
   },
+  { path: "/reset-password", Component: ResetPasswordPage },
   {
     path: "*",
     Component: NotFoundPage,

@@ -1,23 +1,18 @@
-import { Clock3, KeyRound } from "lucide-react";
-import ResetPasswordForm from "@/modules/auth/components/reset-password-form";
-import AuthCard from "@/modules/auth/components/auth-card";
-import AuthLayout from "@/modules/auth/components/auth-layout";
-import { authShieldUser } from "@/assets";
+import { ResetPasswordForm } from "../components/reset-password-form";
+import { AuthCard } from "../components/auth-card";
+import { AuthLayout } from "../components/auth-layout";
+
+import { Clock3, KeyRound, ShieldUser } from "lucide-react";
 
 export const ResetPasswordPage = () => {
   return (
     <AuthLayout>
       <div className="w-full max-w-2xl">
         <AuthCard className="max-w-none">
-          <div dir="rtl" className="text-center">
+          <div className="text-center">
             <div className="mb-5 flex justify-center">
               <span className="flex items-center gap-2 rounded-full bg-auth-soft-bg px-2 py-1 text-xs font-medium text-text-secondary">
-                <img
-                  src={authShieldUser}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-4 w-4 shrink-0 object-contain"
-                />
+                <ShieldUser className="size-4" />
                 بوابة الإدارة المركزية
               </span>
             </div>
@@ -35,20 +30,8 @@ export const ResetPasswordPage = () => {
             </p>
           </div>
 
-          <div
-            dir="rtl"
-            className="mt-5 flex items-center justify-start gap-3 rounded-md border border-auth-border-muted bg-auth-surface-muted px-3 py-2.5"
-          >
-            <img
-              src={authShieldUser}
-              alt=""
-              aria-hidden="true"
-              className="size-5 shrink-0 object-contain"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(67%) sepia(10%) saturate(600%) hue-rotate(350deg) brightness(90%)",
-              }}
-            />
+          <div className="mt-5 flex items-center justify-start gap-3 rounded-md border border-auth-border-muted bg-auth-surface-muted px-3 py-2.5">
+            <ShieldUser className="size-4" />
 
             <div className="min-w-0 text-right">
               <p className="text-xs text-auth-text-muted">الحساب المرتبط</p>
@@ -63,10 +46,7 @@ export const ResetPasswordPage = () => {
 
           <ResetPasswordForm />
 
-          <div
-            dir="rtl"
-            className="-mx-6 mt-7 flex flex-wrap items-center justify-center gap-2 border-t border-auth-border px-6 pt-3 text-sm text-auth-text-muted sm:-mx-9 sm:px-9"
-          >
+          <div className="-mx-6 mt-7 flex flex-wrap items-center justify-center gap-2 border-t border-auth-border px-6 pt-3 text-sm text-auth-text-muted sm:-mx-9 sm:px-9">
             <span className="inline-flex items-center gap-1.5">
               <KeyRound aria-hidden="true" className="size-4 shrink-0" />
               تشفير فيدرالي FIPS
@@ -83,7 +63,7 @@ export const ResetPasswordPage = () => {
           </div>
         </AuthCard>
 
-        <p dir="rtl" className="mt-5 text-center text-sm text-auth-text-muted">
+        <p className="mt-5 text-center text-sm text-auth-text-muted">
           تواجه مشكلة في الاستعادة؟{" "}
           <a
             href="mailto:sec-ops@baytfolio.com"
