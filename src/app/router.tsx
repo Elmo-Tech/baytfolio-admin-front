@@ -1,16 +1,10 @@
 import { createBrowserRouter } from "react-router";
 
 import { adminRoutes } from "./routes";
-import NotFoundPage from "./pages/not-found-page";
+import { publicRoutes } from "./routes/public-routes";
 
 export function createAppRouter() {
-  return createBrowserRouter([
-    ...adminRoutes,
-    {
-      path: "*",
-      Component: NotFoundPage,
-    },
-  ]);
+  return createBrowserRouter([...publicRoutes, ...adminRoutes]);
 }
 
 export const router = createAppRouter();

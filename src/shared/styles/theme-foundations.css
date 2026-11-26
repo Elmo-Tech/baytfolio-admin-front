@@ -1,5 +1,5 @@
 @theme inline {
-  --font-sans: var(--font-inter), var(--font-noto-sans-arabic);
+  --font-sans: var(--font-noto-sans-arabic), var(--font-inter);
   --font-heading: var(--font-inter), var(--font-noto-sans-arabic);
 
   --color-background: var(--background);
