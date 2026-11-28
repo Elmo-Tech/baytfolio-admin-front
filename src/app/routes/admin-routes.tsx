@@ -11,6 +11,7 @@ import { ShowroomDetailsPage, ShowroomsPage } from "@/modules/showrooms";
 import { UserDetailsPage, UsersPage } from "@/modules/users";
 import { CategoriesAndTagsPage } from "@/modules/categories-and-tags";
 import { ReviewsPage } from "@/modules/reviews";
+import { PromotionsPage } from "@/modules/promotions";
 import { AnalyticsPage } from "@/modules/analytics";
 import {
   CMSPage,
@@ -68,6 +69,10 @@ export const adminRoutes = [
           {
             path: "reviews",
             Component: ReviewsPage,
+          },
+          {
+            path: "promotions",
+            Component: PromotionsPage,
           },
           { path: "analytics", Component: AnalyticsPage },
           {
