@@ -11,3 +11,16 @@ export {
   TableCell,
   TableCaption,
 } from "./table-v2";
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "./select-v2";
+export { FiltersBox } from "./filters-box";
