@@ -34,37 +34,35 @@ export const CategoriesAndTagsContent = () => {
   return (
     <div>
       {/* Table */}
-      <div className="rounded-xl border border-border bg-white overflow-hidden">
-        <Table className="min-w-200">
-          <TableHeader className="bg-background/60">
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="ps-4">الصورة</TableHead>
+      <Table className="min-w-200">
+        <TableHeader>
+          <TableRow className="hover:bg-transparent">
+            <TableHead className="ps-4">الصورة</TableHead>
 
-              <TableHead>{cateAndTagsTableNameHeaders[type]}</TableHead>
+            <TableHead>{cateAndTagsTableNameHeaders[type]}</TableHead>
 
-              <TableHead className="text-center">الحالة</TableHead>
+            <TableHead className="text-center">الحالة</TableHead>
 
-              <TableHead className="text-center">الترتيب</TableHead>
+            <TableHead className="text-center">الترتيب</TableHead>
 
-              <TableHead className="text-center">الإجراءات</TableHead>
+            <TableHead className="text-center">الإجراءات</TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          {items.length > 0 ? (
+            items.map((item) => (
+              <CategoriesAndTagsTableRow key={item.id} item={item} />
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} className="py-10 text-center text-sm">
+                لا توجد بيانات لعرضها
+              </TableCell>
             </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {items.length > 0 ? (
-              items.map((item) => (
-                <CategoriesAndTagsTableRow key={item.id} item={item} />
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={5} className="py-10 text-center text-sm">
-                  لا توجد بيانات لعرضها
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+          )}
+        </TableBody>
+      </Table>
 
       {/* Pagination */}
       <SharedPagination
